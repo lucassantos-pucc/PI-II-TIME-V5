@@ -10,3 +10,5 @@
 - Lucas Studach Kaid Ludemann
 - Vitor Kenzo Pina Takemasa
 
+## Professor Orientador 
+- Fernando Luiz de Almeida Silveira
