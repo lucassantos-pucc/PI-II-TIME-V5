@@ -20,7 +20,7 @@ form {
     justify-content: center;
     align-items: center;
     width: 400px;
-    background-color: rgb(130, 120, 50);
+    background-color: rgb(120, 20, 120);
     padding: 20px;
     border: solid black 2px;
     border-radius: 50px;
@@ -32,4 +32,14 @@ form {
     justify-content: center;
     align-items: start;
     margin-top: 50px;
+}
+
+input {
+    width: 300px;
+}
+
+a {
+    margin-top: 30px;
+    margin-left: 175px;
+    color: rgb(110, 200, 230);
 }
