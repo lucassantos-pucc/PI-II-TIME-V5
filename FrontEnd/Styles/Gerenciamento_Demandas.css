@@ -1,0 +1,142 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #18171e 0%,#251052 100%);
+    font-family: Arial, sans-serif;
+}
+
+form {
+    width: 596px;
+    height: 652px;
+    padding: 32px 44px;
+    background: linear-gradient(135deg, #68109b 0%, #5d0d91 100%);
+    border-radius: 31px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 27px;
+    white-space: nowrap;
+}
+
+.campo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+}
+
+.campo label {
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    margin-right: 8px;
+    text-align: right;
+    width: 150px;
+}
+
+.campo input,
+.campo select {
+    height: 27px;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+#titulo_id {
+    width: 447px;
+}
+
+#tipos_id {
+    width: 206px;
+}
+
+#status_id {
+    width: 206px;
+}
+
+#prioridade_id {
+    width: 206px;
+}
+
+#responsavel_id {
+    width: 206px;
+}
+
+#prazo_id {
+    width: 206px;
+}
+
+.descricao {
+    width: 100%;
+    position: relative;
+    margin-top: 0;
+}
+
+.descricao label {
+    position: absolute;
+    top: 9px;
+    left: 20px;
+    color: #260052;
+    font-size: 17px;
+    font-weight: 700;
+    z-index: 1;
+}
+
+#descricao_id {
+    width: 100%;
+    height: 124px;
+    resize: none;
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 7px;
+    outline: none;
+    padding: 35px 20px 15px;
+    font-size: 15px;
+}
+
+.botoes {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 27px;
+    padding: 0 45px;
+}
+
+.botoes input {
+    width: 157px;
+    height: 52px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#botaoApagar_id {
+    background-color: #1e0b3d;
+}
+
+#botaoSalvar_id {
+    background-color: #6e27d9;
+}
+
