@@ -1,0 +1,276 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    background: linear-gradient(to left, #6F118B, #370068);
+    background-attachment: fixed;
+    color: white;
+    font-family:'sans-serif' 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana;
+    font-weight: bold;
+    gap: 20px;
+}
+
+hr {
+    height: 3px;
+    background-color: #de05ff;
+    width: 100%;
+}
+
+p {
+    font-size: larger;
+}
+
+header {
+    bottom: 0;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    background:linear-gradient(to right, #ffcdfc72, #440255);
+    justify-content: center;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff3c;
+}
+
+.invisivel {
+    display: none;
+}
+
+.acoes .btn-personalizado {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.acoes{
+    display: flex;
+    flex-direction: column;
+    background:linear-gradient(to right, #9102ff40, #3102556d);
+    backdrop-filter: blur(12px);
+    width: 160px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.painel-pesquisa {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 15px;
+    background: linear-gradient(to right, #e9cdff40, #3102556d);
+    backdrop-filter: blur(12px);
+    border: 1px solid #de05ff26;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 0 10px 20px #00000080;
+    max-height: 0;
+    opacity: 0;
+    padding: 0 20px;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease, border 0.4s ease;
+}
+
+.invisivel:checked ~ .painel-pesquisa {
+    max-height: 500px; 
+    opacity: 1;
+    padding: 20px;
+    border: 1px solid #de05ff26;
+    margin-bottom: 10px;
+}
+
+.demanda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.demanda-gen {
+    display: flex;
+    flex-direction: column;
+    background:linear-gradient(to right, #ffcdee40, #3902556d);
+    backdrop-filter: blur(12px);
+    width: 650px;
+    height: 350px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.demanda-gen:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px #00000089;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease, border 0.4s ease;
+}
+
+.caixa {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+.tipo-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #63676d87;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.prioridade-b-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #05ff5d26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #84f14a81;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff;
+}
+
+.prioridade-m-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #8f8100b7;
+    border-radius: 20px;
+    padding: 10px;
+    background: #fff20068;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff;
+}
+
+.prioridade-a-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #ff8c0026;
+    border-radius: 20px;
+    padding: 10px;
+    background: #fdac4859;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff;
+}
+
+.prioridade-c-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #ff050526;
+    border-radius: 20px;
+    padding: 10px;
+    background: #ff000038;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff;
+}
+
+.status-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #2dd4be60;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff98;
+}
+
+.projeto-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #f472b55e;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff98;
+}
+
+.responsavel-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #5d9ff02a;
+    border-radius: 20px;
+    padding: 10px;
+    background: #60a5fa55;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff98;
+}
+
+.DTcriacao-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #865d0747;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.prazo-gen {
+    display: flex;
+    text-align: center;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    background: #0c0c0c56;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    background:linear-gradient(to right, #ffcdfc72, #440255);
+    margin-top: 20px;
+}
+
+.links {
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.links a,
+.links a:visited {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.links a:hover {
+    color: rgb(195, 200, 75);
+    text-decoration: underline;
+}
