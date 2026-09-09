@@ -3,11 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Gerenciamento de Demandas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="..\Styles\Gerenciamento_Demandas.css">
+
+    <link rel="stylesheet" href="../Styles/Gerenciamento_Demandas.css">
 </head>
+
 <body>
-    
+
+    <form>
+
+        <h1>Cadastro de Demandas</h1>
+
+        <div class="campo">
+            <label for="titulo_id">Título</label>
+            <input 
+                type="text" 
+                name="Titulo" 
+                id="titulo_id"
+                placeholder=""
+            >
+        </div>
+
+        <div class="campo">
+            <label for="tipos_id">Tipo</label>
+            <select id="tipos_id" name="Tipos">
+                <option value="defeito">Defeito</option>
+                <option value="tarefa">Tarefa</option>
+                <option value="melhoria">Melhoria</option>
+                <option value="documentacao">Documentação</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prazo_id">Prazo</label>
+            <input 
+                type="datetime-local" 
+                name="prazo" 
+                id="prazo_id"
+            >
+        </div>
+
+        <div class="campo">
+            <label for="status_id">Status</label>
+            <select id="status_id" name="Status">
+                <option value="aberta">Aberta</option>
+                <option value="em_andamento">Em Andamento</option>
+                <option value="em_revisao">Em Revisão</option>
+                <option value="concluida">Concluída</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prioridade_id">Prioridade</label>
+            <select id="prioridade_id" name="Prioridade">
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+                <option value="critica">Crítica</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="responsavel_id">Responsável</label>
+            <select id="responsavel_id" name="Responsavel">
+                <option value="responsavel1">Responsável 1</option>
+                <option value="responsavel2">Responsável 2</option>
+                <option value="responsavel3">Responsável 3</option>
+                <option value="responsavel4">Responsável 4</option>
+            </select>
+        </div>
+
+        <div class="descricao">
+            <label for="descricao_id">Descrição</label>
+
+            <textarea 
+                id="descricao_id" 
+                name="Descricao" 
+                maxlength="200"
+            ></textarea>
+        </div>
+
+        <div class="botoes">
+            <input 
+                id="botaoApagar_id" 
+                type="reset" 
+                value="Apagar"
+            >
+
+            <input 
+                id="botaoSalvar_id" 
+                type="submit" 
+                value="Salvar"
+            >
+        </div>
+
+    </form>
+
 </body>
 </html>
