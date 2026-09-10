@@ -10,31 +10,64 @@
     
 </head>
 <body>
-    <div class="Popup">
-        <Header>
-            <h1><b> < Titulo da demanda ></b></h1>
-        </Header>
-        <section class= "Details">
-            <div class="Container">
-                <span>Melhoria</span>
-            </div>
-            <div class="Container">
-                <span>Em andamento</span>
-            </div>
-            <div class="Container">
-                <span id="Responsavel">Responsavel: Arthur</span>
-            </div>
-            <div class="Container">
-                <span>Prazo: 01/01/2027</span>
-            </div>
-            <div class="Container">
-                <span>Prioridade: Alta</span>
-            </div>
-        </section>
-        <Section class="Description">
-            <p>Descrição</p>
-        </Section>
-    </div>
-    
-</body>
+<dialog class="Popup" id="DialogBox">
+    <header>
+        <h1><b>&lt; Titulo da demanda &gt;</b></h1>
+    </header>
+
+    <section class="Details">
+        <div class="Container">
+            <span>Melhoria</span>
+        </div>
+
+        <div class="Container">
+            <span>Em andamento</span>
+        </div>
+
+        <div class="Container">
+            <span id="Responsavel">Responsavel: Arthur</span>
+        </div>
+
+        <div class="Container">
+            <span>Prazo: 01/01/2027</span>
+        </div>
+
+        <div class="Container">
+            <span>Prioridade: Alta</span>
+        </div>
+    </section>
+
+    <section class="Description">
+        <p>Descrição</p>
+    </section>
+    <button type="button" onclick="HideDialog()">Fechar Popup</button>
+
+</dialog>
+
+<button type="button" onclick="ShowDialog()">Display Popup</button>
+
+<script>
+    const dialog = document.getElementById("DialogBox");
+
+    function ShowDialog() {
+        dialog.showModal();
+    }
+
+    function HideDialog() {
+    dialog.classList.add("closing");
+
+    setTimeout(() => {
+        dialog.close();
+        dialog.classList.remove("closing");
+    }, 400);
+}
+
+
+    dialog.addEventListener("click", function(event) {
+        if (event.target === dialog) {
+            HideDialog();
+        }
+    });
+</script>
+
 </html>

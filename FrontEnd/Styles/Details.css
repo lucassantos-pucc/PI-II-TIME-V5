@@ -1,25 +1,67 @@
 .Popup {
     box-sizing: border-box;
     position: fixed;
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    height: 100%;
-    z-index: 2;
-    overflow: hidden;
-    border-radius: 20px;
     top: 0;
     right: 0;
-    padding: 32px 32px;
-    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    bottom: 0;
+    left: auto;
+    width: 600px;
+    height: 100dvh;
+    margin: 0;
+    padding: 32px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    flex-direction: column;
+    min-width: 0;
+    max-height: none;
 }
-.Popup Header{
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.Popup[open] {
+    display: flex;
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+.Popup.closing {
+    animation: slideOut 0.4s ease-in forwards;
+}
+
+
+.Popup header{
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 75px;
     font-size: 30px;
     background-color: transparent;
+    color: white;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 10px;
+}
+.Popup header h1{
+    margin: 0;
 }
 .Details{
     display: flex;
@@ -35,21 +77,26 @@
     height: fit-content;
     background: radial-gradient(#ffcde938, #0586ff26);
     border-radius: 20px;
-    justify-content: center;
     text-align: center;
+    overflow: hidden;
 }
 .Container span{
+    display: block;
+    color: white;
     font-size: 16px;
-    padding: 15px;
+    padding: 10px;
 }
 
-.Description{
+.Description {
     margin-top: 25px;
     width: 100%;
-    height: 100%;
+    flex: 1;
+    min-height: 0;
     border-radius: 20px;
     background-color: rgba(94, 20, 133, 0.3);
+    margin-bottom: 40px;
 }
+
 .Description p{
     padding: 25px;
     color: white;
