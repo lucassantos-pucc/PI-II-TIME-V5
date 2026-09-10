@@ -11,7 +11,7 @@
     padding: 32px;
     border: 2px solid black;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #30003f;
     overflow: hidden;
     flex-direction: column;
     min-width: 0;
@@ -55,12 +55,17 @@
     justify-content: flex-start;
     font-size: 30px;
     background-color: transparent;
+    background: transparent;
     color: white;
     width: 100%;
     height: fit-content;
+    box-shadow: none;
+    margin: 0 0 0 10px;
     margin-bottom: 10px;
+    border-radius: 10px;
 }
 .Popup header h1{
+    background-color:transparent ;
     margin: 0;
 }
 .Details{
@@ -69,7 +74,6 @@
     flex-wrap:wrap;
     gap: 20px;
     margin: 10px;
-    opacity: 1;
 }
 
 .Container{
