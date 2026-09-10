@@ -9,19 +9,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #18171e 0%,#251052 100%);
+    background: linear-gradient(to left, #6F118B, #370068);
     font-family: Arial, sans-serif;
 }
 
 form {
-    width: 596px;
-    height: 652px;
-    padding: 32px 44px;
-    background: linear-gradient(135deg, #68109b 0%, #5d0d91 100%);
-    border-radius: 31px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    background: #ffcdfb37;
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
     align-items: center;
+    border: 3px solid #de05ff26;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff76;
+    padding: 30px;
+    width: 600px;
 }
 
 h1 {
@@ -38,7 +42,7 @@ h1 {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 22px;
 }
 
@@ -46,43 +50,22 @@ h1 {
     color: white;
     font-size: 17px;
     font-weight: 700;
-    margin-right: 8px;
+    margin-right: 15px;
     text-align: right;
-    width: 150px;
+    width: 120px;
+    flex-shrink: 0;
 }
 
 .campo input,
 .campo select {
-    height: 27px;
+    height: 32px;
     background-color: #d9d9d9;
     border: none;
     border-radius: 6px;
     outline: none;
     font-size: 14px;
-}
-
-#titulo_id {
-    width: 447px;
-}
-
-#tipos_id {
-    width: 206px;
-}
-
-#status_id {
-    width: 206px;
-}
-
-#prioridade_id {
-    width: 206px;
-}
-
-#responsavel_id {
-    width: 206px;
-}
-
-#prazo_id {
-    width: 206px;
+    flex: 1;
+    padding: 0 10px;
 }
 
 .descricao {
@@ -118,7 +101,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     margin-top: 27px;
-    padding: 0 45px;
+    padding: 0 20px;
 }
 
 .botoes input {
@@ -139,4 +122,3 @@ h1 {
 #botaoSalvar_id {
     background-color: #6e27d9;
 }
-
