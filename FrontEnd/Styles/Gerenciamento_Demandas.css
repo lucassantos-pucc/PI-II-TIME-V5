@@ -9,8 +9,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to left, #6F118B, #370068);
-    font-family: Arial, sans-serif;
 }
 
 form {
@@ -30,7 +28,6 @@ form {
 
 h1 {
     color: white;
-    font-family: Arial, sans-serif;
     font-size: 44px;
     font-weight: 800;
     text-align: center;
@@ -111,14 +108,14 @@ h1 {
     border-radius: 15px;
     color: white;
     font-size: 25px;
-    font-weight: 800;
+    font-weight: bold;
     cursor: pointer;
 }
 
 #botaoApagar_id {
-    background-color: #1e0b3d;
+    background-color: rgb(150, 26, 26);
 }
 
 #botaoSalvar_id {
-    background-color: #6e27d9;
+    background-color: rgb(32, 119, 32);
 }

@@ -1,13 +1,4 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: left;
-    background: linear-gradient(to left, #6F118B, #370068);
-    background-attachment: fixed;
-    color: white;
-    font-family:'sans-serif' 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana;
-    font-weight: bold;
     gap: 20px;
 }
 
@@ -19,35 +10,18 @@ hr {
 
 p {
     font-size: larger;
-}
-
-header {
-    bottom: 0;
-    height: 75px;
-    display: flex;
-    align-items: center;
-    background:linear-gradient(to right, #ffcdfc72, #440255);
-    justify-content: center;
-    height: 150px;
-    margin: 0;
-    padding: 0;
-    border-radius: 10px;
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff3c;
+    color: white;
 }
 
 .invisivel {
     display: none;
 }
 
-.acoes .btn-personalizado {
-    display: inline-block;
+.btn-personalizado {
     cursor: pointer;
-}
-
-.acoes{
     display: flex;
     flex-direction: column;
+    align-items: center;
     background:linear-gradient(to right, #9102ff40, #3102556d);
     backdrop-filter: blur(12px);
     width: 160px;
@@ -56,6 +30,11 @@ header {
     padding: 10px;
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
+    margin-left: 20px;
+}
+
+.btn-personalizado:hover {
+    transform: scale(1.05);
 }
 
 .painel-pesquisa {
@@ -95,7 +74,7 @@ header {
     justify-content: center;
 }
 
-.demanda-gen {
+.demanda-card {
     display: flex;
     flex-direction: column;
     background:linear-gradient(to right, #ffcdee40, #3902556d);
@@ -107,6 +86,24 @@ header {
     padding: 20px;
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
+    transition: all 0.3s ease;
+}
+
+h3 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #ffcde910;
+    backdrop-filter: blur(12px);
+    padding: 3px;
+    width: auto;
+    border: 1px solid #de05ff26;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+    color:whitesmoke;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 .demanda-gen:hover {
@@ -125,7 +122,8 @@ header {
     padding: 0;
     gap: 20px;
 }
-
+/* To pensando aqui em depois fazer todos esses gens virarem uma classe geral e a cor
+   ser determinada por ID, mas n tenho sabedoria pra isso ainda */
 .tipo-gen {
     display: flex;
     text-align: center;
@@ -244,33 +242,4 @@ header {
     backdrop-filter: blur(12px);
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
-}
-footer {
-    position: sticky;
-    bottom: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 75px;
-    background:linear-gradient(to right, #ffcdfc72, #440255);
-    margin-top: 20px;
-}
-
-.links {
-    font-size: 20px;
-    display: flex;
-    gap: 20px;
-}
-
-.links a,
-.links a:visited {
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.links a:hover {
-    color: rgb(195, 200, 75);
-    text-decoration: underline;
 }

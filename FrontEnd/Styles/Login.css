@@ -6,7 +6,6 @@ body {
     background: linear-gradient(to left, #6F118B, #370068);
     background-attachment: fixed;
     color: white;
-    font-family:'sans-serif' 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana;
     font-weight: bold;
 }
 
@@ -54,22 +53,9 @@ a:hover{
 }
 
 .btn{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background: #ffcde910;
-    backdrop-filter: blur(12px);
-    margin: auto;
     margin-top: 20px;
     width: 290px;
     height: 50px;
-    border: 1px solid #de05ff26;
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
-    color:whitesmoke;
-    border-radius: 10px;
-    font-weight: bold;
-    
 }
 .btn:hover{
     transform: scale(1.05);

@@ -1,12 +1,14 @@
+/* Estilos universais, tentem manter todos os estilos repetidos em múltiplos arquivos aqui*/
+
 body {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     background: linear-gradient(to left, #6F118B, #370068);
     background-attachment: fixed;
     color: white;
-    font-family:'sans-serif' 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
 }
 
@@ -17,13 +19,18 @@ main {
 }
 
 header {
+    bottom: 0;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background:linear-gradient(to right, #ffcdfc72, #440255);
     height: 150px;
-    background-color: rgb(30, 20, 50);
     margin: 0;
     padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff3c;
 }
 
 .logo {
@@ -31,69 +38,58 @@ header {
     color: white;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: #ffcde938;
-    backdrop-filter: blur(12px);
-    border-radius: 20px;
-    align-items: center;
-    border: 1px solid #de05ff26;
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
-    padding: 30px;
-}
-
-.campos {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    margin-top: 20px;
-    border-radius: 20px;
-}
-
-input {
-    width: 300px;
-}
-
-a {
-    margin-top: 20px;
-    margin-left: 175px;
-    color: rgb(110, 200, 230);
-}
-
-a:hover{
-    color: rgb(230, 220, 110); 
-}
-
-.btn{
+.btn {
     display:flex;
     justify-content: center;
     align-items: center;
     background: #ffcde910;
     backdrop-filter: blur(12px);
     margin: auto;
-    margin-top: 20px;
-    width: 290px;
-    height: 50px;
     border: 1px solid #de05ff26;
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
     color:whitesmoke;
     border-radius: 10px;
     font-weight: bold;
-    
-}
-.btn:hover{
-    transform: scale(1.05);
-}
-label{
-    font-size: medium;
 }
 
-input{
-    height: 40px;
-    border-radius: 10px;
+.btn:hover {
+    transform: scale(1.05);
+}
+
+option:hover {
+    background-color: #370068;
+    
+}
+
+footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75px;
+    background:linear-gradient(to right, rgba(30, 20, 50, 0.90), #440255);
+    margin-top: 20px;
+}
+
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.links a {
+    font-size: 20px;
+}
+
+.links a,
+.links a:visited {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.links a:hover {
+    color: rgb(195, 200, 75);
 }
