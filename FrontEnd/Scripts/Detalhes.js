@@ -25,10 +25,10 @@ function ShowDialog(demanda) {
     const responsible = demanda.querySelector(".responsavel-gen p").textContent;
     const createDate = demanda.querySelector(".DTcriacao-gen p").textContent;
     const deadline = demanda.querySelector(".prazo-gen p").textContent;
-
+    
     //Por enquanto vai ser vazia visto que nao tem banco para consultar e nao aparece na listagem
     const description = "     "
-
+    
     //Colocar as informações no popup
     document.getElementById("DialogTitle").textContent = title;
     document.getElementById("DialogType").textContent = type;

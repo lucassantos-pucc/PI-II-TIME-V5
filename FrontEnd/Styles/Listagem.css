@@ -22,6 +22,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
     background:linear-gradient(to right, #9102ff40, #3102556d);
     backdrop-filter: blur(12px);
     width: 160px;
@@ -89,6 +90,10 @@ p {
     transition: all 0.3s ease;
 }
 
+.demanda-card:hover {
+    transform: scale(1.05);
+}
+
 h3 {
     display:flex;
     justify-content: center;
@@ -124,122 +129,67 @@ h3 {
 }
 /* To pensando aqui em depois fazer todos esses gens virarem uma classe geral e a cor
    ser determinada por ID, mas n tenho sabedoria pra isso ainda */
-.tipo-gen {
+
+.gen{
     display: flex;
     text-align: center;
-    border: 1px solid #de05ff26;
     border-radius: 20px;
     padding: 10px;
-    background: #63676d87;
     backdrop-filter: blur(12px);
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.tipo-gen {
+    border: 1px solid #de05ff26;
+    background: #63676d87;
+}
+
+.prioridade-gen {
+
 }
 
 .prioridade-b-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #05ff5d26;
-    border-radius: 20px;
-    padding: 10px;
     background: #84f14a81;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff;
 }
 
 .prioridade-m-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #8f8100b7;
-    border-radius: 20px;
-    padding: 10px;
     background: #fff20068;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff;
 }
 
 .prioridade-a-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #ff8c0026;
-    border-radius: 20px;
-    padding: 10px;
     background: #fdac4859;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff;
 }
 
 .prioridade-c-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #ff050526;
-    border-radius: 20px;
-    padding: 10px;
     background: #ff000038;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff;
 }
 
 .status-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #de05ff26;
-    border-radius: 20px;
-    padding: 10px;
     background: #2dd4be60;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff98;
 }
 
 .projeto-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #de05ff26;
-    border-radius: 20px;
-    padding: 10px;
     background: #f472b55e;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff98;
 }
 
 .responsavel-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #5d9ff02a;
-    border-radius: 20px;
-    padding: 10px;
     background: #60a5fa55;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff98;
 }
 
 .DTcriacao-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #de05ff26;
-    border-radius: 20px;
-    padding: 10px;
     background: #865d0747;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
 }
 
 .prazo-gen {
-    display: flex;
-    text-align: center;
     border: 1px solid #de05ff26;
-    border-radius: 20px;
-    padding: 10px;
     background: #0c0c0c56;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
 }
