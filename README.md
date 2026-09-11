@@ -1,6 +1,6 @@
 # PI-II-TIME-V5
 
-**Sistema de Acompanhamento de Demandas de Desenvolvimento**, feito para o componente curricular *Projeto Integrador II* na Puc-Campinas no curso de **Engenharia de Software** no segundo semestre do ano de 2026. Com os Professores *Lua Marcelo Muriana* e *Fernando Luiz de Almeida Silveira* como orientadores. 
+**Sistema de Acompanhamento de Demandas de Desenvolvimento**, feito para o componente curricular *Projeto Integrador II* na Puc-Campinas no curso de **Engenharia de Software** no segundo semestre do ano de 2026. Com o Professor *Fernando Luiz de Almeida Silveira* como orientador. 
 
 ## Membros
 

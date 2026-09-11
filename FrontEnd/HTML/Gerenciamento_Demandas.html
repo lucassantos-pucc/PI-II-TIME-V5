@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Demandas</title>
+    <link rel="stylesheet" href="../Styles/Style.css">
+    <link rel="stylesheet" href="../Styles/Gerenciamento_Demandas.css">
+</head>
+<body>
+
+    <form>
+        <h1>Cadastro de Demandas</h1>
+
+        <div class="campo">
+            <label for="titulo_id">Título</label>
+            <input type="text" name="Titulo" id="titulo_id">
+        </div>
+
+        <div class="campo">
+            <label for="tipos_id">Tipo</label>
+            <select id="tipos_id" name="Tipos">
+                <option value="defeito">Defeito</option>
+                <option value="tarefa">Tarefa</option>
+                <option value="melhoria">Melhoria</option>
+                <option value="documentacao">Documentação</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prazo_id">Prazo</label>
+            <input type="datetime-local" name="prazo" id="prazo_id">
+        </div>
+
+        <div class="campo">
+            <label for="status_id">Status</label>
+            <select id="status_id" name="Status">
+                <option value="aberta">Aberta</option>
+                <option value="em_andamento">Em Andamento</option>
+                <option value="em_revisao">Em Revisão</option>
+                <option value="concluida">Concluída</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prioridade_id">Prioridade</label>
+            <select id="prioridade_id" name="Prioridade">
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+                <option value="critica">Crítica</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="Responsavel_id">Responsável</label>
+            <input type="text" name="Responsavel" id="Responsavel_id">
+        </div>
+
+        <div class="descricao">
+            <label for="descricao_id">Descrição</label>
+            <textarea id="descricao_id" name="Descricao" maxlength="200"></textarea>
+        </div>
+
+        <div class="botoes">
+            <input id="botaoApagar_id" class="btn" type="reset" value="Apagar">
+            <input id="botaoSalvar_id" class="btn" type="submit" value="Salvar">
+        </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+.Popup {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 600px;
+    height: 100dvh;
+    margin: 0;
+    padding: 32px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #30003f;
+    overflow: hidden;
+    flex-direction: column;
+    min-width: 0;
+    max-height: none;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+.Popup[open] {
+    display: flex;
+    animation: slideIn 0.4s ease-out forwards;
+}
+
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.Popup.closing {
+    animation: slideOut 0.4s ease-in forwards;
+}
+
+
+.Popup header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 30px;
+    background-color: transparent;
+    background: transparent;
+    color: white;
+    width: 100%;
+    height: fit-content;
+    box-shadow: none;
+    margin: 0 0 0 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+.Popup header h1 {
+    background-color:transparent ;
+    margin: 0;
+}
+.Details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap: 20px;
+    margin: 10px;
+}
+
+span {
+    display: block;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    height: 40px;
+}
+
+.Description {
+    margin-top: 25px;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    border-radius: 20px;
+    background-color: rgba(94, 20, 133, 0.3);
+    margin-bottom: 40px;
+}
+
+.Description p {
+    padding: 25px;
+    color: white;
+    font-weight: 0;
+
+}

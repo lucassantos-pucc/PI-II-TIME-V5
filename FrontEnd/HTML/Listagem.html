@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="..\Styles\Style.css">
+    <link rel="stylesheet" href="..\Styles\Listagem.css">
+
+    <link rel="stylesheet" href="../Styles/Details.css">
+    <script src="../Scripts/Detalhes.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo"><b>Listagem de demandas</b></h1>
+    </header>
+    <!-- isso vai se usado para esconder o menu de pesquisa(gambiarra poruqe nao vimos javascript)-->
+    <input type="checkbox" id="escondido" class="invisivel">
+
+    <label for="escondido" class="btn-personalizado">Buscar / Filtrar</label>
+
+    <div id="painel-pesquisa" class="painel-pesquisa">
+        
+        <div class="grupo-filtro">
+            <label>Nome da Demanda</label>
+            <input type="text" placeholder="Pesquisar por nome...">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Tipo de Demanda</label>
+            <select>
+                <option value="">Todos os tipos</option>
+                <option value="tarefa">Tarefa</option>
+                <option value="defeito">Defeito</option>
+                <option value="melhoria">Melhoria</option>
+                <option value="documentacao">Documentação</option>
+            </select>
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Prioridade</label>
+            <select>
+                <option value="">Todas</option>
+                <option value="baixa">Baixa</option>
+                <option value="media">Média</option>
+                <option value="alta">Alta</option>
+                <option value="critica">Crítica</option>
+            </select>
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Status</label>
+            <select>
+                <option value="">Todos</option>
+                <option value="aberta">Aberta</option>
+                <option value="em-andamento">Em andamento</option>
+                <option value="em-revisao">Em revisão</option>
+                <option value="concluida">Concluída</option>
+                <option value="cancelada">Cancelada</option>
+            </select>
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Projeto Vinculado</label>
+            <input type="text" placeholder="Nome do projeto...">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Responsável</label>
+            <input type="text" placeholder="Nome do responsável...">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Data de Criação</label>
+            <input type="date">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Prazo de Entrega</label>
+            <input type="date">
+        </div>
+
+        <div class="grupo-botao-filtro">
+            <button class="btn-personalizado">Aplicar Filtros</button>
+        </div>
+    </div>
+    <section class="demanda">
+        <button class="demanda-card" onclick="ShowDialog(this)">
+            <h3>Demanda exemplo 1</h3>
+            <hr>
+            <div class="caixa">   
+                <div class="tipo-gen">
+                    <p>Tipo: Defeito</p>
+                </div>
+                <div class="prioridade-b-gen">
+                    <p>Prioridade: baixa</p>
+                </div>
+                <div class="status-gen">
+                    <p>Status: Aberta</p>
+                </div>
+                <div class="projeto-gen">
+                    <p>Projeto: exmplo</p>
+                </div>
+                <div class="responsavel-gen">
+                    <p>Responsavel: Sr. exemplilson</p>
+                </div>
+                <div class="DTcriacao-gen">
+                    <p>Data de criação: 11/02/2026</p>
+                </div>
+                <div class="prazo-gen">
+                    <p>Prazo: 18/09/2026</p>
+                </div>
+            </div>
+        </button>
+
+        <button class="demanda-card" onclick="ShowDialog(this)">
+            <h3>Demanda exemplo 2</h3>
+            <hr>
+            <div class="caixa">   
+                <div class="tipo-gen">
+                    <p>Tipo: Melhoria</p>
+                </div>
+                <div class="prioridade-m-gen">
+                    <p>Prioridade: média</p>
+                </div>
+                <div class="status-gen">
+                    <p>Status: Cancelada</p>
+                </div>
+                <div class="projeto-gen">
+                    <p>Projeto: exmplo</p>
+                </div>
+                <div class="responsavel-gen">
+                    <p>Responsavel: Sr. exemplilson</p>
+                </div>
+                <div class="DTcriacao-gen">
+                    <p>Data de criação: 11/02/2026</p>
+                </div>
+                <div class="prazo-gen">
+                    <p>Prazo: 18/09/2026</p>
+                </div>
+            </div>
+        </button>
+
+        <button class="demanda-card" onclick="ShowDialog(this)">
+            <h3>Demanda exemplo 3</h3>
+            <hr>
+            <div class="caixa">   
+                <div class="tipo-gen">
+                    <p>Tipo: Documentação</p>
+                </div>
+                <div class="prioridade-a-gen">
+                    <p>Prioridade: alta</p>
+                </div>
+                <div class="status-gen">
+                    <p>Status: Em revisão</p>
+                </div>
+                <div class="projeto-gen">
+                    <p>Projeto: exmplo</p>
+                </div>
+                <div class="responsavel-gen">
+                    <p>Responsavel: Sr. exemplilson</p>
+                </div>
+                <div class="DTcriacao-gen">
+                    <p>Data de criação: 11/02/2026</p>
+                </div>
+                <div class="prazo-gen">
+                    <p>Prazo: 18/09/2026</p>
+                </div>
+            </div>
+        </button>
+
+        <button class="demanda-card" onclick="ShowDialog(this)">
+            <h3>Demanda exemplo 4</h3>
+            <hr>
+            <div class="caixa">   
+                <div class="tipo-gen">
+                    <p>Tipo: Defeito</p>
+                </div>
+                <div class="prioridade-c-gen">
+                    <p>Prioridade: CRÍTICA</p>
+                </div>
+                <div class="status-gen">
+                    <p>Status: Concluída</p>
+                </div>
+                <div class="projeto-gen">
+                    <p>Projeto: exmplo</p>
+                </div>
+                <div class="responsavel-gen">
+                    <p>Responsavel: Sr. exemplilson</p>
+                </div>
+                <div class="DTcriacao-gen">
+                    <p>Data de criação: 11/02/2026</p>
+                </div>
+                <div class="prazo-gen">
+                    <p>Prazo: 18/09/2026</p>
+                </div>
+            </div>
+        </button>
+
+        <button class="demanda-card" onclick="ShowDialog(this)">
+            <h3>Demanda exemplo 5</h3>
+            <hr>
+            <div class="caixa">   
+                <div class="tipo-gen">
+                    <p>Tipo: Tarefa</p>
+                </div>
+                <div class="prioridade-c-gen">
+                    <p>Prioridade: CRÍTICA</p>
+                </div>
+                <div class="status-gen">
+                    <p>Status: Em andamento</p>
+                </div>
+                <div class="projeto-gen">
+                    <p>Projeto: exmplo</p>
+                </div>
+                <div class="responsavel-gen">
+                    <p>Responsavel: Sr. exemplilson</p>
+                </div>
+                <div class="DTcriacao-gen">
+                    <p>Data de criação: 11/02/2026</p>
+                </div>
+                <div class="prazo-gen">
+                    <p>Prazo: 18/09/2026</p>
+                </div>
+            </div>
+        </button>
+    </section>
+
+    <footer class="rodape">
+        <div class="links">
+            <a href="Login.html" class="btn">SAIR</a>
+            <a href="Dashboard.html" class="btn">VOLTAR PARA DASHBOARD</a>
+        </div>
+    </footer>
+</body>
+</html>
