@@ -19,7 +19,7 @@ function ShowDialog(demanda) {
     // Pegar os dados da demanda
     const title = demanda.querySelector("h3").textContent;
     const type = demanda.querySelector(".tipo-gen p").textContent;
-    const priority = demanda.querySelector('[class*="prioridade-"] p').textContent;
+    const priority = demanda.querySelector(".prioridade-gen p").textContent;
     const status = demanda.querySelector(".status-gen p").textContent;
     const project = demanda.querySelector(".projeto-gen p").textContent;
     const responsible = demanda.querySelector(".responsavel-gen p").textContent;
@@ -42,6 +42,9 @@ function ShowDialog(demanda) {
 
 
     dialog.classList.remove("closing");
+
+    //!! Vejam se alguém consegue descobrir como usar o PriorityColor no popup isso aq não ta dando certo não
+    //PriorityColor(document.getElementsByClassName("prioridade-gen"));
 
     dialog.showModal();
 }
