@@ -1,0 +1,6 @@
+#ignorar pasta node
+node_modules/
+
+#ignorar arquivos com informações senciveis
+.env
+.env.*
