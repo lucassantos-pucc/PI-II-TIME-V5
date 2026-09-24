@@ -1,0 +1,71 @@
+<!--
+
+Feito por: Lucas de Oliveira Santos
+RA: 26887166
+
+-->
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro de Projetos</title>
+
+    <link rel="stylesheet" href="../Styles/Style.css">
+    <link rel="stylesheet" href="../Styles/Gerenciamento_Projetos.css">
+
+
+</head>
+
+<body>
+
+    <form>
+
+        <h1>Cadastro de Projetos</h1>
+
+        <div class="campo">
+            <label for="titulo_id">Título</label>
+
+            <input type="text" name="Titulo" id="titulo_id" placeholder="Digite o título do projeto">
+        </div>
+
+        <div class="campo">
+            <label for="lider_id">Líder do Projeto</label>
+
+            <select name="Lider" id="lider_id">
+                <option value="" disabled selected>
+                    Selecione o líder do projeto
+                </option>
+
+                <option value="membro1">membro 1</option>
+                <option value="membro2">membro 2</option>
+                <option value="membro3">membro 3</option>
+                <option value="membro4">membro 4</option>
+                <option value="membro5">membro 5</option>
+            </select>
+        </div>
+
+        <div class="campo">
+
+            <label for="membros_id">Membros</label>
+            <input type="text" name="Membros" id="membros_id" placeholder="Insira os Membros do Projeto">
+        </div>
+
+        <div class="botoes">
+
+            <input id="botaoCancelar_id" class="btn" type="reset" value="Cancelar">
+
+            <input id="botaoCriar_id" class="btn" type="submit" value="Criar">
+
+        </div>
+
+
+    </form>
+
+</body>
+
+</html>
