@@ -56,7 +56,7 @@ h1 {
     font-size: 17px;
     font-weight: 700;
     margin-right: 15px;
-    text-align: right;
+    text-align: left;
     width: 120px;
     flex-shrink: 0;
 }

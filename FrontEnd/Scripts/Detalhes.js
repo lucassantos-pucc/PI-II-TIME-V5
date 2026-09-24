@@ -1,3 +1,8 @@
+/*
+    Feito por Arthur Cardoso Martin
+    RA: 26006506
+*/
+
 async function LoadDialog() {
     const response = await fetch("Detalhes.html");
 
@@ -18,34 +23,35 @@ function ShowDialog(demanda) {
 
     // Pegar os dados da demanda
     const title = demanda.querySelector("h3").textContent;
-    const type = demanda.querySelector(".tipo-gen p").textContent;
-    const priority = demanda.querySelector(".prioridade-gen p").textContent;
-    const status = demanda.querySelector(".status-gen p").textContent;
-    const project = demanda.querySelector(".projeto-gen p").textContent;
-    const responsible = demanda.querySelector(".responsavel-gen p").textContent;
-    const createDate = demanda.querySelector(".DTcriacao-gen p").textContent;
-    const deadline = demanda.querySelector(".prazo-gen p").textContent;
-    
+    const type = demanda.querySelector(".tipo-gen").textContent;
+    const priority = demanda.querySelector(".prioridade-gen").textContent;
+    const status = demanda.querySelector(".status-gen").textContent;
+    const project = demanda.querySelector(".projeto-gen").textContent;
+    const responsible = demanda.querySelector(".responsavel-gen").textContent;
+    const createDate = demanda.querySelector(".DTcriacao-gen").textContent;
+    const deadline = demanda.querySelector(".prazo-gen").textContent;
+    const dialogPriority = document.getElementById("DialogPriority");
+
     //Por enquanto vai ser vazia visto que nao tem banco para consultar e nao aparece na listagem
     const description = "     "
-    
+
     //Colocar as informações no popup
     document.getElementById("DialogTitle").textContent = title;
     document.getElementById("DialogType").textContent = type;
-    document.getElementById("DialogPriority").textContent = `Prioridade: ${priority}`;
+    dialogPriority.textContent = priority;
     document.getElementById("DialogStatus").textContent = status;
     document.getElementById("DialogProject").textContent = project;
-    document.getElementById("DialogResponsible").textContent = `Responsável: ${responsible}`;
-    document.getElementById("DialogCreate").textContent = `Criação: ${createDate}`;
-    document.getElementById("DialogDeadline").textContent = `Prazo: ${deadline}`;
+    document.getElementById("DialogResponsible").textContent = responsible;
+    document.getElementById("DialogCreate").textContent = createDate;
+    document.getElementById("DialogDeadline").textContent = deadline;
     document.getElementById("DialogDescription").textContent = description;
 
 
     dialog.classList.remove("closing");
-
+    PriorityColorDialog(dialogPriority.parentElement);
     //!! Vejam se alguém consegue descobrir como usar o PriorityColor no popup isso aq não ta dando certo não
     //PriorityColor(document.getElementsByClassName("prioridade-gen"));
-
+    localStorage.setItem("DemandaAtual", JSON.parse())
     dialog.showModal();
 }
 
@@ -61,3 +67,33 @@ function HideDialog() {
 }
 
 LoadDialog();
+
+function PriorityColorDialog(p) {
+    if (!p) {
+        return;
+    }
+
+    const prioridade = p.textContent.toLowerCase();
+
+    p.classList.remove( //remover classe
+        "prioridade-b-gen",
+        "prioridade-m-gen",
+        "prioridade-a-gen",
+        "prioridade-c-gen"
+    );
+
+    if (prioridade.includes("baixa")) { //adicionar baseado no texto
+        p.classList.add("prioridade-b-gen");
+    } else if (prioridade.includes("média")) {
+        p.classList.add("prioridade-m-gen");
+    } else if (prioridade.includes("alta")) {
+        p.classList.add("prioridade-a-gen");
+    } else if (prioridade.includes("crítica")) {
+        p.classList.add("prioridade-c-gen");
+    }
+}
+
+
+function Edit(demanda){
+
+}
