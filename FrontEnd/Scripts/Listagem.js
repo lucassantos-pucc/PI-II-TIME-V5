@@ -28,13 +28,10 @@ function CreateDemanda(json) {
     Dem_Cr.appendChild(box);
 
     
-    Dem_Cr.addEventListener("click", function() {ShowDialog(this);});
+    //Dem_Cr.addEventListener("click", function() {ShowDialog(this);});
+    Dem_Cr.addEventListener("click", () => ShowDialog(Dem_Cr)); 
 
     document.getElementById("secao-demanda").appendChild(Dem_Cr);
-}
-
-function asd(a) {
-    console.log(a)
 }
 
 function DemandaContent(classe, texto) {
@@ -51,8 +48,11 @@ function DemandaContent(classe, texto) {
 }
 
 function PriorityColor(p) {
+    if (!p) { //So coloquei isso para evitar problema de estar vazio
+        return;
+    }
 
-    prio = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
+    const prio = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
     
     // Aplica as cores de fundo respectivas
     if (prio.includes("baixa")) {
@@ -79,6 +79,6 @@ CreateDemanda("temp");
 const ElementosPrioridade = document.getElementsByClassName("prioridade-gen");
     
 // Itera por todos as prioridades
-for (i in ElementosPrioridade) {
-    PriorityColor(ElementosPrioridade[i]);
+for (const prioridade of ElementosPrioridade) {
+    PriorityColor(prioridade);
 }
