@@ -1,0 +1,177 @@
+/*
+
+Feito por: Kauã Gaiofato Santana Lima de Jesus
+RA: 26000195
+
+*/
+
+.usuarios-secao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.usuarios-container {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #ffcdee40, #3902556d);
+    backdrop-filter: blur(12px);
+    width: 100%;
+    max-width: 850px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 25px 40px #0000007d, inset 1px 2px 5px #ffffff33;
+    box-sizing: border-box;
+}
+
+.usuarios-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffcde910;
+    backdrop-filter: blur(12px);
+    padding: 10px;
+    border: 1px solid #de05ff26;
+    box-shadow: 0 25px 40px #0000009d, inset 1px 2px 5px #ffffff33;
+    color: whitesmoke;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.usuarios-divisor {
+    height: 3px;
+    background-color: #de05ff;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.usuarios-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.usuarios-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4402557e;
+    border: 1px solid #de05ff26;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 5px 10px #00000005, inset 1px 1px 3px #ffffff22;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.usuarios-item:hover {
+    transform: scale(1.01);
+    background: #54066b90;
+}
+
+.usuarios-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.usuarios-nome {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.usuarios-email {
+    font-size: 14px;
+    color: #d8b4fe;
+}
+
+.usuarios-detalhes {
+    display: flex;
+    align-items: center;
+}
+
+.usuarios-badge {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 20px #00000024, inset 1px 1px 3px #ffffff33;
+    white-space: nowrap;
+}
+
+.perfil-adm {
+    background: #ff000038;
+    border: 1px solid #ff050540;
+    color: #ffb3b3;
+}
+
+.perfil-lider {
+    background: #60a5fa55;
+    border: 1px solid #5d9ff040;
+    color: #bfdbfe;
+}
+
+.perfil-membro {
+    background: #2dd4be60;
+    border: 1px solid #2dd4be40;
+    color: #ccfbf1;
+}
+
+@media (max-width: 768px) {
+    .usuarios-container {
+        padding: 15px;
+    }
+
+    .usuarios-titulo {
+        font-size: 19px;
+    }
+
+    .usuarios-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+
+    .usuarios-detalhes {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 24px !important;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .usuarios-titulo {
+        font-size: 16px;
+    }
+
+    .usuarios-nome {
+        font-size: 16px;
+    }
+
+    .usuarios-email {
+        font-size: 12px;
+    }
+
+    .usuarios-badge {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
