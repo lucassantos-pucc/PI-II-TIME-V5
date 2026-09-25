@@ -3,7 +3,7 @@
 // RA: 26007167
 
 function CreateDemanda(json) {
-    const info = JSON.parse('{"nome":"Teste", "tipo":"Defeito", "prioridade":"Baixa", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}'); // Lista temporaria
+    const info = JSON.parse(json);
     
     const Dem_Cr = document.createElement('button'); // Demanda Criada
     Dem_Cr.classList.add("demanda-card");
@@ -72,7 +72,16 @@ function PriorityColor(p) {
     }
 }
 
-CreateDemanda("temp");
+// Cria as demandas dinamicamente na tela a partir de arquivos JSON
+const jsondemandas = []; // !! Temporario
+jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[1] = '{"nome":"Teste2", "tipo":"Defeito", "prioridade":"Média", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+
+for (const demanda of jsondemandas) {
+    CreateDemanda(demanda);
+}
 
 
 // Obtém os elementos de prioridade com base na classe geral de prioridade
