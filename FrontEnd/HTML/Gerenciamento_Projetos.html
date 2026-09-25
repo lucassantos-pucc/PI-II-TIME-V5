@@ -17,25 +17,31 @@ RA: 26887166
 
     <link rel="stylesheet" href="../Styles/Style.css">
     <link rel="stylesheet" href="../Styles/Gerenciamento_Projetos.css">
+    <script src="../Scripts/Gerenciamento_projetos.js" defer></script>
 
 
 </head>
 
 <body>
 
-    <form>
+    <form id="formulario">
 
         <h1>Cadastro de Projetos</h1>
 
         <div class="campo">
-            <label for="titulo_id">Título</label>
+                <label for="titulo_id">Título</label>
 
-            <input type="text" name="Titulo" id="titulo_id" placeholder="Digite o título do projeto">
+                <div class="input-erro">
+                <input type="text" name="Titulo" id="titulo_id" placeholder="Digite o título do projeto">
+
+                <div class="erro" id="erroTitulo">opsss deu erro heinn</div>
+                </div>
         </div>
 
         <div class="campo">
             <label for="lider_id">Líder do Projeto</label>
 
+            <div class="input-erro">
             <select name="Lider" id="lider_id">
                 <option value="" disabled selected>
                     Selecione o líder do projeto
@@ -47,13 +53,22 @@ RA: 26887166
                 <option value="membro4">membro 4</option>
                 <option value="membro5">membro 5</option>
             </select>
+
+            <div class="erro" id="erroLider">opsss deu erro heinn</div>
+        </div>
         </div>
 
         <div class="campo">
 
             <label for="membros_id">Membros</label>
+            <div class="input-erro">
             <input type="text" name="Membros" id="membros_id" placeholder="Insira os Membros do Projeto">
+
+            <div class="erro" id="erroMembros">opsss deu erro heinn</div>
         </div>
+        </div>
+
+        <div class="sucesso" id="sucesso">Seu Projeto foi Criado Com sucesso!!</div>
 
         <div class="botoes">
 
