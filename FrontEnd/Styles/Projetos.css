@@ -1,0 +1,126 @@
+/*
+
+Feito por: Kauã Gaiofato Santana Lima de Jesus
+RA: 26000195
+
+*/
+
+.projeto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.projeto-card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #ffcdee40, #3902556d);
+    backdrop-filter: blur(12px);
+    width: 650px;
+    min-height: 320px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.projeto-card:hover {
+    transform: scale(1.03);
+}
+
+.projeto-card hr {
+    height: 3px;
+    background-color: #de05ff;
+    width: 100%;
+    border: none;
+    margin: 10px 0;
+}
+
+.projeto-card h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #ffcde910;
+    backdrop-filter: blur(12px);
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #de05ff26;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+    color: whitesmoke;
+    border-radius: 10px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.projeto-card p {
+    font-size: larger;
+    color: white;
+    margin: 0;
+}
+
+.caixa {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.gen {
+    display: flex;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px 15px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+}
+
+.lider-gen {
+    border: 1px solid #5d9ff02a;
+    background: #60a5fa55;
+}
+
+.demandas-gen {
+    border: 1px solid #de05ff26;
+    background: #f472b55e;
+}
+
+.DTcriacao-gen {
+    border: 1px solid #de05ff26;
+    background: #865d0747;
+}
+
+.descricao-gen {
+    border: 1px solid #de05ff26;
+    background: #ffffff15;
+    width: 100%;
+}
+
+.status-gen {
+    border: 1px solid #de05ff26;
+}
+
+.status-ativo {
+    background: #2dd4be60;
+}
+
+.status-andamento {
+    background: #fff20068;
+}
+
+.status-concluido {
+    background: #84f14a81;
+}
+
+.status-cancelado {
+    background: #f1584a81;
+}
