@@ -4,6 +4,7 @@ Feito por: Kauã Gaiofato Santana Lima de Jesus
 RA: 26000195
 
 */
+
 body {
     gap: 20px;
 }
@@ -12,36 +13,35 @@ hr {
     height: 3px;
     background-color: #de05ff;
     width: 100%;
+    border: none;
+    margin: 10px;
+}
+
+h3 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #ffcde910;
+    backdrop-filter: blur(12px);
+    padding: 3px;
+    width: auto;
+    border: 1px solid #de05ff26;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+    color:whitesmoke;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
 p {
     font-size: larger;
     color: white;
+    margin: 0;
 }
 
 .invisivel {
     display: none;
-}
-
-.btn-personalizado {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    background:linear-gradient(to right, #9102ff40, #3102556d);
-    backdrop-filter: blur(12px);
-    width: 160px;
-    border: 1px solid #de05ff26;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
-    margin-left: 20px;
-}
-
-.btn-personalizado:hover {
-    transform: scale(1.05);
 }
 
 .painel-pesquisa {
@@ -73,7 +73,29 @@ p {
     margin-bottom: 10px;
 }
 
-.demanda {
+.btn-personalizado {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background:linear-gradient(to right, #9102ff40, #3102556d);
+    backdrop-filter: blur(12px);
+    width: 160px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 25px 40px #000000;
+    box-shadow: inset 1px 2px 5px #ffffff33;
+    margin-left: 20px;
+}
+
+.btn-personalizado:hover {
+    transform: scale(1.05);
+}
+
+.demanda,
+.projeto {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
@@ -81,70 +103,58 @@ p {
     justify-content: center;
 }
 
-.demanda-card {
+.demanda-card,
+.projeto-card {
     display: flex;
     flex-direction: column;
-    background:linear-gradient(to right, #ffcdee40, #3902556d);
+    background: linear-gradient(to right, #ffcdee40, #3902556d);
     backdrop-filter: blur(12px);
     width: 650px;
-    height: 350px;
+    min-height: 320px;
     border: 1px solid #de05ff26;
     border-radius: 20px;
     padding: 20px;
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
     transition: all 0.3s ease;
+    text-align: left;
 }
 
-.demanda-card:hover {
+.demanda-card:hover,
+.projeto-card:hover {
     transform: scale(1.05);
-}
-
-h3 {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background: #ffcde910;
-    backdrop-filter: blur(12px);
-    padding: 3px;
-    width: auto;
-    border: 1px solid #de05ff26;
-    box-shadow: 0 25px 40px #000000;
-    box-shadow: inset 1px 2px 5px #ffffff33;
-    color:whitesmoke;
-    border-radius: 10px;
-    font-weight: bold;
-}
-
-.demanda-gen:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px #00000089;
-    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease, border 0.4s ease;
 }
 
 .caixa {
     flex-wrap: wrap;
     display: flex;
     align-items: center;
-    justify-content: left;
-    height: 150px;
-    margin: 0;
-    padding: 0;
-    gap: 20px;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-
-.gen{
+.gen {
     display: flex;
     text-align: center;
     border-radius: 20px;
-    padding: 10px;
+    padding: 15px;
     backdrop-filter: blur(12px);
     box-shadow: 0 25px 40px #000000;
     box-shadow: inset 1px 2px 5px #ffffff33;
 }
 
+.status-gen {
+    border: 1px solid #de05ff26;
+    background: #2dd4be60;
+}
+
+.DTcriacao-gen {
+    border: 1px solid #de05ff26;
+    background: #865d0747;
+}
+
+/* Demandas */
 .tipo-gen {
     border: 1px solid #de05ff26;
     background: #63676d87;
@@ -170,11 +180,6 @@ h3 {
     background: #ff000038;
 }
 
-.status-gen {
-    border: 1px solid #de05ff26;
-    background: #2dd4be60;
-}
-
 .projeto-gen {
     border: 1px solid #de05ff26;
     background: #f472b55e;
@@ -185,12 +190,41 @@ h3 {
     background: #60a5fa55;
 }
 
-.DTcriacao-gen {
-    border: 1px solid #de05ff26;
-    background: #865d0747;
-}
-
 .prazo-gen {
     border: 1px solid #de05ff26;
     background: #0c0c0c56;
+}
+
+
+/* Projetos */
+.lider-gen {
+    border: 1px solid #5d9ff02a;
+    background: #60a5fa55;
+}
+
+.demandas-gen {
+    border: 1px solid #de05ff26;
+    background: #f472b55e;
+}
+
+.descricao-gen {
+    border: 1px solid #de05ff26;
+    background: #ffffff15;
+    width: 100%;
+}
+
+.status-ativo {
+    background: #2dd4be60;
+}
+
+.status-andamento {
+    background: #fff20068;
+}
+
+.status-concluido {
+    background: #84f14a81;
+}
+
+.status-cancelado {
+    background: #f1584a81;
 }
