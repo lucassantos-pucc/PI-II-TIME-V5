@@ -2,20 +2,24 @@ const form = document.querySelector("form");
 const campoUsuario = document.querySelector("#usuario");
 const campoSenha = document.querySelector("#senha");
 const campoConf_senha = document.querySelector("#conf_senha");
+const campoTipo = document.querySelector("#Tipo");
 const erroUsuario = document.querySelector("#erroUsuario");
 const erroSenha = document.querySelector("#erroSenha");
 const erroConf_Senha = document.querySelector("#erroConf_Senha");
+const erroTipo = document.querySelector("#erroTipo");
 
 const camposComErro = [
     campoUsuario,
     campoSenha,
-    campoConf_senha
+    campoConf_senha,
+    campoTipo
 ];
 
 const mensagensDeErro = [
     erroUsuario,
     erroSenha,
-    erroConf_Senha
+    erroConf_Senha,
+    erroTipo
 ];
 
 // Função para mostrar erro e mudar estilo do campo
@@ -47,6 +51,7 @@ form.addEventListener("submit", function(event) {
     const usuario = campoUsuario.value.trim();
     const senha = campoSenha.value.trim();
     const conf_senha = campoConf_senha.value.trim();
+    const tipo = campoTipo.value.trim();
 
     // Validar e-mail
     if (usuario === "") {
@@ -89,15 +94,25 @@ form.addEventListener("submit", function(event) {
         Validation = false;
     }
 
+    if (tipo === "") {
+        ErroValidation(campoTipo, erroTipo, "O tipo de usuário é obrigatório.");
+        Validation = false;
+    }
+
     // Se houver algum erro, interrompe a execução
     if (!Validation) {
         return;
     }
 
-    const login = {
+    const user = {
         usuario: campoUsuario.value,
-        senha: campoSenha.value
+        senha: campoSenha.value,
+        tipo: campoTipo.value
     };
+    const users = JSON.parse(localStorage.getItem("Usuarios") || "[]");
+    users.push(user);
+    localStorage.setItem("Usuarios", JSON.stringify(users));
 
-    console.log("Dados enviados:", JSON.stringify(login, null, 2));
+    open("Login.html", "_self");
+
 });

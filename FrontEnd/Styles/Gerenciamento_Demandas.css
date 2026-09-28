@@ -110,7 +110,7 @@ h1 {
     padding: 0 20px;
 }
 
-.botoes input {
+.botoes button, .botoes a {
     width: 157px;
     height: 52px;
     border: none;
@@ -119,6 +119,7 @@ h1 {
     font-size: 25px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
 }
 
 #botaoCancelar_id {
