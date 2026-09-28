@@ -1,7 +1,14 @@
+/*
+
+Feito por: Lucas Studach Kaid Ludemann
+RA: 26006454
+
+*/
 body {
     margin: 0;
-    padding: 0;
+    padding:0;
 }
+
 
 .informações {
     display: flex;
@@ -33,11 +40,13 @@ body {
 }
 
 h3 {
+    font-size: 32px;
+    font-weight: bold;
     padding: 10px;
     margin: 0;
 }
 
-span.valor {
+span {
     font-size: 40px;
     font-weight: bold;
     padding-top: 10px;
