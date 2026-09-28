@@ -75,6 +75,19 @@ form.addEventListener("submit", function(event) {
         senha: campoSenha.value
     };
 
+
+    if (localStorage.getItem("Usuarios")) { // Ver usuarios cadastrados no localStorage
+        const usuarios = JSON.parse(localStorage.getItem("Usuarios"));
+        const usuarioEncontrado = usuarios.find((u) => u.usuario === login.usuario && u.senha === login.senha);
+        if (usuarioEncontrado) {
+            localStorage.setItem("UsuarioLogado", JSON.stringify(usuarioEncontrado));
+            open("Dashboard_Demandas.html", "_self");
+        } else {
+            ErroValidation(campoUsuario, erroUsuario, "Usuário ou senha inválidos.");
+            ErroValidation(campoSenha, erroSenha, "Usuário ou senha inválidos.");
+        }
+    }
+
     console.log("Dados enviados:", JSON.stringify(login, null, 2));
 });
  //!!VALIDAÇAO POR BANCO DE DADOS QUANDO O BANCO DE DADOS FOR IMPLEMENTADO!!

@@ -4,6 +4,7 @@
 
 function CreateDemanda(json) {
     const info = JSON.parse(json);
+    console.log("Criando demanda:", info);
     
     const Dem_Cr = document.createElement('button'); // Demanda Criada
     Dem_Cr.classList.add("demanda-card");
@@ -79,8 +80,17 @@ jsondemandas[1] = '{"nome":"Teste2", "tipo":"Defeito", "prioridade":"Média", "s
 jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 
-for (const demanda of jsondemandas) {
+for (const demanda of jsondemandas) { //Criar demandas padrões
     CreateDemanda(demanda);
+}
+
+// Pegar as demandas salvas no localStorage e criar os elementos na tela
+if (localStorage.getItem("demandas")) {
+    const demandasSalvas = JSON.parse(localStorage.getItem("demandas"));
+    for (const demanda of demandasSalvas) {
+        console.log("Demanda salva:", demanda);
+        CreateDemanda(JSON.stringify(demanda));
+    }
 }
 
 

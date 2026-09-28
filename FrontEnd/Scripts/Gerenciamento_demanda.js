@@ -2,6 +2,9 @@
     Feito por Arthur Cardoso Martin
     RA: 26006506
 */
+//! TEMPORARIO
+localStorage.setItem("projetoSelecionado", "Projeto Exemplo");
+
 const form = document.querySelector("form");
 
 const titulo = document.getElementById("titulo_id");
@@ -9,18 +12,18 @@ const prazo = document.getElementById("prazo_id");
 const responsavel = document.getElementById("Responsavel_id");
 const descricao = document.getElementById("descricao_id");
 
+dataAtual = new Date().getDate() + "/" + (new Date().getMonth()<10 ? "0" + (new Date().getMonth() + 1) : (new Date().getMonth() + 1)) + "/" + new Date().getFullYear();
+
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const erros = [];
-
     if (titulo.value.trim().length < 3) {
         erros.push("O título deve ter pelo menos 3 caracteres.");
     }
     else if(titulo.value.trim().length > 30){
         erros.push("O título não deve ter mais de 30 caracteres.")
     }
-
     if (!prazo.value) {
         erros.push("Informe o prazo da demanda.");
     } else if (new Date(prazo.value) <= new Date()) { //Verifica data futura
@@ -42,14 +45,19 @@ form.addEventListener("submit", function (event) {
     }
 
     alert("Demanda validada com sucesso!");
+    // Usar replaceAll com expressão regular para remover as '-' do prazo e trocar por '/'
+    newPrazo = prazo.value.trim().replaceAll(/-/g, '/');
+    newPrazo = newPrazo.split('/').reverse().join('/'); // Inverte a data para o formato dd/mm/yyyy
 
     const demanda = { //Preparar a estrutura para json
-        titulo: titulo.value.trim(),
-        tipo: document.getElementById("tipos_id").value,
-        prazo: prazo.value,
-        status: document.getElementById("status_id").value,
+        DTcriacao: dataAtual,
+        nome: titulo.value.trim(),
+        prazo: newPrazo,
         prioridade: document.getElementById("prioridade_id").value,
+        projeto: localStorage.getItem("projetoSelecionado"),
         responsavel: responsavel.value.trim(),
+        status: document.getElementById("status_id").value,
+        tipo: document.getElementById("tipos_id").value,
         descricao: descricao.value.trim()
     };
 
