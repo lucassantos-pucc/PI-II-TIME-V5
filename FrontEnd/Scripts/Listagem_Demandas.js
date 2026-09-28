@@ -2,6 +2,10 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
+
+localStorage.setItem("DemandaAtual", JSON.stringify({})); // Para limpar o campo de demanda atual por preucação
+
+
 function CreateDemanda(json) {
     const info = JSON.parse(json);
     console.log("Criando demanda:", info);
@@ -28,9 +32,8 @@ function CreateDemanda(json) {
 
     Dem_Cr.appendChild(box);
 
-    
-    //Dem_Cr.addEventListener("click", function() {ShowDialog(this);});
-    Dem_Cr.addEventListener("click", () => ShowDialog(Dem_Cr)); 
+    info.descricao = info.descricao ? info.descricao : "Sem descrição"; // Se não houver descrição, exibe "Sem descrição"
+    Dem_Cr.addEventListener("click", () => ShowDialog(info)); 
 
     document.getElementById("secao-demanda").appendChild(Dem_Cr);
 }
@@ -88,7 +91,6 @@ for (const demanda of jsondemandas) { //Criar demandas padrões
 if (localStorage.getItem("demandas")) {
     const demandasSalvas = JSON.parse(localStorage.getItem("demandas"));
     for (const demanda of demandasSalvas) {
-        console.log("Demanda salva:", demanda);
         CreateDemanda(JSON.stringify(demanda));
     }
 }

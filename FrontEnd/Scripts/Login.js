@@ -4,6 +4,8 @@ const campoSenha = document.querySelector("#senha");
 const erroUsuario = document.querySelector("#erroUsuario");
 const erroSenha = document.querySelector("#erroSenha");
 
+
+localStorage.removeItem("UsuarioLogado"); // Remove o usuário logado do localStorage ao carregar a página
 const camposComErro = [
     campoUsuario,
     campoSenha

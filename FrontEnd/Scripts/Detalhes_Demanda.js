@@ -18,33 +18,22 @@ async function LoadDialog() {
     });
 }
 
-function ShowDialog(demanda) {
+function ShowDialog(info) {
     const dialog = document.getElementById("DialogBox");
-
-    // Pegar os dados da demanda
-    const title = demanda.querySelector("h3").textContent;
-    const type = demanda.querySelector(".tipo-gen").textContent;
-    const priority = demanda.querySelector(".prioridade-gen").textContent;
-    const status = demanda.querySelector(".status-gen").textContent;
-    const project = demanda.querySelector(".projeto-gen").textContent;
-    const responsible = demanda.querySelector(".responsavel-gen").textContent;
-    const createDate = demanda.querySelector(".DTcriacao-gen").textContent;
-    const deadline = demanda.querySelector(".prazo-gen").textContent;
+    
+    
     const dialogPriority = document.getElementById("DialogPriority");
-
-    //Por enquanto vai ser vazia visto que nao tem banco para consultar e nao aparece na listagem
-    const description = "     "
+    dialogPriority.textContent = "Prioridade: " + info.prioridade;
 
     //Colocar as informações no popup
-    document.getElementById("DialogTitle").textContent = title;
-    document.getElementById("DialogType").textContent = type;
-    dialogPriority.textContent = priority;
-    document.getElementById("DialogStatus").textContent = status;
-    document.getElementById("DialogProject").textContent = project;
-    document.getElementById("DialogResponsible").textContent = responsible;
-    document.getElementById("DialogCreate").textContent = createDate;
-    document.getElementById("DialogDeadline").textContent = deadline;
-    document.getElementById("DialogDescription").textContent = description;
+    document.getElementById("DialogTitle").textContent = info.nome;
+    document.getElementById("DialogType").textContent = "Tipo: " + info.tipo;
+    document.getElementById("DialogStatus").textContent = "Status: " + info.status;
+    document.getElementById("DialogProject").textContent = "Projeto: " + info.projeto;
+    document.getElementById("DialogResponsible").textContent = "Responsável: " + info.responsavel;
+    document.getElementById("DialogCreate").textContent = "Data de Criação: " + info.DTcriacao;
+    document.getElementById("DialogDeadline").textContent = "Prazo: " + info.prazo;
+    document.getElementById("DialogDescription").textContent = info.descricao;
 
 
     dialog.classList.remove("closing");
@@ -52,9 +41,22 @@ function ShowDialog(demanda) {
     //localStorage.setItem("DemandaAtual", JSON.parse())
     // !! Comentei por enquanto por conflitos com o popup,
     dialog.showModal();
+
+    localStorage.setItem("DemandaAtual", JSON.stringify({
+        nome: info.nome,
+        tipo: info.tipo,
+        prioridade: info.prioridade,
+        status: info.status,
+        projeto: info.projeto,
+        responsavel: info.responsavel,
+        DTcriacao: info.DTcriacao,
+        prazo: info.prazo,
+        descricao: info.descricao
+    }));
 }
 
 function HideDialog() {
+    localStorage.setItem("DemandaAtual", JSON.stringify({}));
     const dialog = document.getElementById("DialogBox");
 
     dialog.classList.add("closing");
@@ -94,5 +96,5 @@ function PriorityColorDialog(p) {
 
 
 function Edit(demanda){
-
+    open("Gerenciamento_Demandas.html", "_self");
 }
