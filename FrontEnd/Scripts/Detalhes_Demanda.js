@@ -31,6 +31,7 @@ function ShowDialog(demanda) {
     const createDate = demanda.querySelector(".DTcriacao-gen").textContent;
     const deadline = demanda.querySelector(".prazo-gen").textContent;
     const dialogPriority = document.getElementById("DialogPriority");
+    const dialogStatus = document.getElementById("DialogStatus");
 
     //Por enquanto vai ser vazia visto que nao tem banco para consultar e nao aparece na listagem
     const description = "     "
@@ -39,7 +40,7 @@ function ShowDialog(demanda) {
     document.getElementById("DialogTitle").textContent = title;
     document.getElementById("DialogType").textContent = type;
     dialogPriority.textContent = priority;
-    document.getElementById("DialogStatus").textContent = status;
+    dialogStatus.textContent = status;
     document.getElementById("DialogProject").textContent = project;
     document.getElementById("DialogResponsible").textContent = responsible;
     document.getElementById("DialogCreate").textContent = createDate;
@@ -49,6 +50,7 @@ function ShowDialog(demanda) {
 
     dialog.classList.remove("closing");
     PriorityColorDialog(dialogPriority.parentElement);
+    StatusColorDialog(dialogStatus.parentElement);
     //localStorage.setItem("DemandaAtual", JSON.parse())
     // !! Comentei por enquanto por conflitos com o popup,
     dialog.showModal();
@@ -89,6 +91,31 @@ function PriorityColorDialog(p) {
         p.classList.add("prioridade-a-gen");
     } else if (prioridade.includes("crítica")) {
         p.classList.add("prioridade-c-gen");
+    }
+}
+
+function StatusColorDialog(p) {
+    if (!p) {
+        return;
+    }
+
+    const status = p.textContent.toLowerCase();
+
+    p.classList.remove( //remover classe
+        "status-ativo",
+        "status-andamento",
+        "status-concluido",
+        "status-cancelado"
+    );
+
+    if (status.includes("ativo")) { //adicionar baseado no texto
+        p.classList.add("status-ativo");
+    } else if (status.includes("andamento")) {
+        p.classList.add("status-andamento");
+    } else if (status.includes("concluido")) {
+        p.classList.add("status-concluido");
+    } else if (status.includes("cancelado")) {
+        p.classList.add("status-cancelado");
     }
 }
 
