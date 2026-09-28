@@ -49,9 +49,8 @@ function ShowDialog(demanda) {
 
     dialog.classList.remove("closing");
     PriorityColorDialog(dialogPriority.parentElement);
-    //!! Vejam se alguém consegue descobrir como usar o PriorityColor no popup isso aq não ta dando certo não
-    //PriorityColor(document.getElementsByClassName("prioridade-gen"));
-    localStorage.setItem("DemandaAtual", JSON.parse())
+    //localStorage.setItem("DemandaAtual", JSON.parse())
+    // !! Comentei por enquanto por conflitos com o popup,
     dialog.showModal();
 }
 
