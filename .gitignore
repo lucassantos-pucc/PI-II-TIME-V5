@@ -4,3 +4,5 @@ node_modules/
 # Ignorar arquivos com informações sensíveis
 .env
 .env.*
+
+lib

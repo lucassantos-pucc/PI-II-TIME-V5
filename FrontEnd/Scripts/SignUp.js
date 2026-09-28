@@ -94,6 +94,10 @@ form.addEventListener("submit", function(event) {
         return;
     }
 
-    const login = { usuario, senha };
-    console.log("Dados enviados:", login);
+    const login = {
+        usuario: campoUsuario.value,
+        senha: campoSenha.value
+    };
+
+    console.log("Dados enviados:", JSON.stringify(login, null, 2));
 });
