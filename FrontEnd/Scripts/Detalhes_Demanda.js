@@ -4,7 +4,7 @@
 */
 
 async function LoadDialog() {
-    const response = await fetch("Detalhes.html");
+    const response = await fetch("Detalhes_Demanda.html");
 
     const html = await response.text();
 

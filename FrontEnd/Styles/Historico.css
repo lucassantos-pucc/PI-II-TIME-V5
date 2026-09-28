@@ -1,0 +1,159 @@
+/*
+
+Feito por: Kauã Gaiofato Santana Lima de Jesus
+RA: 26000195
+
+*/
+
+.historico-secao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.historico-container {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #ffcdee40, #3902556d);
+    backdrop-filter: blur(12px);
+    width: 100%;
+    max-width: 850px;
+    border: 1px solid #de05ff26;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 25px 40px #000000, inset 1px 2px 5px #ffffff33;
+    box-sizing: border-box;
+}
+
+.historico-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ffcde910;
+    backdrop-filter: blur(12px);
+    padding: 10px;
+    border: 1px solid #de05ff26;
+    box-shadow: 0 25px 30px #0000005e, inset 1px 2px 5px #ffffff33;
+    color: whitesmoke;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.historico-divisor {
+    height: 3px;
+    background-color: #de05ff;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.historico-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.historico-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4402557e;
+    border: 1px solid #de05ff26;
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 10px 20px #00000024, inset 1px 1px 3px #ffffff22;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.historico-item:hover {
+    transform: scale(1.01);
+    background: #54066b90;
+}
+
+.historico-cancelado {
+    border: 1px solid #ff050540;
+    background: #ff000025;
+}
+.historico-cancelado:hover {
+    transform: scale(1.01);
+    background: #ff484825;
+}
+
+.historico-texto {
+    font-size: 17.6px;
+    color: #f3e8ff;
+    margin: 0;
+}
+
+.historico-texto strong {
+    color: #ffffff;
+}
+
+.historico-texto em {
+    color: #f472b5;
+    font-style: normal;
+    font-weight: bold;
+}
+
+.historico-data {
+    font-size: 14.4px;
+    color: #d8b4fe;
+    white-space: nowrap;
+    margin-left: 20px;
+    background: #2b0238aa;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid #de05ff15;
+}
+
+@media (max-width: 768px) {
+    .historico-container {
+        padding: 15px;
+    }
+
+    .historico-titulo {
+        font-size: 19.2px;
+    }
+
+    .historico-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 15px;
+    }
+
+    .historico-data {
+        margin-left: 0;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 24px !important;
+        text-align: center;
+        padding: 0 10px;
+    }
+
+    .historico-titulo {
+        font-size: 16px;
+    }
+
+    .historico-texto {
+        font-size: 15.2px;
+    }
+
+    .historico-data {
+        font-size: 12.8px;
+    }
+}
