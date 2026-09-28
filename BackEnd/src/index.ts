@@ -7,11 +7,13 @@
 // Executar:  'node install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
 // Por fim, 'npm start' pra rodar o servidor
 
+import { Request, Response } from "express";
+
 const express = require("express");
 
 const app = express();
 
-app.get("/", (req: any, res: any) => { //retorno do servidor 
+app.get("/", (req: Request, res: Response) => { //retorno do servidor 
     res.send("Olá! Meu servidor está funcionando (agora em typescript)!");
 });
 
