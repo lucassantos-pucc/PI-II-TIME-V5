@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"npx tsc-watch --onSuccess \"node ./lib/index.js\"",
+    "start": "npx tsc-watch --onSuccess \"node ./lib/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.13",
     "@types/express": "^5.0.6",
-    "@types/node": "^26.6.2",
+    "@types/node": "^26.6.3",
     "tsc-watch": "^7.2.1",
     "typescript": "^7.0.2"
   }
