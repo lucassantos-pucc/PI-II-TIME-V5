@@ -120,7 +120,9 @@ for (const prioridade of ElementosPrioridade) {
 // Obtém os elementos de status com base na classe geral de status
 const ElementosStatus = document.getElementsByClassName("status-gen");
     
-// Itera por todos as prioridades
+// Itera por todos os status
 for (const status of ElementosStatus) {
     StatusColor(status);
 }
+
+export default StatusColor();
