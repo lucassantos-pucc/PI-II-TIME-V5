@@ -38,6 +38,7 @@ function ShowDialog(info) {
 
     dialog.classList.remove("closing");
     PriorityColorDialog(dialogPriority.parentElement);
+    StatusColorDialog(dialogStatus.parentElement);
     //localStorage.setItem("DemandaAtual", JSON.parse())
     // !! Comentei por enquanto por conflitos com o popup,
     dialog.showModal();
@@ -91,6 +92,31 @@ function PriorityColorDialog(p) {
         p.classList.add("prioridade-a-gen");
     } else if (prioridade.includes("crítica")) {
         p.classList.add("prioridade-c-gen");
+    }
+}
+
+function StatusColorDialog(p) {
+    if (!p) {
+        return;
+    }
+
+    const status = p.textContent.toLowerCase();
+
+    p.classList.remove( //remover classe
+        "status-ativo",
+        "status-andamento",
+        "status-concluido",
+        "status-cancelado"
+    );
+
+    if (status.includes("ativo")) { //adicionar baseado no texto
+        p.classList.add("status-ativo");
+    } else if (status.includes("andamento")) {
+        p.classList.add("status-andamento");
+    } else if (status.includes("concluido")) {
+        p.classList.add("status-concluido");
+    } else if (status.includes("cancelado")) {
+        p.classList.add("status-cancelado");
     }
 }
 

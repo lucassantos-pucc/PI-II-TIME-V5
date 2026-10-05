@@ -144,11 +144,6 @@ p {
     box-shadow: inset 1px 2px 5px #ffffff33;
 }
 
-.status-gen {
-    border: 1px solid #de05ff26;
-    background: #2dd4be60;
-}
-
 .DTcriacao-gen {
     border: 1px solid #de05ff26;
     background: #865d0747;
@@ -218,13 +213,13 @@ p {
 }
 
 .status-andamento {
-    background: #fff20068;
+    background: #f8bc1868;
 }
 
 .status-concluido {
-    background: #84f14a81;
+    background: #4bd60081;
 }
 
 .status-cancelado {
-    background: #f1584a81;
+    background: #ec241281;
 }

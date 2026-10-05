@@ -76,12 +76,37 @@ function PriorityColor(p) {
     }
 }
 
+function StatusColor(p) {
+    if (!p) { //So coloquei isso para evitar problema de estar vazio
+        return;
+    }
+
+    const stat = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
+    
+    // Aplica as cores de fundo respectivas
+    if (stat.includes("ativo")) {
+        p.classList.add("status-ativo");
+    }
+        
+    else if (stat.includes("andamento")) {
+        p.classList.add("status-andamento");
+    }
+        
+    else if (stat.includes("concluido")) {
+        p.classList.add("status-concluido");
+    }
+        
+    else if (stat.includes("cancelado")) {
+        p.classList.add("status-cancelado");
+    }
+}
+
 // Cria as demandas dinamicamente na tela a partir de arquivos JSON
 const jsondemandas = []; // !! Temporario
-jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Ativo", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[1] = '{"nome":"Teste2", "tipo":"Defeito", "prioridade":"Média", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
-jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
-jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Concluido", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Cancelado", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 
 for (const demanda of jsondemandas) { //Criar demandas padrões
     CreateDemanda(demanda);
@@ -103,3 +128,13 @@ const ElementosPrioridade = document.getElementsByClassName("prioridade-gen");
 for (const prioridade of ElementosPrioridade) {
     PriorityColor(prioridade);
 }
+
+// Obtém os elementos de status com base na classe geral de status
+const ElementosStatus = document.getElementsByClassName("status-gen");
+    
+// Itera por todos os status
+for (const status of ElementosStatus) {
+    StatusColor(status);
+}
+
+export default StatusColor();
