@@ -1,3 +1,12 @@
+
+<!--
+
+Feito por: Lucas de Oliveira Santos
+RA: 26887166
+
+-->
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,6 +15,7 @@
     <title>Gerenciamento de Demandas</title>
     <link rel="stylesheet" href="../Styles/Style.css">
     <link rel="stylesheet" href="../Styles/Gerenciamento_Demandas.css">
+    <script src="../Scripts/Gerenciamento_demanda.js" defer></script>
 </head>
 <body>
 
@@ -20,36 +30,36 @@
         <div class="campo">
             <label for="tipos_id">Tipo</label>
             <select id="tipos_id" name="Tipos">
-                <option value="defeito">Defeito</option>
-                <option value="tarefa">Tarefa</option>
-                <option value="melhoria">Melhoria</option>
-                <option value="documentacao">Documentação</option>
+                <option value="Defeito">Defeito</option>
+                <option value="Tarefa">Tarefa</option>
+                <option value="Melhoria">Melhoria</option>
+                <option value="Documentação">Documentação</option>
             </select>
         </div>
 
         <div class="campo">
             <label for="prazo_id">Prazo</label>
-            <input type="datetime-local" name="prazo" id="prazo_id">
+            <input type="date" name="prazo" id="prazo_id">
         </div>
 
         <div class="campo">
             <label for="status_id">Status</label>
             <select id="status_id" name="Status">
-                <option value="aberta">Aberta</option>
-                <option value="em_andamento">Em Andamento</option>
-                <option value="em_revisao">Em Revisão</option>
-                <option value="concluida">Concluída</option>
-                <option value="cancelada">Cancelada</option>
+                <option value="Aberta">Aberta</option>
+                <option value="Em andamento">Em Andamento</option>
+                <option value="Em revisao">Em Revisão</option>
+                <option value="Concluida">Concluída</option>
+                <option value="Cancelada">Cancelada</option>
             </select>
         </div>
 
         <div class="campo">
             <label for="prioridade_id">Prioridade</label>
             <select id="prioridade_id" name="Prioridade">
-                <option value="baixa">Baixa</option>
-                <option value="media">Média</option>
-                <option value="alta">Alta</option>
-                <option value="critica">Crítica</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Crítica">Crítica</option>
             </select>
         </div>
 
@@ -64,8 +74,8 @@
         </div>
 
         <div class="botoes">
-            <input id="botaoApagar_id" class="btn" type="reset" value="Apagar">
-            <input id="botaoSalvar_id" class="btn" type="submit" value="Salvar">
+            <a id="voltar" class="btn" href="Listagem_Demandas.html" target="_self">Voltar</a>
+            <button id="botaoCriar_id" class="btn" type="submit" value="Criar">Criar</button>
         </div>
     </form>
 
