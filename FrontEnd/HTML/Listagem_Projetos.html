@@ -14,22 +14,49 @@ RA: 26000195
     <link rel="stylesheet" href="../Styles/Style.css">
     <link rel="stylesheet" href="../Styles/Listagem_Style.css">
     <link rel="stylesheet" href="../Styles/Details.css">
-
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    
+    <script src="../Scripts/Menu.js" defer></script>
     <script src="../Scripts/Listagem_Projetos.js" defer></script>
     <script src="../Scripts/Detalhes_Projeto.js" defer></script>
 </head>
 
 <body>
-    <header>
-        <h1 class="logo"><b>Listagem de Projetos</b></h1>
-    </header>
+<header>
+    <h1 class="logo"><b>Listagem de Projetos</b></h1>
+</header>
+    <input type="checkbox" id="toggle-filtro-projeto" class="invisivel">
+        <label for="toggle-filtro-projeto" class="btn-personalizado">Buscar / Filtrar</label>
+
+    <div id="painel-projetos" class="painel-projetos">
+
+        <div class="grupo-filtro">
+            <label>Nome do Projeto</label>
+            <input type="text" placeholder="Pesquisar por projeto...">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Líder de Projeto</label>
+            <input type="text" placeholder="Nome do líder...">
+        </div>
+
+        <div class="grupo-filtro">
+            <label>Status</label>
+            <select>
+                <option value="">Todos</option>
+                <option value="ativo">Ativo</option>
+                <option value="concluido">Concluído</option>
+            </select>
+        </div>
+
+        <div class="grupo-botao-filtro">
+            <button class="btn-personalizado">Aplicar Filtros</button>
+        </div>
+    </div>
     <div class="projeto" id="secao-projeto">
     </div>
-    <footer class="rodape">
-        <div class="links">
-            <a href="Login.html" class="btn">SAIR</a>
-            <a href="Dashboard_Projetos.html" class="btn">VOLTAR PARA DASHBOARD</a>
-        </div>
+    <footer class="bolha">
+        <a class="btn" href="Gerenciamento_Projetos.html">+</a>
     </footer>
 </body>
 </html>
