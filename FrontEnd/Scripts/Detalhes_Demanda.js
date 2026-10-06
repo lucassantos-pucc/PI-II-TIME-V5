@@ -24,7 +24,7 @@ function ShowDialog(info) {
     
     const dialogPriority = document.getElementById("DialogPriority");
     dialogPriority.textContent = "Prioridade: " + info.prioridade;
-
+    const dialogStatus = document.getElementById("DialogStatus");
     //Colocar as informações no popup
     document.getElementById("DialogTitle").textContent = info.nome;
     document.getElementById("DialogType").textContent = "Tipo: " + info.tipo;
