@@ -84,12 +84,16 @@ function StatusColor(p) {
     const stat = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
     
     // Aplica as cores de fundo respectivas
-    if (stat.includes("ativo")) {
-        p.classList.add("status-ativo");
+    if (stat.includes("aberta")) {
+        p.classList.add("status-aberta");
     }
         
     else if (stat.includes("andamento")) {
         p.classList.add("status-andamento");
+    }
+    
+    else if (stat.includes("em revisao")) {
+        p.classList.add("status-revisao");
     }
         
     else if (stat.includes("concluido")) {
@@ -103,7 +107,7 @@ function StatusColor(p) {
 
 // Cria as demandas dinamicamente na tela a partir de arquivos JSON
 const jsondemandas = []; // !! Temporario
-jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Ativo", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Aberta", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[1] = '{"nome":"Teste2", "tipo":"Defeito", "prioridade":"Média", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Concluido", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Cancelado", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';

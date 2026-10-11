@@ -208,12 +208,16 @@ p {
     width: 100%;
 }
 
-.status-ativo {
+.status-aberta {
     background: #2dd4be60;
 }
 
 .status-andamento {
     background: #f8bc1868;
+}
+
+.status-revisao {
+    background: #5929df6e;
 }
 
 .status-concluido {
