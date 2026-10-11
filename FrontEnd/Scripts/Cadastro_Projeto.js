@@ -93,6 +93,6 @@ formulario.addEventListener("submit", function (event) {
 });
 
 botaoCancelar.addEventListener("click", function () {
-    open("Listagem_Projetos.html", "_self");
+    open("Listagem_Projeto.html", "_self");
     
 });

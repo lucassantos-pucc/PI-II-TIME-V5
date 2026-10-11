@@ -82,5 +82,5 @@ form.addEventListener("submit", function (event) {
     alert("Demanda Salva com sucesso!")
     form.reset();
     localStorage.setItem("DemandaAtual", JSON.stringify({})); // Limpa a demanda atual
-    open("Listagem_Demandas.html", "_self");
+    open("Listagem_Demanda.html", "_self");
 });
