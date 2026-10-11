@@ -83,7 +83,7 @@ form.addEventListener("submit", function(event) {
         const usuarioEncontrado = usuarios.find((u) => u.usuario === login.usuario && u.senha === login.senha);
         if (usuarioEncontrado) {
             localStorage.setItem("UsuarioLogado", JSON.stringify(usuarioEncontrado));
-            open("Dashboard_Demandas.html", "_self");
+            open("Dashboard_Projetos.html", "_self");
         } else {
             ErroValidation(campoUsuario, erroUsuario, "Usuário ou senha inválidos.");
             ErroValidation(campoSenha, erroSenha, "Usuário ou senha inválidos.");

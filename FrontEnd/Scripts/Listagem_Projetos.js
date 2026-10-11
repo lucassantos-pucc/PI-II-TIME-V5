@@ -27,7 +27,9 @@ function CreateProjeto(json) {
 
     
     //Proj_Cr.addEventListener("click", function() {ShowDialog(this);});
-    Proj_Cr.addEventListener("click", () => ShowDialog(Proj_Cr)); 
+    Proj_Cr.addEventListener("click", () => {
+        open("Dashboard_Demandas.html", "_self");
+    }); 
 
     document.getElementById("secao-projeto").appendChild(Proj_Cr);
 }
