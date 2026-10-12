@@ -9,7 +9,7 @@
 
 import { Request, Response } from "express";
 //import RouterLogin from "./login";
-//import RouterDashboard from "./dashboard";
+import RouterDashboard from "./Dashboard";
 import RouterListagem from "./listagem";
 //import RouterGerenciamento from "./gerenciamento";
 //import RouterDetalhes from "./detalhes";
@@ -28,7 +28,7 @@ app.listen(3000, () => { //porta em que o server esta sendo rodado
 });
 
 //app.use(RouterLogin);
-//app.use(RouterDashboard);
+app.use(RouterDashboard);
 app.use(RouterListagem);
 //app.use(RouterGerenciamento);
 //app.use(RouterDetalhes);
