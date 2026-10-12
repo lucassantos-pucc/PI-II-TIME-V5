@@ -9,10 +9,10 @@
 
 import { Request, Response } from "express";
 //import RouterLogin from "./login";
-import RouterDashboard from "./Dashboard";
+import RouterDashboard from "./dashboard";
 import RouterListagem from "./listagem";
 //import RouterGerenciamento from "./gerenciamento";
-//import RouterDetalhes from "./detalhes";
+import RouterDetalhes from "./detalhes";
 
 const express = require("express");
 
@@ -31,4 +31,4 @@ app.listen(3000, () => { //porta em que o server esta sendo rodado
 app.use(RouterDashboard);
 app.use(RouterListagem);
 //app.use(RouterGerenciamento);
-//app.use(RouterDetalhes);
+app.use(RouterDetalhes);

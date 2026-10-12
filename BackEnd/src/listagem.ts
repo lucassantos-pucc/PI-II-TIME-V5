@@ -11,6 +11,7 @@ type T_Prioridade = "Baixa" | "Média" | "Alta" | "Crítica";
 type T_Status = "Aberta" | "Em andamento" | "Em revisao" | "Concluído" | "Cancelado";
 
 interface Demanda {
+    id: number;
     nome: string;
     tipo: T_Tipo;
     prioridade: T_Prioridade;
@@ -23,6 +24,7 @@ interface Demanda {
 
 let Demandas: Demanda[] = [ // !! Lista temporária
     {
+        id: 1,
         nome: "Teste1",
         tipo: "Defeito",
         prioridade: "Baixa",
@@ -33,6 +35,7 @@ let Demandas: Demanda[] = [ // !! Lista temporária
         prazo: new Date(2026, 10, 14)
     },
     {
+        id: 2,
         nome: "Teste2",
         tipo: "Documentação",
         prioridade: "Média",
@@ -43,6 +46,7 @@ let Demandas: Demanda[] = [ // !! Lista temporária
         prazo: new Date(2026, 10, 15)
     },
     {
+        id: 3,
         nome: "Teste3",
         tipo: "Defeito",
         prioridade: "Baixa",
@@ -75,7 +79,7 @@ routerListagem.get("/demandas", (req: Request, res: Response) => {
     if (tipo || prioridade || status || projeto || responsavel) { return res.status(200).json(filtro); }
 
     return res.status(200).json(Demandas);
-});
+});Demandas
 
 
 
