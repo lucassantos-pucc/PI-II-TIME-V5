@@ -14,14 +14,24 @@ import RouterListagem from "./listagem";
 //import RouterGerenciamento from "./gerenciamento";
 import RouterDetalhes from "./detalhes";
 
+// Importando as rotas
+import demandasRotas from "./rotas/demandas";
+import projetosRotas from "./rotas/projetos";
+
 const express = require("express");
 
 const app = express();
 app.use(express.json());
 
+app.use(express.json());
+
 app.get("/", (req: Request, res: Response) => { //retorno do servidor 
     res.send("Olá! Meu servidor está funcionando (agora em typescript)!");
 });
+
+// Conectando as rotas
+app.use("/demandas", demandasRotas);
+app.use("/projetos", projetosRotas);
 
 app.listen(3000, () => { //porta em que o server esta sendo rodado
     console.log("Servidor rodando em http://localhost:3000");

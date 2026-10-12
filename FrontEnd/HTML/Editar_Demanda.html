@@ -14,16 +14,13 @@ RA: 26887166
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Demandas</title>
     <link rel="stylesheet" href="../Styles/Style.css">
-    <link rel="stylesheet" href="../Styles/Gerenciamento_Demandas.css">
-    <link rel="stylesheet" href="../Styles/Menu.css">
-    
-    <script src="../Scripts/Menu.js" defer></script>
-    <script src="../Scripts/Gerenciamento_demanda.js" defer></script>
+    <link rel="stylesheet" href="../Styles/Cadastro_Demanda.css">
+    <script src="../Scripts/Cadastro_Demanda.js" defer></script>
 </head>
 <body>
 
     <form>
-        <h1>Cadastro de Demandas</h1>
+        <h1>Edição de Demandas</h1>
 
         <div class="campo">
             <label for="titulo_id">Título</label>
@@ -52,7 +49,7 @@ RA: 26887166
                 <option value="Em andamento">Em Andamento</option>
                 <option value="Em revisao">Em Revisão</option>
                 <option value="Concluida">Concluída</option>
-                <option value="Cancelado">Cancelado</option>
+                <option value="Cancelada">Cancelada</option>
             </select>
         </div>
 
@@ -77,9 +74,10 @@ RA: 26887166
         </div>
 
         <div class="botoes">
-            <a id="voltar" class="btn" href="Listagem_Demandas.html" target="_self">Voltar</a>
+            <a id="voltar" class="btn" href="Listagem_Demanda.html" target="_self">Voltar</a>
             <button id="botaoCriar_id" class="btn" type="submit" value="Criar">Criar</button>
         </div>
     </form>
+
 </body>
 </html>

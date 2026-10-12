@@ -122,5 +122,5 @@ function StatusColorDialog(p) {
 
 
 function Edit(demanda){
-    open("Gerenciamento_Demandas.html", "_self");
+    open("Cadastro_Demanda.html", "_self");
 }
