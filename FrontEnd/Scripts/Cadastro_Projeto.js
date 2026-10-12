@@ -9,6 +9,7 @@ const campoErroLider = document.querySelector("#erroLider");
 const campoErroMembros = document.querySelector("#erroMembros");
 
 const sucesso = document.querySelector("#sucesso");
+const botaoCancelar = document.querySelector("#botaoCancelar_id");
 
 
 function mostrarErro(campo, elementoErro, mensagem) {
@@ -82,4 +83,16 @@ formulario.addEventListener("submit", function (event) {
         campoLider.value = "";
         campoMembros.value = "";
     }
+
+
+
+
+
+
+
+});
+
+botaoCancelar.addEventListener("click", function () {
+    open("Listagem_Projeto.html", "_self");
+    
 });
