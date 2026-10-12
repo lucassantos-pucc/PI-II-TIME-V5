@@ -18,14 +18,14 @@ RA: 26000195
 .usuarios-container {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right, #ffcdee40, #3902556d);
-    backdrop-filter: blur(12px);
+    background: #111827cc;
+    backdrop-filter: blur(16px);
     width: 100%;
     max-width: 850px;
-    border: 1px solid #de05ff26;
+    border: 1px solid #334155;
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 25px 40px #0000007d, inset 1px 2px 5px #ffffff33;
+    box-shadow: 0 20px 40px #00000080;
     box-sizing: border-box;
 }
 
@@ -33,22 +33,22 @@ RA: 26000195
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ffcde910;
+    background: #ffffff05;
     backdrop-filter: blur(12px);
     padding: 10px;
-    border: 1px solid #de05ff26;
-    box-shadow: 0 25px 40px #0000009d, inset 1px 2px 5px #ffffff33;
-    color: whitesmoke;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 20px #0000004d;
+    color: #ffffff;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 15px;
     text-align: center;
 }
 
 .usuarios-divisor {
-    height: 3px;
-    background-color: #de05ff;
+    height: 1px;
+    background-color: #334155;
     width: 100%;
     margin-bottom: 20px;
 }
@@ -59,25 +59,25 @@ RA: 26000195
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
 }
 
 .usuarios-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #4402557e;
-    border: 1px solid #de05ff26;
+    background: #ffffff0a;
+    border: 1px solid #334155;
     border-radius: 12px;
     padding: 15px 20px;
-    box-shadow: 0 5px 10px #00000005, inset 1px 1px 3px #ffffff22;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
 .usuarios-item:hover {
-    transform: scale(1.01);
-    background: #54066b90;
+    transform: translateY(-2px);
+    background: #a855f71a;
+    border-color: #a855f7;
 }
 
 .usuarios-info {
@@ -87,14 +87,14 @@ RA: 26000195
 }
 
 .usuarios-nome {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #ffffff;
 }
 
 .usuarios-email {
-    font-size: 14px;
-    color: #d8b4fe;
+    font-size: 13px;
+    color: #cbd5e1;
 }
 
 .usuarios-detalhes {
@@ -103,52 +103,41 @@ RA: 26000195
 }
 
 .usuarios-badge {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     padding: 6px 14px;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 10px 20px #00000024, inset 1px 1px 3px #ffffff33;
+    border-radius: 12px;
     white-space: nowrap;
 }
 
 .perfil-adm {
-    background: #ff000038;
-    border: 1px solid #ff050540;
-    color: #ffb3b3;
+    background: #ef444433;
+    border: 1px solid #ef44444d;
+    color: #fca5a5;
 }
 
 .perfil-lider {
-    background: #60a5fa55;
-    border: 1px solid #5d9ff040;
-    color: #bfdbfe;
+    background: #3b82f633;
+    border: 1px solid #3b82f64d;
+    color: #93c5fd;
 }
 
 .perfil-membro {
-    background: #2dd4be60;
-    border: 1px solid #2dd4be40;
-    color: #ccfbf1;
+    background: #14b8a633;
+    border: 1px solid #14b8a64d;
+    color: #99f6e4;
 }
 
 @media (max-width: 768px) {
-    .usuarios-container {
-        padding: 15px;
-    }
-
-    .usuarios-titulo {
-        font-size: 19px;
-    }
-
+    .usuarios-container { padding: 15px; }
+    .usuarios-titulo { font-size: 18px; }
     .usuarios-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
         padding: 12px 15px;
     }
-
-    .usuarios-detalhes {
-        align-self: flex-start;
-    }
+    .usuarios-detalhes { align-self: flex-start; }
 }
 
 @media (max-width: 480px) {

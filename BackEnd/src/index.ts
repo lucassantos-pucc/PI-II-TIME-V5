@@ -4,7 +4,7 @@
 
 // !! Pra rodar localmente na máquina de vocês, 
 // dem right click na pasta do backend, em open integrated terminal
-// Executar:  'node install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
+// Executar:  'npm install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
 // Por fim, 'npm start' pra rodar o servidor
 
 import { Request, Response } from "express";

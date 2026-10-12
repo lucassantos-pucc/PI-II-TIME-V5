@@ -1,0 +1,129 @@
+/*
+    Feito por: Kauã Gaiofato Santana Lima de Jesus
+    RA: 26000195
+*/
+
+/* O botão do menu fica posicionado em relação ao header */
+body > header {
+    position: relative;
+}
+
+#MenuButton {
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.Menu {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-right: 1px solid #334155;
+    border-radius: 0;
+    background-color: #090d16f2;
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    flex-direction: column;
+    min-width: 0;
+    max-height: none;
+    box-shadow: 10px 0 30px #00000080;
+    color: #ffffff;
+}
+
+.Menu::backdrop {
+    background-color: #00000080;
+}
+
+@keyframes MenuSlideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+.Menu[open] {
+    display: flex;
+    animation: MenuSlideIn 0.4s ease-out forwards;
+}
+
+@keyframes MenuSlideOut {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+.Menu.closing {
+    animation: MenuSlideOut 0.4s ease-in forwards;
+}
+
+.MenuContent {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+#MenuTitle {
+    margin: 0;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.MenuLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.MenuLinks .btn,
+.MenuContent > .btn {
+    width: 100%;
+    height: 45px;
+    margin: 0;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.MenuLinks .atual {
+    border-color: #a855f7;
+    background: #b655f746;
+}
+
+.MenuLinks .sair {
+    margin-top: auto;
+    background: #ef444433;
+    border-color: #ef44444d;
+    color: #fca5a5;
+}
+
+.MenuLinks .sair:hover {
+    background: #ef444466;
+}
+
+@media (max-width: 480px) {
+    #MenuButton {
+        left: 12px;
+        width: 44px;
+        height: 44px;
+    }
+
+    .Menu {
+        max-width: 85%;
+    }
+}
