@@ -141,4 +141,3 @@ for (const status of ElementosStatus) {
     StatusColor(status);
 }
 
-export default StatusColor();
