@@ -53,12 +53,16 @@ function StatusColor(p) { // !! Função um tanto redundante por existir em dois
     const stat = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
     
     // Aplica as cores de fundo respectivas
-    if (stat.includes("ativo")) {
-        p.classList.add("status-ativo");
+    if (stat.includes("aberta")) {
+        p.classList.add("status-aberta");
     }
         
     else if (stat.includes("andamento")) {
         p.classList.add("status-andamento");
+    }
+    
+    else if (stat.includes("revisao")) {
+        p.classList.add("status-revisao");
     }
         
     else if (stat.includes("concluido")) {
@@ -72,7 +76,7 @@ function StatusColor(p) { // !! Função um tanto redundante por existir em dois
 
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON
 const jsonprojetos = []; // !! Temporario
-jsonprojetos[0] = '{"nome":"Teste1", "lider":"Sr.Exemplilson", "status":"Ativo", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 1"}';
+jsonprojetos[0] = '{"nome":"Teste1", "lider":"Sr.Exemplilson", "status":"Aberta", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 1"}';
 jsonprojetos[1] = '{"nome":"Teste2", "lider":"Sr.Exemplilson", "status":"Em andamento", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 2"}';
 jsonprojetos[2] = '{"nome":"Teste3", "lider":"Sr.Exemplilson", "status":"Concluido", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 3"}';
 jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancelado", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 4"}';
