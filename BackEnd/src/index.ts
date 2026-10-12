@@ -4,19 +4,30 @@
 
 // !! Pra rodar localmente na máquina de vocês, 
 // dem right click na pasta do backend, em open integrated terminal
-// Executar:  'node install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
+// Executar:  'npm install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
 // Por fim, 'npm start' pra rodar o servidor
 
 import { Request, Response } from "express";
+
+// Importando as rotas
+import demandasRotas from "./rotas/demandas";
+import projetosRotas from "./rotas/projetos";
 
 const express = require("express");
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req: Request, res: Response) => { //retorno do servidor 
     res.send("Olá! Meu servidor está funcionando (agora em typescript)!");
 });
 
+// Conectando as rotas
+app.use("/demandas", demandasRotas);
+app.use("/projetos", projetosRotas);
+
 app.listen(3000, () => { //porta em que o server esta sendo rodado
     console.log("Servidor rodando em http://localhost:3000");
 });
+
