@@ -16,6 +16,7 @@ import demandasRotas from "./rotas/demandas";
 import projetosRotas from "./rotas/projetos";
 import dashboardRotas from "./rotas/dashboard";
 import comentariosRotas from "./rotas/comentarios";
+import usuariosRotas from "./rotas/usuarios";
 
 const express = require("express");
 
@@ -28,6 +29,8 @@ app.use("/demandas", demandasRotas);
 app.use("/projetos", projetosRotas);
 app.use("/dashboard", dashboardRotas);
 app.use("/demandas/:id/comentarios", comentariosRotas);
+app.use("/usuarios", usuariosRotas);
+
 
 app.listen(3000, () => { //porta em que o server esta sendo rodado
     console.log("Servidor rodando em http://localhost:3000");

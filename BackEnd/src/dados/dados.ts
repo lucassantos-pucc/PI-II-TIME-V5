@@ -147,3 +147,18 @@ export let Comentarios: Comentario[] = [ // !! Lista temporária
         data: new Date(2026, 10, 12)
     }
 ];
+
+export type TipoUsuario = "Administrador"  | "Lider de Projeto"  | "Membro da equipe" 
+
+export interface Usuario {
+    id: number;
+    usuario: string;
+    senha: string;
+    tipo: TipoUsuario;
+}
+
+export const Usuarios: Usuario[] = [
+    { id: 1, usuario: "admin@exemplo.com", senha: "Admin_123", tipo: "Administrador" },
+    { id: 2, usuario: "lider@exemplo.com", senha: "Lider_123", tipo: "Lider de Projeto" },
+    { id: 3, usuario: "membro@exemplo.com", senha: "Membro_123", tipo: "Membro da equipe" },
+];

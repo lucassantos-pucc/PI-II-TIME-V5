@@ -62,6 +62,7 @@ router.get("/", (req: Request, res: Response) => {
 
         if ((demanda.status === "Aberta") && (demanda.prioridade === "Crítica")) {demcrit++;}
         total++;
+        console.log(diasFinalizar);
     }
     
     return res.status(200).json({

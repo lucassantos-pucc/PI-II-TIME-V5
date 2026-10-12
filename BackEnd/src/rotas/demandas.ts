@@ -47,6 +47,17 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 //POST DEMANDAS
+/*
+{
+ "nome": "Nova Demanda",
+ "tipo": "Tarefa",
+ "prazo_finalizacao": "2023-12-31",
+ "prioridade": "Alta",
+ "id_projeto": 1,
+ "responsavel": "João da Silva",
+ "descricao": "Descrição detalhada da demanda"
+}
+*/
 router.post("/", (req:Request, res:Response)=>{
     //pega dados apartir da requisicao
     const {titulo, tipo, prazo_finalizacao, prioridade, id_projeto, responsavel, descricao} = req.body;
