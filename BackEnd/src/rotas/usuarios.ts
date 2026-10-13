@@ -15,12 +15,19 @@ const semSenha = (usuario: Usuario) => ({
 });
 
 // POST "/login"
-/* Exemplo
+/* 
+Teste valido
 {
   "usuario": "admin@exemplo.com",
   "senha": "Admin_123"
 }
-  */
+
+Teste invalido
+{
+  "usuario": "admin@exemplo.com",
+  "senha": "senha_incorreta"
+}
+*/
 router.post("/login", (req: Request, res: Response) => {
   const { usuario, senha } = req.body;
 
@@ -57,13 +64,21 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 // POST /usuarios
-/*
+/* 
+Teste valido
 {
-  "usuario": "admin@exemplo.com",
+  "usuario": "admin4@exemplo.com",
   "senha": "Admin_123",
   "tipo": "Administrador"
 }
-  */
+
+Teste invalido
+{
+  "usuario": "admin1@exemplo.com",
+  "senha": "Admin_123",
+  "tipo": "Administrador"
+}
+*/
 router.post("/", (req: Request, res: Response) => {
   const { usuario, senha, tipo } = req.body || {};
 

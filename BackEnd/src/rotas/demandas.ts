@@ -35,6 +35,13 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 //Listar uma demanda
+/*
+Teste valido
+/1
+
+Teste invalido
+/999
+*/
 router.get("/:id", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
@@ -48,6 +55,7 @@ router.get("/:id", (req: Request, res: Response) => {
 
 //POST DEMANDAS
 /*
+Teste valido
 {
  "nome": "Nova Demanda",
  "tipo": "Tarefa",
@@ -57,7 +65,19 @@ router.get("/:id", (req: Request, res: Response) => {
  "responsavel": "João da Silva",
  "descricao": "Descrição detalhada da demanda"
 }
+
+Teste invalido
+{
+ "nome": "Nova Demanda",
+ "tipo": "Tarefa",
+ "prazo_finalizacao": "2023-12-31",
+ "prioridade": "prioridade_invalida",
+ "id_projeto": 1,
+ "responsavel": "João da Silva",
+ "descricao": "Descrição detalhada da demanda"
+}
 */
+
 router.post("/", (req:Request, res:Response)=>{
     //pega dados apartir da requisicao
     const {titulo, tipo, prazo_finalizacao, prioridade, id_projeto, responsavel, descricao} = req.body;

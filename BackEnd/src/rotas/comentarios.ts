@@ -2,7 +2,15 @@ import {Router, Request, Response} from "express";
 import {Comentarios, Comentario, demandas} from "../dados/dados";
 
 const router = Router({mergeParams: true});
-router.get("", (req: Request, res: Response) => {
+
+/*
+Teste valido
+http://localhost:3000/demandas/2/comentarios
+
+Teste invalido
+http://localhost:3000/demandas/999/comentarios
+*/
+router.get("/", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
 
@@ -17,7 +25,22 @@ router.get("", (req: Request, res: Response) => {
     return res.status(200).json(comentarios);
 });
 
-router.post("", (req: Request, res: Response) => {
+/*
+Teste valido
+http://localhost:3000/demandas/2/comentarios
+{
+    "autor": "João",
+    "conteudo": "Teste!"
+}
+
+Teste invalido
+http://localhost:3000/demandas/999/comentarios
+{
+    "autor": "João",
+    "conteudo": ""
+}
+*/
+router.post("/", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
 
@@ -26,6 +49,13 @@ router.post("", (req: Request, res: Response) => {
     }
 
     const { autor, conteudo } = req.body;
+    if (!autor || typeof autor !== "string" || autor.trim() === "") {
+        return res.status(400).json({ error: "O autor é obrigatório." });
+    }
+
+    if (!conteudo || typeof conteudo !== "string" || conteudo.trim() === "") {
+        return res.status(400).json({ error: "O conteúdo é obrigatório." });
+    }
     const novoComentario: Comentario = {
         id: Comentarios.length + 1,
         demandaId: id,
