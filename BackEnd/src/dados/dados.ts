@@ -30,7 +30,7 @@ export interface Projeto{
 
 export let demandas: Demanda[]=[
     {
-        id: 101,
+        id: 1,
         titulo: 'Erro ao processar pagamento via Pix',
         tipo: 'Defeito',
         data_criacao: new Date('2026-10-10T14:00:00Z'),
@@ -43,7 +43,7 @@ export let demandas: Demanda[]=[
         descricao: 'Os clientes estão relatando que, após escanear o QR Code do Pix, o sistema retorna um erro de timeout e a tela trava. O problema começou após a última atualização do gateway de pagamento.'
     },
     {
-        id: 102,
+        id: 2,
         titulo: 'Implementar Modo Escuro (Dark Mode) no painel',
         tipo: 'Melhoria',
         data_criacao: new Date('2026-10-01T08:00:00Z'),
@@ -56,7 +56,7 @@ export let demandas: Demanda[]=[
         descricao: 'Solicitação da equipe de design para melhorar a acessibilidade e o conforto visual dos usuários que utilizam a plataforma durante a noite. Será necessário mapear todas as variáveis de cores existentes.'
     },
     {   
-        id: 103,
+        id: 3,
         titulo: 'Reset de senha de administrador travado',
         tipo: 'Melhoria',
         data_criacao: new Date('2026-10-12T08:15:00Z'),
@@ -69,7 +69,7 @@ export let demandas: Demanda[]=[
         descricao: 'O usuário master do cliente XPTO errou a senha 3 vezes e bloqueou a conta. O e-mail de recuperação não está chegando na caixa de entrada dele. Solicita o reset manual via banco de dados.'
     },
     {
-        id: 104,
+        id: 4,
         titulo: 'Botão de salvar desalinhado no Safari mobile',
         tipo: 'Defeito',
         data_criacao: new Date('2026-10-11T16:00:00Z'),
@@ -101,3 +101,64 @@ export let projetos: Projeto[] = [
         titulo: 'Modernização da API de Pagamentos Integrados'
     }
 ]
+
+export interface Comentario {
+    id: number;
+    demandaId: number;
+    autor: string;
+    conteudo: string;
+    data: Date;
+};
+
+export let Comentarios: Comentario[] = [ // !! Lista temporária
+    {
+        id: 1,
+        demandaId: 1,
+        autor: "Usario Exemplo 1",
+        conteudo: "Comentário de teste 1",
+        data: new Date(2026, 10, 11)
+    },
+    {
+        id: 2,
+        demandaId: 1,
+        autor: "Usario Exemplo 2",
+        conteudo: "Comentário de teste 2",
+        data: new Date(2026, 10, 12)
+    },
+    {
+        id: 3,
+        demandaId: 2,
+        autor: "Usario Exemplo 2",
+        conteudo: "Comentário de teste 2",
+        data: new Date(2026, 10, 12)
+    },
+    {
+        id: 4,
+        demandaId: 2,
+        autor: "Usario Exemplo 2",
+        conteudo: "Comentário de teste 2",
+        data: new Date(2026, 10, 12)
+    },
+    {
+        id: 4,
+        demandaId: 3,
+        autor: "Usario Exemplo 2",
+        conteudo: "Comentário de teste 2",
+        data: new Date(2026, 10, 12)
+    }
+];
+
+export type TipoUsuario = "Administrador"  | "Lider de Projeto"  | "Membro da equipe" 
+
+export interface Usuario {
+    id: number;
+    usuario: string;
+    senha: string;
+    tipo: TipoUsuario;
+}
+
+export const Usuarios: Usuario[] = [
+    { id: 1, usuario: "admin@exemplo.com", senha: "Admin_123", tipo: "Administrador" },
+    { id: 2, usuario: "lider@exemplo.com", senha: "Lider_123", tipo: "Lider de Projeto" },
+    { id: 3, usuario: "membro@exemplo.com", senha: "Membro_123", tipo: "Membro da equipe" },
+];
