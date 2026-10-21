@@ -4,14 +4,14 @@ async function TratarRespostaApi(resposta) {
     const dados = await resposta.json();
 
     if (!resposta.ok) {
-        const mensagem = Dados.mensagem || "Erro na requisição";
+        const mensagem = dados.mensagem || "Erro na requisição";
         throw new Error(mensagem);
     }
 
     return dados;
 }
 
-async function ListarDemandasApi(tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
+export async function ListarDemandasApi(tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
     let Url = `${Url_Api}/demandas`;
 
     if (tipo) {
@@ -19,31 +19,31 @@ async function ListarDemandasApi(tipo = "", prioridade = "", status = "", projet
     }
     
     if (prioridade) {
-        Url += `?tipo=${encodeURIComponent(prioridade)}&`;
+        Url += `?prioridade=${encodeURIComponent(prioridade)}&`;
     }
 
     if (status) {
-        Url += `?tipo=${encodeURIComponent(status)}&`;
+        Url += `?status=${encodeURIComponent(status)}&`;
     }
 
     if (projeto) {
-        Url += `?tipo=${encodeURIComponent(projeto)}&`;
+        Url += `?id_projeto=${encodeURIComponent(projeto)}&`;
     }
 
     if (responsavel) {
-        Url += `?tipo=${encodeURIComponent(responsavel)}`;
+        Url += `?responsavel=${encodeURIComponent(responsavel)}`;
     }
 
     const resposta = await fetch(Url);
     return await TratarRespostaApi(resposta);
 }
 
-async function BuscarDemandasApi(id) {
+export async function BuscarDemandasApi(id) {
     const resposta = await fetch(`${Url_Api}/demandas/${id}`);
     return await TratarRespostaApi(resposta);
 }
 
-async function CadastrarDemandasApi(demanda) {
+export async function CadastrarDemandasApi(demanda) {
     const resposta = await fetch(`${Url_Api}/demandas`,
         {
             method: "POST",
@@ -54,7 +54,7 @@ async function CadastrarDemandasApi(demanda) {
     return await TratarRespostaApi(resposta);
 }
 
-async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe a rota Put, portanto essa função é um placeholder
+export async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe a rota Put, portanto essa função é um placeholder
     const resposta = await fetch(`${Url_Api}/demandas/${id}`,
         {
             method: "PUT",
@@ -64,3 +64,4 @@ async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe a rota 
     );
     return await TratarRespostaApi(resposta);
 }
+
