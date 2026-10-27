@@ -30,17 +30,17 @@ create table usuario_projeto_participa(
 
 create table demanda(
     id_demanda int primary key auto_increment,
-    descricao text,
     titulo varchar(150) not null,
-    tipo varchar(50) not null,
+    tipo varchar(50) not null check (tipo in ('Defeito', 'Tarefa', 'Melhoria', 'Documentacao')),
     dataCriacao datetime not null default current_timestamp(),
-    prazofinalizacao datetime not null,
-    statusDemanda varchar(50) not null,
+    prazoFinalizacao datetime,
+    statusDemanda varchar(50) not null check (statusDemanda in ('Aberta', 'Em andamento', 'Em revisão', 'Concluída')),
     prioridade varchar(50) not null,
-    data_alteracao datetime not null default current_timestamp() on update current_timestamp(),
+    dataAlteracao datetime not null default current_timestamp() on update current_timestamp(),
+    descricao text,
     
-	id_usuario int not null,
-    constraint fk_id_usuario_demanda foreign key (id_usuario) references usuario(id_usuario) ON DELETE CASCADE,
+	id_responsavel int,
+    constraint fk_id_usuario_demanda foreign key (id_responsavel) references usuario(id_usuario) ON DELETE CASCADE,
     
     id_projeto int not null,
     constraint fk_id_projeto_demanda foreign key (id_projeto) references projeto(id_projeto) ON DELETE CASCADE
@@ -49,24 +49,24 @@ create table demanda(
 
 create table historico(
 	id_historico int primary key auto_increment,
-    data_hora datetime not null default current_timestamp(),
+    dataHora datetime not null default current_timestamp(),
     descricao text,
 
-    id_usuario int not null,
-	constraint fk_id_usuario_historico foreign key (id_usuario) references usuario(id_usuario) ON DELETE CASCADE,
+    id_autor int not null,
+	constraint fk_id_usuario_historico foreign key (id_autor) references usuario(id_usuario) ON DELETE CASCADE,
     
 	id_demanda int not null,
     constraint fk_id_demanda foreign key (id_demanda) references demanda(id_demanda) ON DELETE CASCADE
 );
 
 create table comentario(
-	id_comentarios int primary key auto_increment,
+	id_comentario int primary key auto_increment,
     dataHora datetime not null default current_timestamp(),
     conteudo text,
     id_demanda int,
-    id_usuario int,
+    id_autor int,
     constraint fk_id_demanda_comentario foreign key (id_demanda) references demanda(id_demanda) ON DELETE CASCADE,
-    constraint fk_id_usuario_comentario foreign key (id_usuario) references usuario(id_usuario) ON DELETE CASCADE
+    constraint fk_id_usuario_comentario foreign key (id_autor) references usuario(id_usuario) ON DELETE CASCADE
 );
 
 -- ****************************************************
@@ -74,11 +74,11 @@ create table comentario(
 -- ****************************************************
 
 insert into usuario (nome, email, senha, papel) values
-('lucas silva', 'lucas@gmail.com', 'senha123', 'Administrador'),
-('mariana santos', 'mariana@gmail.com', 'senha456', 'Lider de Projeto'),
-('pedro costa', 'pedro@gmail.com', 'senha789', 'Membro da equipe'),
-('ana silva', 'ana@gmail.com', 'senha321', 'Membro da equipe'),
-('joao souza', 'joao@gmail.com', 'senha654', 'Membro da equipe');
+('lucas silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
+('mariana santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
+('pedro costa', 'pedro@gmail.com', 'Senha_789', 'Membro da equipe'),
+('ana silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
+('joao souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
 
 -- ****************************************************
 -- inserindo projetos
@@ -108,8 +108,8 @@ insert into usuario_projeto_participa
 -- ****************************************************
 
 insert into demanda
-(descricao, titulo, tipo, prazofinalizacao,
- statusDemanda, prioridade,  id_usuario, id_projeto)
+(descricao, titulo, tipo, prazoFinalizacao,
+ statusDemanda, prioridade,  id_responsavel, id_projeto)
 values
 ('criar a tela de login do sistema', 'tela de login',
  'tarefa', '2026-11-05 18:00:00',
@@ -129,13 +129,17 @@ values
 
 ('documentar as funcionalidades', 'documentacao do sistema',
  'documentacao', '2026-11-20 18:00:00',
- 'concluida', 'media', 5, 3);
+ 'concluida', 'media', 5, 3),
+
+('documentar as funcionalidades do sistema', 'documentacao',
+ 'documentacao', '2026-12-20 18:00:00',
+ 'concluida', 'media', NULL, 3);
 
 -- ****************************************************
 -- inserindo historicos
 -- ****************************************************
 
-insert into historico (descricao, id_usuario, id_demanda) values
+insert into historico (descricao, id_autor, id_demanda) values
 ('demanda criada', 1, 1),
 ('demanda criada', 2, 2),
 ('status alterado para em revisao', 3, 3),
@@ -147,7 +151,7 @@ insert into historico (descricao, id_usuario, id_demanda) values
 -- inserindo comentarios
 -- ****************************************************
 
-insert into comentario (conteudo, id_demanda, id_usuario) values
+insert into comentario (conteudo, id_demanda, id_autor) values
 ( 'ja comecei a desenvolver a tela de login', 1, 1),
 ('encontrei um erro na validacao do formulario', 2, 3),
 ('a pagina inicial esta quase pronta', 3, 2),
@@ -196,7 +200,7 @@ and demanda.id_projeto = 1;
 select * from historico where id_demanda = 1;
 
 -- historico da demanda com nome do usuario
-select historico.data_hora, historico.descricao, usuario.nome
+select historico.dataHora, historico.descricao, usuario.nome
 from historico, usuario
 where historico.id_usuario = usuario.id_usuario
 and historico.id_demanda = 1;
@@ -209,7 +213,7 @@ where comentario.id_usuario = usuario.id_usuario
 and comentario.id_demanda = 1;
 
 -- historico geral do projeto com demanda e usuario
-select historico.data_hora, historico.descricao,
+select historico.dataHora, historico.descricao,
        demanda.titulo, usuario.nome
 from historico, demanda, usuario
 where historico.id_demanda = demanda.id_demanda

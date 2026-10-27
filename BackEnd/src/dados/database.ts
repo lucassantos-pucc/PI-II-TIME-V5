@@ -40,5 +40,10 @@ async function testarConexao() {
     }
 }
 
-testarConexao();
+
+const TestarConexao = false;
+if (TestarConexao) {
+    testarConexao();
+}
+
 export default conexao;
