@@ -5,13 +5,21 @@
 //importando dados testes
 
 import { Request, Response, Router } from "express";
-import { projetos } from "../dados/dados";
+import { projetos, demandas } from "../dados/dados";
 
 const router = Router();
 
 // GET PROJETOS
 router.get("/", (req: Request, res: Response) => {
     //retorna todos os projetos
+    for (const projeto of projetos) {
+        projeto.demandas = 0;
+        for (const demanda of demandas) {
+            if (demanda.id_projeto === projeto.id) {
+                projeto.demandas = Number(projeto.demandas) + 1; // !! Provavelmente essa contagem pode ser só um count no banco de dados
+            }
+        }
+    }
     return res.status(200).json(projetos);
 });
 

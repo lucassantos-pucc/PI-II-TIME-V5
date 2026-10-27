@@ -24,6 +24,8 @@ export interface Demanda{
 export interface Projeto{
     id: number,
     titulo: string
+    lider: string
+    demandas: Number
 }
 
 // DEFININDO DADOS DE TESTE
@@ -86,19 +88,27 @@ export let demandas: Demanda[]=[
 export let projetos: Projeto[] = [
     {
         id: 1,
-        titulo: 'Desenvolvimento do Aplicativo Mobile Corporativo'
+        titulo: 'Desenvolvimento do Aplicativo Mobile Corporativo',
+        lider: 'Sr.Exemplilson',
+        demandas: 0
     },
     {
         id: 2,
-        titulo: 'Migração do Banco de Dados para Nuvem (AWS)'
+        titulo: 'Migração do Banco de Dados para Nuvem (AWS)',
+        lider: 'Sr.Exemplilson',
+        demandas: 0
     },
     {
         id: 3,
-        titulo: 'Implementação do Portal de Autoatendimento do Cliente'
+        titulo: 'Implementação do Portal de Autoatendimento do Cliente',
+        lider: 'Sr.Exemplilson',
+        demandas: 0
     },
     {
         id: 4,
-        titulo: 'Modernização da API de Pagamentos Integrados'
+        titulo: 'Modernização da API de Pagamentos Integrados',
+        lider: 'Sr.Exemplilson',
+        demandas: 0
     }
 ]
 
