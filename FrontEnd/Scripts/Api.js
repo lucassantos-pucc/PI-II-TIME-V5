@@ -11,6 +11,8 @@ async function TratarRespostaApi(resposta) {
     return dados;
 }
 
+// Demandas
+
 export async function ListarDemandasApi(tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
     let Url = `${Url_Api}/demandas`;
 
@@ -65,3 +67,40 @@ export async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe 
     return await TratarRespostaApi(resposta);
 }
 
+export async function CancelarDemandasApi(id) {
+    const resposta = await fetch(`${Url_Api}/demandas/${id}`,
+        {
+            method: "DELETE"
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
+
+// Usuarios
+
+export async function VerificarLoginApi(usuario) {
+    const resposta = await fetch(`${Url_Api}/usuarios/login`,
+        {
+            method: "PUT",
+            headers: { "Constent-Type" : "application/json" },
+            body: JSON.stringify(usuario)
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
+
+export async function ListarUsuariosApi() {
+    const resposta = await fetch(`${Url_Api}/usuarios`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function CadastrarUsuarioApi(usuario) {
+    const resposta = await fetch(`${Url_Api}/usuarios`,
+        {
+            method: "PUT",
+            headers: { "Constent-Type" : "application/json" },
+            body: JSON.stringify(usuario)
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
