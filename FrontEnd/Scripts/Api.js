@@ -97,10 +97,51 @@ export async function ListarUsuariosApi() {
 export async function CadastrarUsuarioApi(usuario) {
     const resposta = await fetch(`${Url_Api}/usuarios`,
         {
-            method: "PUT",
+            method: "POST",
             headers: { "Constent-Type" : "application/json" },
             body: JSON.stringify(usuario)
         }
     );
+    return await TratarRespostaApi(resposta);
+}
+
+// Projetos
+
+export async function ListarProjetosApi() {
+    const resposta = await fetch(`${Url_Api}/projetos`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function CadastrarProjetosApi(projeto) {
+    const resposta = await fetch(`${Url_Api}/projetos`,
+        {
+            method: "POST",
+            headers: { "Constent-Type" : "application/json" },
+            body: JSON.stringify(projeto)
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
+
+export async function EditarProjetosApi(projeto) {
+    const resposta = await fetch(`${Url_Api}/projetos`,
+        {
+            method: "PUT",
+            headers: { "Constent-Type" : "application/json" },
+            body: JSON.stringify(projeto)
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
+
+// Dashboards
+
+export async function DashboardDemandasApi() {
+    const resposta = await fetch(`${Url_Api}/dashboard/demandas`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function DashboardProjetosApi() {
+    const resposta = await fetch(`${Url_Api}/dashboard/projetos`);
     return await TratarRespostaApi(resposta);
 }

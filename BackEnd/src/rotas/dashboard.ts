@@ -9,7 +9,7 @@ const router = Router();
 
 router.use(express.json());
 
-router.get("/", (req: Request, res: Response) => {
+router.get("/demandas", (req: Request, res: Response) => {
     //CONTADORES DOS sTATUS
     let abertas= 0;
     let andam= 0;
@@ -90,6 +90,10 @@ router.get("/", (req: Request, res: Response) => {
         proximasDoPrazo: final,
         demandas_criticas_abertas: demcrit
     });
+});
+
+router.get("/projetos", (req: Request, res: Response) => {
+
 });
 
 //EXPORTAR A ROTA PARA O ARQUIVO INDEX.JS
