@@ -4,12 +4,12 @@
 
 //importando dados testes
 
-import { Request, Response, Router } from "express";
-import {demandas, projetos, Demanda, Tipo , Prioridade} from "../dados/dados";
-
+//import { Request, Response, Router } from "express";
+//import {demandas, projetos, Demanda, Tipo , Prioridade} from "../dados/dados";
+/*
 const router = Router();
-let proximoIdDemanda = 5;
-
+let proximoIdDemanda = 5;*/
+/*
 //Listagem de demandas
 router.get("/", (req: Request, res: Response) => {
     let filtro = demandas;
@@ -33,7 +33,7 @@ router.get("/", (req: Request, res: Response) => {
 
     return res.status(200).json(demandas);
 });
-
+*/
 //Listar uma demanda
 /*
 Teste valido
@@ -41,7 +41,7 @@ Teste valido
 
 Teste invalido
 /999
-*/
+*//*
 router.get("/:id", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
@@ -51,7 +51,7 @@ router.get("/:id", (req: Request, res: Response) => {
     }
 
     return res.status(200).json(demanda);
-});
+});*/
 
 //POST DEMANDAS
 /*
@@ -77,7 +77,7 @@ Teste invalido
  "descricao": "Descrição detalhada da demanda"
 }
 */
-
+/*
 router.post("/", (req:Request, res:Response)=>{
     //pega dados apartir da requisicao
     const {titulo, tipo, prazo_finalizacao, prioridade, id_projeto, responsavel, descricao} = req.body;
@@ -143,4 +143,4 @@ router.post("/", (req:Request, res:Response)=>{
 
 });
 
-export default router;
+export default router;*/

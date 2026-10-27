@@ -1,19 +1,24 @@
 /*
-    Feito por Kauã Gaiofato Santana Lima de Jesus
+    Feito por:
+    Kauã Gaiofato Santana Lima de Jesus 
     RA: 26000195
+    Arthur Cardoso Martin
+    RA: 26006506
 */
 
 import { Request, Response } from "express";
-import {Usuarios, Usuario, TipoUsuario} from "../dados/dados";
+import {Usuario} from "../dados/dados";
+
+import conexao from "../dados/database";
 const express = require("express");
 const router = express.Router();
-
+ /*
 const semSenha = (usuario: Usuario) => ({
   id: usuario.id,
   usuario: usuario.usuario,
   tipo: usuario.tipo,
 });
-
+*/
 // POST "/login"
 /* 
 Teste valido
@@ -28,6 +33,7 @@ Teste invalido
   "senha": "senha_incorreta"
 }
 */
+/*
 router.post("/login", (req: Request, res: Response) => {
   const { usuario, senha } = req.body;
 
@@ -50,11 +56,11 @@ router.post("/login", (req: Request, res: Response) => {
   }
 
   return res.status(200).json({ usuario: usuarioEncontrado, mensagem: "Login bem-sucedido." });
-});
+});*/
 
 // GET /usuarios
-router.get("/", (req: Request, res: Response) => {
-  const lista = Usuarios;
+router.get("/", async (req: Request, res: Response) => {
+  const [lista] = await conexao.query<Usuario[]>("SELECT * FROM usuario;");
 
   if (lista.length === 0) {
     return res.status(404).json({ mensagem: "Nenhum usuário encontrado." });
@@ -79,7 +85,8 @@ Teste invalido
   "tipo": "Administrador"
 }
 */
-router.post("/", (req: Request, res: Response) => {
+/*
+router.post("/", async (req: Request, res: Response) => {
   const { usuario, senha, tipo } = req.body || {};
 
   if (!usuario || typeof usuario !== "string" || usuario.trim() === "") {
@@ -120,5 +127,5 @@ router.post("/", (req: Request, res: Response) => {
 
   return res.status(201).json({ usuario: semSenha(novoUsuario), mensagem: "Usuário cadastrado com sucesso." });
 });
-
+*/
 export default router;

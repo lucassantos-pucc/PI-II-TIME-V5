@@ -2,6 +2,7 @@
 //RA: 26006454
 
 //IMPORTAR O MODULO ROUTER DA BIBLOTECA EXPRESS
+/*
 import express, {Router, Request, Response} from "express";
 import {demandas} from "../dados/dados";
 
@@ -93,4 +94,4 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 //EXPORTAR A ROTA PARA O ARQUIVO INDEX.JS
-export default router;
+export default router;*/

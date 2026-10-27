@@ -14,6 +14,8 @@ const porta = Number(process.env.DB_PORT) || 3306;
 
 // se ao consultar os valores no .env faltar algo mostra o erro
 if (!host || !user || !senha || !banco) {
+    console.log("Faltam configurações no arquivo .env");
+    console.log(host, user, senha, banco);
     throw new Error("Faltam configurações no arquivo .env");
 }
 
@@ -25,4 +27,18 @@ const conexao = mysql.createPool({
     port: porta
 });
 
+async function testarConexao() {
+    try {
+        const conexaoTeste = await conexao.getConnection();
+        console.log("Conexão com o banco de dados estabelecida com sucesso!");
+        const [linhas] = await conexao.query("select * from usuario;");
+        console.log(linhas);
+        console.log("Consulta de teste realizada com sucesso!");
+        conexaoTeste.release();
+    } catch (erro) {
+        console.error("Erro ao conectar ao banco de dados:", erro);
+    }
+}
+
+testarConexao();
 export default conexao;

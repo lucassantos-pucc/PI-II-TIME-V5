@@ -1,4 +1,4 @@
-import {Router, Request, Response} from "express";
+/*import {Router, Request, Response} from "express";
 import {Comentarios, Comentario, demandas} from "../dados/dados";
 
 const router = Router({mergeParams: true});
@@ -9,7 +9,7 @@ http://localhost:3000/demandas/2/comentarios
 
 Teste invalido
 http://localhost:3000/demandas/999/comentarios
-*/
+*//*
 router.get("/", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
@@ -39,7 +39,7 @@ http://localhost:3000/demandas/999/comentarios
     "autor": "João",
     "conteudo": ""
 }
-*/
+*//*
 router.post("/", (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const demanda = demandas.find((d) => d.id === id);
@@ -67,4 +67,4 @@ router.post("/", (req: Request, res: Response) => {
     return res.status(201).json(novoComentario);
 });
 
-export default router;
+export default router;*/

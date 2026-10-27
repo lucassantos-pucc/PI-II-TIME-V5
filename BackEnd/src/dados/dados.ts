@@ -1,13 +1,20 @@
 //Feito por: Lucas de Oliveira Santos
 //RA: 26887166
 
+/*
+Modificado por; Arthur Cardoso Martin
+RA: 26006506
+*/
+
+//Importando o pacote RowdataPacket do mysql2
+import { RowDataPacket } from "mysql2";
 
 // DEFININDO INTERFACE DE DEMANDA E DE PROJETOS
 export type Tipo = "Defeito" | "Tarefa" | "Melhoria" | "Documentação" 
 export type Status = "Aberta" | "Em andamento" | "Em revisão" | "Concluída" | "Cancelada" 
 export type Prioridade = "Baixa"  | "Média"  | "Alta" | "Crítica"  
 
-export interface Demanda{
+export interface Demanda extends RowDataPacket {
     id: number,
     titulo: string
     tipo: Tipo
@@ -27,7 +34,7 @@ export interface Projeto{
 }
 
 // DEFININDO DADOS DE TESTE
-
+/*
 export let demandas: Demanda[]=[
     {
         id: 1,
@@ -101,15 +108,15 @@ export let projetos: Projeto[] = [
         titulo: 'Modernização da API de Pagamentos Integrados'
     }
 ]
-
-export interface Comentario {
+*/
+export interface Comentario extends RowDataPacket {
     id: number;
     demandaId: number;
     autor: string;
     conteudo: string;
     data: Date;
 };
-
+/*
 export let Comentarios: Comentario[] = [ // !! Lista temporária
     {
         id: 1,
@@ -147,18 +154,21 @@ export let Comentarios: Comentario[] = [ // !! Lista temporária
         data: new Date(2026, 10, 12)
     }
 ];
-
+*/
 export type TipoUsuario = "Administrador"  | "Lider de Projeto"  | "Membro da equipe" 
 
-export interface Usuario {
-    id: number;
-    usuario: string;
+export interface Usuario extends RowDataPacket {
+    id_usuario: number;
+    nome: string;
+    email: string;
     senha: string;
-    tipo: TipoUsuario;
+    papel: TipoUsuario;
 }
 
+/*
 export const Usuarios: Usuario[] = [
     { id: 1, usuario: "admin@exemplo.com", senha: "Admin_123", tipo: "Administrador" },
     { id: 2, usuario: "lider@exemplo.com", senha: "Lider_123", tipo: "Lider de Projeto" },
     { id: 3, usuario: "membro@exemplo.com", senha: "Membro_123", tipo: "Membro da equipe" },
 ];
+*/

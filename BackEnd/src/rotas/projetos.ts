@@ -3,16 +3,16 @@
 
 
 //importando dados testes
-
+/*
 import { Request, Response, Router } from "express";
-import { projetos } from "../dados/dados";
+import { Projeto } from "../dados/dados";
 
 const router = Router();
-
+/*
 // GET PROJETOS
 router.get("/", (req: Request, res: Response) => {
     //retorna todos os projetos
     return res.status(200).json(projetos);
 });
 
-export default router;
+export default router;*/

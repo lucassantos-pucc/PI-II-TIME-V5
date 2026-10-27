@@ -11,11 +11,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.3.0"
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.13",
     "@types/express": "^5.0.6",
+    "@types/mysql": "^2.15.28",
     "@types/node": "^26.6.3",
     "tsc-watch": "^7.2.1",
     "typescript": "^7.0.2"
