@@ -143,4 +143,54 @@ router.post("/", (req:Request, res:Response)=>{
 
 });
 
+router.put("/:id", (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    const demanda = demandas.find((d) => d.id === id);
+
+    if (!demanda) {
+        return res.status(404).json({ error: "Demanda não encontrada" });
+    }
+
+    //pega dados apartir da requisicao
+    const {titulo, tipo, prazo_finalizacao, prioridade, descricao} = req.body; // TODO Implementar status dinamico
+
+    //validacao dos dados
+    if(!titulo || !tipo || !prioridade || !descricao){
+        return res.status(400).json({
+            mensagem: "titulo, tipo, prioridade e descricao são obrigatorios"
+        })
+    }
+
+    if(tipo !== "Defeito" && tipo !== "Tarefa" && tipo !== "Melhoria" && tipo !== "Documentação" ){
+        return res.status(400).json({ mensagem: "Tipo inválido."});
+    }
+    if(prioridade !== "Baixa"  && prioridade !== "Média"  && prioridade !== "Alta" && prioridade !== "Crítica"){
+        return res.status(400).json({mensagem: "Prioridade inválida."});
+    }
+
+    let prazo: Date | null;
+
+    //se tiver um prazo de finalização (em string) converte para Date
+    if (prazo_finalizacao) {
+        prazo = new Date(prazo_finalizacao);
+    } 
+    // se n tiver deixa null
+    else {
+        prazo = null;
+    }
+
+    demanda.titulo = titulo;
+    demanda.tipo = tipo;
+    demanda.data_ultima_alteracao = new Date();
+    demanda.prioridade = prioridade;
+    demanda.prazo_finalizacao = prazo;
+    demanda.descricao = descricao;
+
+    return res.status(200).json(demanda);
+});
+
+router.delete("/", (req: Request, res: Response) => {
+
+});
+
 export default router;
