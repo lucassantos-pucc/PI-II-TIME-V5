@@ -2,19 +2,18 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
+import { ListarDemandasApi } from "./Api.js";
 
 localStorage.setItem("DemandaAtual", JSON.stringify({})); // Para limpar o campo de demanda atual por preucação
 
-
-function CreateDemanda(json) {
-    const info = JSON.parse(json);
+function CreateDemanda(info) {
     console.log("Criando demanda:", info);
     
     const Dem_Cr = document.createElement('button'); // Demanda Criada
     Dem_Cr.classList.add("demanda-card");
 
     const h3 = document.createElement('h3');
-    h3.appendChild(document.createTextNode(info.nome));
+    h3.appendChild(document.createTextNode(info.titulo));
     Dem_Cr.appendChild(h3);
 
     Dem_Cr.appendChild(document.createElement('hr'));
@@ -25,10 +24,10 @@ function CreateDemanda(json) {
     box.appendChild(DemandaContent("tipo-gen", "Tipo: " + info.tipo));
     box.appendChild(DemandaContent("prioridade-gen", "Prioridade: " + info.prioridade));
     box.appendChild(DemandaContent("status-gen", "Status: " + info.status));
-    box.appendChild(DemandaContent("projeto-gen", "Projeto: " + info.projeto));
+    box.appendChild(DemandaContent("projeto-gen", "Projeto: " + info.id_projeto)); // Em teoria é pra ser o nome mas deixa assim por enquanto
     box.appendChild(DemandaContent("responsavel-gen", "Responsável: " + info.responsavel));
-    box.appendChild(DemandaContent("DTcriacao-gen", "Data de criacao: " + info.DTcriacao));
-    box.appendChild(DemandaContent("prazo-gen", "Prazo: " + info.prazo));
+    box.appendChild(DemandaContent("DTcriacao-gen", "Data de criacao: " + info.data_criacao));
+    box.appendChild(DemandaContent("prazo-gen", "Prazo: " + info.prazo_finalizacao));
 
     Dem_Cr.appendChild(box);
 
@@ -109,11 +108,15 @@ function StatusColor(p) {
 }
 
 // Cria as demandas dinamicamente na tela a partir de arquivos JSON
-const jsondemandas = []; // !! Temporario
+/*const jsondemandas = []; // !! Temporario
 jsondemandas[0] = '{"nome":"Teste1", "tipo":"Defeito", "prioridade":"Baixa", "status":"Aberta", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[1] = '{"nome":"Teste2", "tipo":"Defeito", "prioridade":"Média", "status":"Em andamento", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "status":"Concluido", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Cancelado", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
+*/
+
+const id = 1; // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
+const jsondemandas = await ListarDemandasApi(id); console.log(jsondemandas[0]);
 
 for (const demanda of jsondemandas) { //Criar demandas padrões
     CreateDemanda(demanda);
@@ -143,4 +146,3 @@ const ElementosStatus = document.getElementsByClassName("status-gen");
 for (const status of ElementosStatus) {
     StatusColor(status);
 }
-

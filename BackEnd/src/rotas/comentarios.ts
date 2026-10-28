@@ -1,8 +1,17 @@
+/*
+    Feito por: Arthur Cardoso Martin
+    RA: 26006506
+*/
+
 import {Router, Request, Response} from "express";
-import {Comentarios, Comentario, demandas} from "../dados/dados";
+import {ComentarioRow, DemandaRow} from "../dados/dados";
+import {ResultSetHeader} from "mysql2";
+import Conexao from "../dados/database";
 
 const router = Router({mergeParams: true});
 
+
+// Select para todas de uma demanda
 /*
 Teste valido
 http://localhost:3000/demandas/2/comentarios
@@ -10,17 +19,12 @@ http://localhost:3000/demandas/2/comentarios
 Teste invalido
 http://localhost:3000/demandas/999/comentarios
 */
-router.get("/", (req: Request, res: Response) => {
+router.get("/", async(req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const demanda = demandas.find((d) => d.id === id);
+    const [comentarios] = await Conexao.query<ComentarioRow[]>("SELECT * FROM comentario where comentario.id_demanda = ?", [id]);
 
-    if (!demanda) {
-        return res.status(404).json({ error: "Demanda não encontrada" });
-    }
-
-    const comentarios = Comentarios.filter((c) => c.demandaId === id) || [];
-    if (comentarios.length === 0) {
-        return res.status(404).json({ error: "Nenhum comentário encontrado para esta demanda" });
+    if (!comentarios) {
+        return res.status(404).json({ error: "Comentários não encontrados" });
     }
     return res.status(200).json(comentarios);
 });
@@ -29,7 +33,7 @@ router.get("/", (req: Request, res: Response) => {
 Teste valido
 http://localhost:3000/demandas/2/comentarios
 {
-    "autor": "João",
+    "id_autor": "João",
     "conteudo": "Teste!"
 }
 
@@ -40,31 +44,25 @@ http://localhost:3000/demandas/999/comentarios
     "conteudo": ""
 }
 */
-router.post("/", (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const demanda = demandas.find((d) => d.id === id);
+    const demanda = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_demanda = ?", [id]);
 
     if (!demanda) {
         return res.status(404).json({ error: "Demanda não encontrada" });
     }
 
-    const { autor, conteudo } = req.body;
-    if (!autor || typeof autor !== "string" || autor.trim() === "") {
+    const { id_autor, conteudo } = req.body;
+    if (!id_autor) {
         return res.status(400).json({ error: "O autor é obrigatório." });
     }
 
     if (!conteudo || typeof conteudo !== "string" || conteudo.trim() === "") {
         return res.status(400).json({ error: "O conteúdo é obrigatório." });
     }
-    const novoComentario: Comentario = {
-        id: Comentarios.length + 1,
-        demandaId: id,
-        autor,
-        conteudo,
-        data: new Date()
-    };
-    Comentarios.push(novoComentario);
-    return res.status(201).json(novoComentario);
+    const [resultado] = await Conexao.query<ResultSetHeader>("INSERT INTO comentario (id_demanda, id_autor, conteudo) VALUES (?, ?, ?)", [id, id_autor, conteudo]);
+    const [comentario] = await Conexao.query<ComentarioRow[]>("SELECT * FROM comentario where id_comentario = ?", [resultado.insertId]);
+    return res.status(201).json({ message: "Comentário criado com sucesso!", comentario: comentario[0] });
 });
 
 export default router;

@@ -1,16 +1,21 @@
-//Feito por Lucas Studach Kaid Ludemann
-//RA: 26006454
+/*
+    Feito por Lucas Studach Kaid Ludemann
+    RA: 26006454
+    Modificado por: Arthur Cardoso Martin
+    RA: 26006506
+*/
 
-//IMPORTAR O MODULO ROUTER DA BIBLOTECA EXPRESS
 import express, {Router, Request, Response} from "express";
-import {demandas} from "../dados/dados";
+import {DemandaRow} from "../dados/dados";
+import Conexao from "../dados/database";
 
 const router = Router();
 
 router.use(express.json());
 
-router.get("/", (req: Request, res: Response) => {
-    //CONTADORES DOS sTATUS
+router.get("/demandas/:id", async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    //CONTADORES DOS STATUS
     let abertas= 0;
     let andam= 0;
     let rev= 0;
@@ -39,28 +44,29 @@ router.get("/", (req: Request, res: Response) => {
     let total= 0;
     let diasFinalizar: number;
     const diaAtual = new Date();
+    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where demanda.id_projeto = ?", [id]);
     for (const demanda of demandas) {
-        if (demanda.status === "Aberta") {abertas++;}
-        else if (demanda.status === "Em andamento") {andam++;}
-        else if (demanda.status === "Em revisão") {rev++;}
-        else if (demanda.status === "Concluída") {conc++;}
-        else if (demanda.status === "Cancelada") {canc++;}
+        if (demanda.statusDemanda === "Aberta".toLowerCase()) {abertas++;}
+        else if (demanda.statusDemanda === "Em andamento".toLowerCase()) {andam++;}
+        else if (demanda.statusDemanda === "Em revisao".toLowerCase()) {rev++;}
+        else if (demanda.statusDemanda === "Concluida".toLowerCase()) {conc++;}
+        else if (demanda.statusDemanda === "Cancelada".toLowerCase()) {canc++;}
 
-        if (demanda.prioridade === "Crítica") {crit++;}
-        else if (demanda.prioridade === "Alta") {alta++;}
-        else if (demanda.prioridade === "Média") {media++;}
-        else if (demanda.prioridade === "Baixa") {baixa++;}
+        if (demanda.prioridade === "Critica".toLowerCase()) {crit++;}
+        else if (demanda.prioridade === "Alta".toLowerCase()) {alta++;}
+        else if (demanda.prioridade === "Media".toLowerCase()) {media++;}
+        else if (demanda.prioridade === "Baixa".toLowerCase()) {baixa++;}
 
-        if (demanda.tipo === "Tarefa") {tarefa++;}
-        else if (demanda.tipo === "Melhoria") {melhoria++;}
-        else if (demanda.tipo === "Defeito") {defeito++;}
-        else if (demanda.tipo === "Documentação") {doc++;}
+        if (demanda.tipo === "Tarefa".toLowerCase()) {tarefa++;}
+        else if (demanda.tipo === "Melhoria".toLowerCase()) {melhoria++;}
+        else if (demanda.tipo === "Defeito".toLowerCase()) {defeito++;}
+        else if (demanda.tipo === "Documentacao".toLowerCase()) {doc++;}
 
         diasFinalizar = demanda.prazo_finalizacao ? 
         (demanda.prazo_finalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazo_finalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazo_finalizacao.getDate() - diaAtual.getDate()) : -1;
         if ((diasFinalizar <= 3) && (diasFinalizar >= 0)) {final++;}
 
-        if ((demanda.status === "Aberta") && (demanda.prioridade === "Crítica")) {demcrit++;}
+        if ((demanda.statusDemanda === "Aberta".toLowerCase()) && (demanda.prioridade === "Critica".toLowerCase())) {demcrit++;}
         total++;
         console.log(diasFinalizar);
     }
@@ -90,6 +96,10 @@ router.get("/", (req: Request, res: Response) => {
         proximasDoPrazo: final,
         demandas_criticas_abertas: demcrit
     });
+});
+
+router.get("/projetos", (req: Request, res: Response) => {
+
 });
 
 //EXPORTAR A ROTA PARA O ARQUIVO INDEX.JS
