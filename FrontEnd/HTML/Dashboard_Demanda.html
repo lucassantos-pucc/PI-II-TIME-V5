@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../Styles/Menu.css">
     
     <script src="../Scripts/Menu.js" defer></script>
+    <script src="../Scripts/Dashboard.js" type="module" defer></script>
 </head>
 <body>
     <header>
@@ -26,7 +27,7 @@
 
             <div class="informação">
                 <h3>TOTAL DE DEMANDAS: </h3>
-                <span class="valor">
+                <span class="valor" id="total">
                     50
                 </span>
             </div>
@@ -34,19 +35,18 @@
             
            <div class="informação">
                 <h3>SITUAÇÃO DE DEMANDAS:</h3>
-                <span class="valor">
+                <span class="valor" id="status">
                     ABERTAS: 50 <br>
                     EM ANDAMENTO: 50 <br>
                     EM REVISÃO: 50 <br>
                     CONCLUÍDAS: 50 <br>
                     CANCELADAS: 50
-
                 </span>
             </div>
 
             <div class="informação">
                 <h3>QUANTIDADE DE DEMANDAS POR PRIORIDADE: </h3>
-                <span class="valor">
+                <span class="valor" id="prioridade">
                     CRÍTICA: 50 <br>
                     ALTA: 50 <br>
                     MÉDIA: 50 <br>
@@ -56,7 +56,7 @@
 
             <div class="informação">
                 <h3>QUANTIDADE DE DEMANDAS POR TIPO: </h3>
-                <span class="valor">
+                <span class="valor" id="tipo">
                     TAREFA: 50 <br>
                     MELHORIA: 50 <br>
                     DEFEITO: 50 <br>
@@ -66,14 +66,14 @@
 
             <div class="informação">
                 <h3>DEMANDAS PRÓXIMAS DO PRAZO DE FINALIZAÇÃO: </h3>
-                <span class="valor">
+                <span class="valor" id="prox">
                     50
                 </span>
             </div>
 
             <div class="informação">
-                <h3>QUANTIDADE DE DEMANDAS EM ANDAMENTO: </h3>
-                <span class="valor">
+                <h3>QUANTIDADE DE DEMANDAS CRíTICAS EM ANDAMENTO: </h3>
+                <span class="valor" id="andacrit">
                     50
                 </span>
             </div>

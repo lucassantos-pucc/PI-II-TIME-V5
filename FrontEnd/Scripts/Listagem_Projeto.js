@@ -2,14 +2,14 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-function CreateProjeto(json) {
-    const info = JSON.parse(json);
-    
+import { ListarProjetosApi } from "./Api.js";
+
+function CreateProjeto(info) {
     const Proj_Cr = document.createElement('button'); // !! Projeto Criado || Não sei se o projeto tem q ser uma div ou botão, deixei como tava no demandas mas podem mudar
     Proj_Cr.classList.add("projeto-card");
 
     const h3 = document.createElement('h3');
-    h3.appendChild(document.createTextNode(info.nome));
+    h3.appendChild(document.createTextNode(info.titulo));
     Proj_Cr.appendChild(h3);
 
     Proj_Cr.appendChild(document.createElement('hr'));
@@ -77,11 +77,14 @@ function StatusColor(p) { // !! Função um tanto redundante por existir em dois
 }
 
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON
+/*
 const jsonprojetos = []; // !! Temporario
 jsonprojetos[0] = '{"nome":"Teste1", "lider":"Sr.Exemplilson", "status":"Aberta", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 1"}';
 jsonprojetos[1] = '{"nome":"Teste2", "lider":"Sr.Exemplilson", "status":"Em andamento", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 2"}';
 jsonprojetos[2] = '{"nome":"Teste3", "lider":"Sr.Exemplilson", "status":"Concluido", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 3"}';
 jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancelado", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 4"}';
+*/
+const jsonprojetos = await ListarProjetosApi();
 
 for (const projeto of jsonprojetos) {
     CreateProjeto(projeto);
