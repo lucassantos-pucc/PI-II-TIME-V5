@@ -61,6 +61,7 @@ export interface ComentarioRow extends RowDataPacket, Comentario {}
 export interface Historico extends RowDataPacket {
     id_historico: number;
     dataHora: Date;
+    descricao: string;
     id_autor: number;
     id_demanda: number;
 }

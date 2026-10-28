@@ -17,6 +17,7 @@ import projetosRotas from "./rotas/projetos";
 //import dashboardRotas from "./rotas/dashboard";
 //import comentariosRotas from "./rotas/comentarios";
 import usuariosRotas from "./rotas/usuarios";
+import historicoRotas from "./rotas/historico";
 
 const express = require("express");
 
@@ -27,6 +28,7 @@ app.use(express.json());
 // Conectando as rotas
 app.use("/demandas", demandasRotas);
 app.use("/projetos", projetosRotas);
+app.use("/historico", historicoRotas);
 //app.use("/dashboard", dashboardRotas);
 //app.use("/demandas/:id/comentarios", comentariosRotas);
 app.use("/usuarios", usuariosRotas);
