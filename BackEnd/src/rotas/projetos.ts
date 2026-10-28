@@ -32,4 +32,12 @@ router.get("/:id", async (req: Request, res: Response) => {
     return res.status(200).json(projetos);
 });
 
+router.post("/", (req: Request, res: Response) => {
+
+});
+
+router.put("/:id", (req: Request, res: Response) => {
+
+});
+
 export default router;

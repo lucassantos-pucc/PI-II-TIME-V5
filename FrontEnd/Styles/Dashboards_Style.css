@@ -27,11 +27,11 @@ body {
     margin-right: 0px;
     display: flex;
     flex-direction: column;
-    background:linear-gradient(to right, #ffcdee40, #3902556d);
+    background: #111827a6;
     backdrop-filter: blur(12px);
     width: 650px;
     min-height: 200px;
-    border: 1px solid #de05ff26;
+    border: 1px solid #334155;
     border-radius: 20px;
     padding: 25px;
     box-shadow: 0 10px 30px #00000059;
@@ -41,7 +41,7 @@ body {
 .informação:hover {
     color: #ffffff;
     transform: translateY(-4px);
-    background: #a855f71a;;
+    background: #a855f71a;
     border-color: #a855f7;
     box-shadow: 0 15px 35px #00000080;
 }
