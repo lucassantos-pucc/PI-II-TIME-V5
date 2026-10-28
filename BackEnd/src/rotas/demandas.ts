@@ -13,9 +13,26 @@ import Conexao from "../dados/database";
 
 const router = Router();
 
-//Listagem de demandas por projeto e filtros
-router.get("/projeto/:id_projeto", async (req: Request, res: Response) => {
-    const projeto = Number(req.params.id_projeto);
+/*Listagem de demandas por projeto e filtros
+Teste valido
+/?id=1
+/?id_projeto=3
+
+Teste invalido
+/?id=a
+/?id_projeto=a
+*/
+router.get("/", async (req: Request, res: Response) => {
+    const projeto = Number(req.query.id_projeto);
+    const id = Number(req.query.id);
+    if (id){
+        const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
+        const demanda = demandas.find((d) => d.id_demanda === id);
+        if (!demanda) {
+            return res.status(404).json({ error: "Demanda não encontrada" });
+        }
+        return res.status(200).json(demanda);
+    }
     const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
     const tipo = req.query.tipo;
     const prioridade = req.query.prioridade;
@@ -33,26 +50,6 @@ router.get("/projeto/:id_projeto", async (req: Request, res: Response) => {
     if (responsavel) { filtro = filtro.filter((i) => i.id_responsavel === Number(responsavel)); }
 
     return res.status(200).json(filtro);
-});
-
-//Listar uma demanda
-/*
-Teste valido
-/1
-
-Teste invalido
-/999
-*/
-router.get("/:id", async(req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
-    const demanda = demandas.find((d) => d.id_demanda === id);
-
-    if (!demanda) {
-        return res.status(404).json({ error: "Demanda não encontrada" });
-    }
-
-    return res.status(200).json(demanda);
 });
 
 //POST DEMANDAS

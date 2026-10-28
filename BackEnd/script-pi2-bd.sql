@@ -15,7 +15,9 @@ create table usuario(
 
 create table projeto(
 	id_projeto int primary key auto_increment,
-    titulo varchar(150) not null
+    titulo varchar(150) not null,
+    id_lider int,
+    constraint fk_id_Lider foreign key (id_lider) references usuario(id_usuario) ON DELETE CASCADE
 );
 
 create table usuario_projeto_participa(    
@@ -76,7 +78,7 @@ create table comentario(
 insert into usuario (nome, email, senha, papel) values
 ('lucas silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
 ('mariana santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
-('pedro costa', 'pedro@gmail.com', 'Senha_789', 'Membro da equipe'),
+('pedro costa', 'pedro@gmail.com', 'Senha_789', 'Lider de Projeto'),
 ('ana silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
 ('joao souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
 
@@ -84,10 +86,10 @@ insert into usuario (nome, email, senha, papel) values
 -- inserindo projetos
 -- ****************************************************
 
-insert into projeto (titulo) values
-('sistema de gerenciamento de tarefas'),
-('sistema de controle financeiro'),
-('plataforma de estudos');
+insert into projeto (titulo, id_lider) values
+('sistema de gerenciamento de tarefas', 2),
+('sistema de controle financeiro',2),
+('plataforma de estudos',3);
 
 -- ****************************************************
 -- inserindo participacoes dos usuarios nos projetos

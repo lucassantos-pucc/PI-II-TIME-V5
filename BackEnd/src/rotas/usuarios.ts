@@ -69,6 +69,17 @@ router.get("/", async (req: Request, res: Response) => {
   return res.status(200).json({ usuarios: lista, mensagem: "Usuários encontrados." });
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  const [lista] = await conexao.query<UsuarioRow[]>("SELECT * FROM usuario where id_usuario = ?;", [id]);
+
+  if (lista.length === 0) {
+    return res.status(404).json({ mensagem: "Nenhum usuário encontrado." });
+  }
+
+  return res.status(200).json({ usuario: lista[0], mensagem: "Usuário encontrado." });
+});
+
 // POST /usuarios
 /* 
 Teste valido

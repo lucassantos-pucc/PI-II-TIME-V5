@@ -24,7 +24,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.get("/:id", async (req: Request, res: Response) => {
     const id  = Number(req.params.id);
     const [projetos] = await Conexao.query<ProjetoRow[]>(
-        "select Distinct projeto.id_projeto, projeto.titulo " +
+        "select Distinct projeto.id_projeto, projeto.titulo, projeto.id_lider " +
         "from usuario, usuario_projeto_participa, projeto " +
         "where ? = usuario_projeto_participa.id_usuario " + 
         "and projeto.id_projeto = usuario_projeto_participa.id_projeto;", [id]

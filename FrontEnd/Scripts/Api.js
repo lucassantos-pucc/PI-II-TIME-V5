@@ -94,6 +94,11 @@ export async function ListarUsuariosApi() {
     return await TratarRespostaApi(resposta);
 }
 
+export async function ListarUsuarioApi(id){
+    const resposta = await fetch(`${Url_Api}/usuarios/${id}`);
+    return await TratarRespostaApi(resposta);
+}
+
 export async function CadastrarUsuarioApi(usuario) {
     const resposta = await fetch(`${Url_Api}/usuarios`,
         {

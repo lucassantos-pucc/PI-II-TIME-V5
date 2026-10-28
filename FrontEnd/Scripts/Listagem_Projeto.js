@@ -2,9 +2,10 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { ListarProjetosApi } from "./Api.js";
+import { ListarProjetosApi, ListarUsuarioApi } from "./Api.js";
 
-function CreateProjeto(info) {
+async function CreateProjeto(info) {
+    const lider = await ListarUsuarioApi(info.id_lider)
     const Proj_Cr = document.createElement('button'); // !! Projeto Criado || Não sei se o projeto tem q ser uma div ou botão, deixei como tava no demandas mas podem mudar
     Proj_Cr.classList.add("projeto-card");
 
@@ -13,14 +14,9 @@ function CreateProjeto(info) {
     Proj_Cr.appendChild(h3);
 
     Proj_Cr.appendChild(document.createElement('hr'));
-
     const box = document.createElement('div');
     box.classList.add("caixa");
-
-    box.appendChild(ProjetoContent("lider-gen", "Lider: " + info.lider));
-    box.appendChild(ProjetoContent("status-gen", "Status: " + info.status));
-    box.appendChild(ProjetoContent("demandas-gen", "Total de Demandas: " + info.demandas));
-    box.appendChild(ProjetoContent("DTcriacao-gen", "Data de criacao: " + info.DTcriacao));
+    box.appendChild(ProjetoContent("lider-gen", "Lider: " + lider.nome));
     box.appendChild(ProjetoContent("descricao-gen", "Descrição: " + info.descricao));
 
     Proj_Cr.appendChild(box);
@@ -45,35 +41,6 @@ function ProjetoContent(classe, texto) {
     content.appendChild(p);
     
     return content;
-}
-
-function StatusColor(p) { // !! Função um tanto redundante por existir em dois arquivos, alg tenta importar isso de listagem demandas dps
-    if (!p) { //So coloquei isso para evitar problema de estar vazio
-        return;
-    }
-
-    const stat = p.textContent.toLowerCase(); // Variável de simplificação da sintaxe
-    
-    // Aplica as cores de fundo respectivas
-    if (stat.includes("aberta")) {
-        p.classList.add("status-aberta");
-    }
-        
-    else if (stat.includes("andamento")) {
-        p.classList.add("status-andamento");
-    }
-    
-    else if (stat.includes("revisao")) {
-        p.classList.add("status-revisao");
-    }
-        
-    else if (stat.includes("concluido")) {
-        p.classList.add("status-concluido");
-    }
-        
-    else if (stat.includes("cancelado")) {
-        p.classList.add("status-cancelado");
-    }
 }
 
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON

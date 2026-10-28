@@ -11,8 +11,7 @@
 // Por fim, 'npm start' pra rodar o servidor
 
 import { Request, Response } from "express";
-//import RouterLogin from "./login";
-//import RouterGerenciamento from "./gerenciamento";
+import cors from "cors"
 
 // Importando as rotas
 import demandasRotas from "./rotas/demandas";
@@ -25,6 +24,7 @@ import historicoRotas from "./rotas/historico";
 const express = require("express");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 
