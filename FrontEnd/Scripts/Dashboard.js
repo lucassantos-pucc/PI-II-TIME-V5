@@ -4,8 +4,8 @@
 
 import { DashboardDemandasApi, DashboardProjetosApi } from "./Api.js";
 
-async function DemandasMostrar() {
-    const info = await DashboardDemandasApi();
+async function DemandasMostrar(id) {
+    const info = await DashboardDemandasApi(id);
 
     const total = document.getElementById("total");
     total.textContent = info.total;
@@ -47,6 +47,6 @@ async function ProjetosMostrar() {
 
 }
 
-if (document.title === "Dashboard_Demandas") { DemandasMostrar(); }
+if (document.title === "Dashboard_Demandas") { DemandasMostrar(1); } // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
 
 else if (document.title === "Dashboard_Projetos") { ProjetosMostrar(); }

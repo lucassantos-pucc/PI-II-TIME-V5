@@ -13,8 +13,8 @@ async function TratarRespostaApi(resposta) {
 
 // Demandas
 
-export async function ListarDemandasApi(tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
-    let Url = `${Url_Api}/demandas`;
+export async function ListarDemandasApi(id, tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
+    let Url = `${Url_Api}/demandas/projeto/${id}`;
 
     if (tipo) {
         Url += `?tipo=${encodeURIComponent(tipo)}&`;
@@ -40,8 +40,8 @@ export async function ListarDemandasApi(tipo = "", prioridade = "", status = "",
     return await TratarRespostaApi(resposta);
 }
 
-export async function BuscarDemandasApi(id) {
-    const resposta = await fetch(`${Url_Api}/demandas/${id}`);
+export async function BuscarDemandasApi(idDem, idProj) {
+    const resposta = await fetch(`${Url_Api}/demandas/${idDem}/projeto/${idProj}`);
     return await TratarRespostaApi(resposta);
 }
 
@@ -136,8 +136,8 @@ export async function EditarProjetosApi(projeto) {
 
 // Dashboards
 
-export async function DashboardDemandasApi() {
-    const resposta = await fetch(`${Url_Api}/dashboard/demandas`);
+export async function DashboardDemandasApi(id) {
+    const resposta = await fetch(`${Url_Api}/dashboard/demandas/${id}`);
     return await TratarRespostaApi(resposta);
 }
 

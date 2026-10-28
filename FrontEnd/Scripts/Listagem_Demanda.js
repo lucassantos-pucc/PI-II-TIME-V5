@@ -112,7 +112,8 @@ jsondemandas[2] = '{"nome":"Teste3", "tipo":"Defeito", "prioridade":"Alta", "sta
 jsondemandas[3] = '{"nome":"Teste4", "tipo":"Defeito", "prioridade":"Crítica", "status":"Cancelado", "projeto":"Exemplo", "responsavel":"Sr. Exemplilson", "DTcriacao":"25/09/2026", "prazo":"30/09/2026"}';
 */
 
-const jsondemandas = await ListarDemandasApi(); console.log(jsondemandas[0]);
+const id = 1; // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
+const jsondemandas = await ListarDemandasApi(id); console.log(jsondemandas[0]);
 
 for (const demanda of jsondemandas) { //Criar demandas padrões
     CreateDemanda(demanda);
