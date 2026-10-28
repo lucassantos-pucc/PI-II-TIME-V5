@@ -1,8 +1,7 @@
 /*
-    Feito por:
-    Kauã Gaiofato Santana Lima de Jesus 
+    Feito por: Kauã Gaiofato Santana Lima de Jesus 
     RA: 26000195
-    Arthur Cardoso Martin
+    Modificado por: Arthur Cardoso Martin
     RA: 26006506
 */
 

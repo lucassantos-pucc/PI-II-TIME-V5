@@ -1,10 +1,13 @@
-
-//Feito por: Lucas de Oliveira Santos
-//RA: 26887166
+/*
+    Feito por: Lucas de Oliveira Santos
+    RA: 26887166
+    Modificado por: Arthur Cardoso Martin
+    RA: 26006506
+*/
 
 // !! Pra rodar localmente na máquina de vocês, 
 // dem right click na pasta do backend, em open integrated terminal
-// Executar:  'npm install express'  ,  'npx tsc'  e  'npm i tsc-watch -D' , vai criar as pastas do node_modules e lib
+// Executar:  'npm i' e 'npx tsc' , vai criar as pastas do node_modules e lib
 // Por fim, 'npm start' pra rodar o servidor
 
 import { Request, Response } from "express";
@@ -14,8 +17,8 @@ import { Request, Response } from "express";
 // Importando as rotas
 import demandasRotas from "./rotas/demandas";
 import projetosRotas from "./rotas/projetos";
-//import dashboardRotas from "./rotas/dashboard";
-//import comentariosRotas from "./rotas/comentarios";
+import dashboardRotas from "./rotas/dashboard";
+import comentariosRotas from "./rotas/comentarios";
 import usuariosRotas from "./rotas/usuarios";
 import historicoRotas from "./rotas/historico";
 
@@ -28,9 +31,12 @@ app.use(express.json());
 // Conectando as rotas
 app.use("/demandas", demandasRotas);
 app.use("/projetos", projetosRotas);
+
 app.use("/historico", historicoRotas);
-//app.use("/dashboard", dashboardRotas);
-//app.use("/demandas/:id/comentarios", comentariosRotas);
+
+app.use("/dashboard", dashboardRotas);
+app.use("/demandas/:id/comentarios", comentariosRotas);
+
 app.use("/usuarios", usuariosRotas);
 
 
