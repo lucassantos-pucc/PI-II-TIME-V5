@@ -32,7 +32,10 @@ function CreateDemanda(info) {
     Dem_Cr.appendChild(box);
 
     info.descricao = info.descricao ? info.descricao : "Sem descrição"; // Se não houver descrição, exibe "Sem descrição"
-    Dem_Cr.addEventListener("click", () => ShowDialog(info)); 
+    Dem_Cr.addEventListener("click", () => {
+    localStorage.setItem("DemandaAtual", JSON.stringify(info));
+    window.open("demanda.html", "_blank");
+    });
 
     document.getElementById("secao-demanda").appendChild(Dem_Cr);
 }
