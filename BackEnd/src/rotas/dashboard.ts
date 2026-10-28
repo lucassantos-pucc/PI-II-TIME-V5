@@ -1,16 +1,21 @@
-//Feito por Lucas Studach Kaid Ludemann
-//RA: 26006454
+/*
+    Feito por Lucas Studach Kaid Ludemann
+    RA: 26006454
+    Modificado por: Arthur Cardoso Martin
+    RA: 26006506
+*/
 
-//IMPORTAR O MODULO ROUTER DA BIBLOTECA EXPRESS
 import express, {Router, Request, Response} from "express";
-import {demandas} from "../dados/dados";
+import {DemandaRow} from "../dados/dados";
+import Conexao from "../dados/database";
 
 const router = Router();
 
 router.use(express.json());
 
-router.get("/", (req: Request, res: Response) => {
-    //CONTADORES DOS sTATUS
+router.get("/:id", async (req: Request, res: Response) => {
+    const id = Number(req.params.id);
+    //CONTADORES DOS STATUS
     let abertas= 0;
     let andam= 0;
     let rev= 0;
@@ -39,12 +44,13 @@ router.get("/", (req: Request, res: Response) => {
     let total= 0;
     let diasFinalizar: number;
     const diaAtual = new Date();
+    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where demanda.id_projeto = ?", [id]);
     for (const demanda of demandas) {
-        if (demanda.status === "Aberta") {abertas++;}
-        else if (demanda.status === "Em andamento") {andam++;}
-        else if (demanda.status === "Em revisão") {rev++;}
-        else if (demanda.status === "Concluída") {conc++;}
-        else if (demanda.status === "Cancelada") {canc++;}
+        if (demanda.statusDemanda === "Aberta") {abertas++;}
+        else if (demanda.statusDemanda === "Em andamento") {andam++;}
+        else if (demanda.statusDemanda === "Em revisão") {rev++;}
+        else if (demanda.statusDemanda === "Concluída") {conc++;}
+        else if (demanda.statusDemanda === "Cancelada") {canc++;}
 
         if (demanda.prioridade === "Crítica") {crit++;}
         else if (demanda.prioridade === "Alta") {alta++;}
@@ -60,7 +66,7 @@ router.get("/", (req: Request, res: Response) => {
         (demanda.prazo_finalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazo_finalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazo_finalizacao.getDate() - diaAtual.getDate()) : -1;
         if ((diasFinalizar <= 3) && (diasFinalizar >= 0)) {final++;}
 
-        if ((demanda.status === "Aberta") && (demanda.prioridade === "Crítica")) {demcrit++;}
+        if ((demanda.statusDemanda === "Aberta") && (demanda.prioridade === "Crítica")) {demcrit++;}
         total++;
         console.log(diasFinalizar);
     }
