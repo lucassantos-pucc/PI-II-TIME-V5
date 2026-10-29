@@ -53,11 +53,14 @@ jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancela
 */
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
 let jsonprojetos;
-if (usuario.papel === "Administrador"){
+if (usuario.papel === "Administrador") {
     jsonprojetos = await ListarProjetosApi();
-}else{
+}
+
+else {
     jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario);
 }
+
 console.log(jsonprojetos);
 for (const projeto of jsonprojetos) {
     console.log(projeto);   

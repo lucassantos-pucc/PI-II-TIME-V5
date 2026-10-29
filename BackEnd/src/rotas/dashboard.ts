@@ -46,21 +46,21 @@ router.get("/:id", async (req: Request, res: Response) => {
     const diaAtual = new Date();
     const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where demanda.id_projeto = ?", [id]);
     for (const demanda of demandas) {
-        if (demanda.statusDemanda === "Aberta".toLowerCase()) {abertas++;}
-        else if (demanda.statusDemanda === "Em andamento".toLowerCase()) {andam++;}
-        else if (demanda.statusDemanda === "Em revisao".toLowerCase()) {rev++;}
-        else if (demanda.statusDemanda === "Concluida".toLowerCase()) {conc++;}
-        else if (demanda.statusDemanda === "Cancelada".toLowerCase()) {canc++;}
+        if (demanda.statusDemanda === "Aberta") {abertas++;}
+        else if (demanda.statusDemanda === "Em andamento") {andam++;}
+        else if (demanda.statusDemanda === "Em revisão") {rev++;}
+        else if (demanda.statusDemanda === "Concluída") {conc++;}
+        else if (demanda.statusDemanda === "Cancelada") {canc++;}
 
-        if (demanda.prioridade === "Critica".toLowerCase()) {crit++;}
-        else if (demanda.prioridade === "Alta".toLowerCase()) {alta++;}
-        else if (demanda.prioridade === "Media".toLowerCase()) {media++;}
-        else if (demanda.prioridade === "Baixa".toLowerCase()) {baixa++;}
+        if (demanda.prioridade === "Crítica") {crit++;}
+        else if (demanda.prioridade === "Alta") {alta++;}
+        else if (demanda.prioridade === "Média") {media++;}
+        else if (demanda.prioridade === "Baixa") {baixa++;}
 
-        if (demanda.tipo === "Tarefa".toLowerCase()) {tarefa++;}
-        else if (demanda.tipo === "Melhoria".toLowerCase()) {melhoria++;}
-        else if (demanda.tipo === "Defeito".toLowerCase()) {defeito++;}
-        else if (demanda.tipo === "Documentacao".toLowerCase()) {doc++;}
+        if (demanda.tipo === "Tarefa") {tarefa++;}
+        else if (demanda.tipo === "Melhoria") {melhoria++;}
+        else if (demanda.tipo === "Defeito") {defeito++;}
+        else if (demanda.tipo === "Documentação") {doc++;}
 
         let prazo: Date = new Date;
         if(demanda.prazoFinalizacao === null){

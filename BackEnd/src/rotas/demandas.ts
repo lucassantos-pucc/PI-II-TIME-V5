@@ -24,16 +24,24 @@ Teste invalido
 */
 router.get("/", async (req: Request, res: Response) => {
     const projeto = Number(req.query.id_projeto);
-    const id = Number(req.query.id);
-    if (id){
+    const id_demanda = Number(req.query.id_demanda);
+    const id_usuario = Number(req.query.id_usuario);
+    
+    if (id_demanda){
         const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
-        const demanda = demandas.find((d) => d.id_demanda === id);
+        const demanda = demandas.find((d) => d.id_demanda === id_demanda);
         if (!demanda) {
             return res.status(404).json({ error: "Demanda não encontrada" });
         }
         return res.status(200).json(demanda);
     }
-    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
+
+    let [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
+
+    if(id_usuario !== -1 && id_usuario){ 
+        [demandas]  = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
+    }
+    
     const tipo = req.query.tipo;
     const prioridade = req.query.prioridade;
     const status = req.query.status;
@@ -48,7 +56,6 @@ router.get("/", async (req: Request, res: Response) => {
     if (status) { filtro = filtro.filter((i) => i.statusDemanda === status); }
     
     if (responsavel) { filtro = filtro.filter((i) => i.id_responsavel === Number(responsavel)); }
-
     return res.status(200).json(filtro);
 });
 

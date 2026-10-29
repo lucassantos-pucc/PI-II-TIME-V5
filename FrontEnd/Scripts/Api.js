@@ -13,27 +13,26 @@ async function TratarRespostaApi(resposta) {
 
 // Demandas
 
-export async function ListarDemandasApi(id, tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
-    let Url = `${Url_Api}/demandas/?id_projeto=${id}`;
-
+export async function ListarDemandasApi(idProj, idUsu, tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
+    let Url = `${Url_Api}/demandas/?id_projeto=${idProj}&id_usuario=${idUsu}`;
     if (tipo) {
-        Url += `?tipo=${encodeURIComponent(tipo)}&`;
+        Url += `&tipo=${encodeURIComponent(tipo)}`;
     }
     
     if (prioridade) {
-        Url += `?prioridade=${encodeURIComponent(prioridade)}&`;
+        Url += `&prioridade=${encodeURIComponent(prioridade)}`;
     }
 
     if (status) {
-        Url += `?status=${encodeURIComponent(status)}&`;
+        Url += `&status=${encodeURIComponent(status)}`;
     }
 
     if (projeto) {
-        Url += `?id_projeto=${encodeURIComponent(projeto)}&`;
+        Url += `&id_projeto=${encodeURIComponent(projeto)}`;
     }
 
     if (responsavel) {
-        Url += `?responsavel=${encodeURIComponent(responsavel)}`;
+        Url += `&responsavel=${encodeURIComponent(responsavel)}`;
     }
 
     const resposta = await fetch(Url);
@@ -122,7 +121,7 @@ export async function ListarProjetosUsuarioApi(id) {
     const resposta = await fetch(`${Url_Api}/projetos/?id=${id}`);
     return await TratarRespostaApi(resposta);
 }
-export async function ListarProjetoApi(id) {
+export async function BuscarProjetoApi(id) {
     const resposta = await fetch(`${Url_Api}/projetos/?id_projeto=${id}`);
     return await TratarRespostaApi(resposta);
 }

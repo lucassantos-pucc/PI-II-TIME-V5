@@ -2,13 +2,13 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { ListarDemandasApi, ListarProjetoApi, ListarUsuarioApi} from "./Api.js";
+import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi} from "./Api.js";
 
 localStorage.setItem("DemandaAtual", JSON.stringify({})); // Para limpar o campo de demanda atual por preucação
 
 async function CreateDemanda(info) {
     //console.log("Criando demanda:", info);
-    const [projeto] = await ListarProjetoApi(localStorage.getItem("Projeto"));
+    const [projeto] = await BuscarProjetoApi(localStorage.getItem("Projeto"));
     const responsavel = await ListarUsuarioApi(projeto.id_lider);
     let criação = correctDate(new Date(info.dataCriacao));
     let prazo = correctDate(new Date(info.prazoFinalizacao));
@@ -132,7 +132,15 @@ function correctDate(date){
 }
 
 const id = localStorage.getItem("Projeto");
-const jsondemandas = await ListarDemandasApi(id); console.log(jsondemandas[0]);
+const usuario = localStorage.getItem("UsuarioLogado");
+let jsondemandas;
+if (usuario.papel === "Membro de Equipe") {
+    jsondemandas = await ListarDemandasApi(id,usuario.id_usuario);
+}
+
+else {
+    jsondemandas = await ListarDemandasApi(id,-1);
+}
 
 for (const demanda of jsondemandas) { //Criar demandas padrões
     await CreateDemanda(demanda);

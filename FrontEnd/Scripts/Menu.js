@@ -1,7 +1,14 @@
 /*
     Feito por: Kauã Gaiofato Santana Lima de Jesus
     RA: 26000195
+    Editado por: Vitor Kenzo Pina Takemasa
+    RA: 26007167
 */
+
+// Carrega botões do menu
+function CreateButton() {
+
+}
 
  
 // Carrega o Menu.html e coloca o conteúdo dentro da página atual
@@ -73,6 +80,14 @@ function MarkCurrentPage() {
         }
     }
 }
+
+// Carrega os elementos de acordo com o nível de acesso
+const Usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
+
+if (Usuario.papel === "Administrador") {
+    
+}
+
  
 // Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
 if (document.querySelector("body > header")) {

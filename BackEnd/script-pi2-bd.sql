@@ -179,14 +179,19 @@ select * from demanda;
 -- todos os historicos
 select * from historico;
 
--- todos os todos os comentarios
+-- todos os comentarios
 select * from comentario;
 
 -- usuarios que sao administradores
 select * from usuario where papel = 'Administrador';
 
+-- pega um id de usuário e retorna seu papel
+select usuario.id_usuario, usuario.papel
+from usuario
+where usuario.id_usuario = 1;
+
 -- select de qual usuario esta em que projeto e qual o seu papel-- usuarios, projetos e seus papeis
-select usuario.nome, projeto.titulo, usuario.papel
+select usuario.id_usuario, usuario.nome, projeto.titulo, usuario.papel
 from usuario, usuario_projeto_participa, projeto
 where usuario.id_usuario = usuario_projeto_participa.id_usuario
 and projeto.id_projeto = usuario_projeto_participa.id_projeto;
@@ -194,7 +199,7 @@ and projeto.id_projeto = usuario_projeto_participa.id_projeto;
 -- select demandas especificas de um projeto
 select demanda.titulo, demanda.descricao, usuario.nome, projeto.titulo
 from demanda, usuario, projeto
-where demanda.id_usuario = usuario.id_usuario
+where demanda.id_responsavel = usuario.id_usuario
 and demanda.id_projeto = projeto.id_projeto
 and demanda.id_projeto = 1;
 
@@ -204,14 +209,14 @@ select * from historico where id_demanda = 1;
 -- historico da demanda com nome do usuario
 select historico.dataHora, historico.descricao, usuario.nome
 from historico, usuario
-where historico.id_usuario = usuario.id_usuario
+where historico.id_autor = usuario.id_usuario
 and historico.id_demanda = 1;
 
 
 -- comentarios da demanda com nome do usuario
 select comentario.dataHora, comentario.conteudo, usuario.nome
 from comentario, usuario
-where comentario.id_usuario = usuario.id_usuario
+where comentario.id_autor = usuario.id_usuario
 and comentario.id_demanda = 1;
 
 -- historico geral do projeto com demanda e usuario
@@ -219,8 +224,5 @@ select historico.dataHora, historico.descricao,
        demanda.titulo, usuario.nome
 from historico, demanda, usuario
 where historico.id_demanda = demanda.id_demanda
-and historico.id_usuario = usuario.id_usuario
+and historico.id_autor = usuario.id_usuario
 and demanda.id_projeto = 1;
-
-
-

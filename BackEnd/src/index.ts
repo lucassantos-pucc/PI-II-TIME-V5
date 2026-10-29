@@ -11,7 +11,7 @@
 // Por fim, 'npm start' pra rodar o servidor
 
 import { Request, Response } from "express";
-import cors from "cors"
+import cors from "cors";
 
 // Importando as rotas
 import demandasRotas from "./rotas/demandas";
