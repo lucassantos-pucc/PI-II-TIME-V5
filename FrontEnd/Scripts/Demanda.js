@@ -225,7 +225,13 @@ else {
 
     document.getElementById("dem-autor").addEventListener("input", ValidarComentario);
     document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
-    document.getElementById("dem-texto").addEventListener("keydown", AtalhoComentario);
     document.getElementById("dem-form").addEventListener("submit", AddComentario);
     document.getElementById("dem-editar").addEventListener("click", Edit);
+
+    document.getElementById("dem-historico").addEventListener("click", () => {
+        console.log("Clicou no botão de historicoo!");
+    window.location.href = "historico.html";
+});
+
+
 }

@@ -27,7 +27,7 @@ if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual")
 }
 
 
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const erros = [];
@@ -81,6 +81,13 @@ form.addEventListener("submit", function (event) {
 
     alert("Demanda Salva com sucesso!")
     form.reset();
+
+    const demandaAntiga = JSON.parse(localStorage.getItem("DemandaAtual") || "null" );
+
+    if (demandaAntiga && demandaAntiga.id_demanda) {
+        await RegistrarHistorico(demandaAntiga, demanda);
+    }
+
     localStorage.setItem("DemandaAtual", JSON.stringify({})); // Limpa a demanda atual
     open("Listagem_Demanda.html", "_self");
 });

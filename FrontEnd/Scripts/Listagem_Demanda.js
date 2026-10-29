@@ -7,7 +7,8 @@ import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi} from "./Api.js";
 localStorage.setItem("DemandaAtual", JSON.stringify({})); // Para limpar o campo de demanda atual por preucação
 
 async function CreateDemanda(info) {
-    //console.log("Criando demanda:", info);
+
+    console.log("Criando demanda:", info);
     const [projeto] = await BuscarProjetoApi(localStorage.getItem("Projeto"));
     const responsavel = await ListarUsuarioApi(projeto.id_lider);
     let criação = correctDate(new Date(info.dataCriacao));
@@ -34,7 +35,7 @@ async function CreateDemanda(info) {
 
     Dem_Cr.appendChild(box);
     const demanda = {
-        id_demanda: info.id,
+        id_demanda: info.id_demanda,
         titulo: info.titulo,
         tipo: info.tipo,
         prioridade: info.prioridade,

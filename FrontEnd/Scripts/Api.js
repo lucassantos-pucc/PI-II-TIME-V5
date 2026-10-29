@@ -154,3 +154,19 @@ export async function DashboardDemandasApi(id) {
     const resposta = await fetch(`${Url_Api}/dashboard/${id}`);
     return await TratarRespostaApi(resposta);
 }
+
+export async function CarregarHistoricoApi(id) {
+    const resposta = await fetch(`${Url_Api}/historico/${id}`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function RegistrarHistoricoApi(historico) {
+    const resposta = await fetch(`${Url_Api}/historico/`,
+        {
+            method: "POST",
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(historico)
+        }
+    );
+    return await TratarRespostaApi(resposta);
+}
