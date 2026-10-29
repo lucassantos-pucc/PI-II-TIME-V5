@@ -2,10 +2,14 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { DashboardDemandasApi } from "./Api.js";
+import { DashboardDemandasApi, BuscarProjetoApi } from "./Api.js";
 
 async function DemandasMostrar(id) {
     const info = await DashboardDemandasApi(id);
+
+    const projeto = document.getElementById("projeto");
+    const projtitle = await BuscarProjetoApi(localStorage.getItem("Projeto"));
+    projeto.textContent = projtitle[0].titulo;
 
     const total = document.getElementById("total");
     total.textContent = info.total;

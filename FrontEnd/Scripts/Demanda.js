@@ -80,11 +80,11 @@ function StatusColor(p) {
         p.classList.add("status-andamento");
     }
 
-    else if (stat.includes("revisao") || stat.includes("revisão")) {
+    else if (stat.includes("revisão") || stat.includes("revisão")) {
         p.classList.add("status-revisao");
     }
 
-    else if (stat.includes("concluido") || stat.includes("concluída")) {
+    else if (stat.includes("concluída") || stat.includes("concluída")) {
         p.classList.add("status-concluido");
     }
 

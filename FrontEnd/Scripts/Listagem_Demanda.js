@@ -45,10 +45,11 @@ async function CreateDemanda(info) {
         prazoFinalizacao: prazo,
         descricao: info.descricao
     }
+
     info.descricao = info.descricao ? info.descricao : "Sem descrição"; // Se não houver descrição, exibe "Sem descrição"
     Dem_Cr.addEventListener("click", () => {
         localStorage.setItem("DemandaAtual", JSON.stringify(demanda));
-        window.open("Demanda.html", "_blank");
+        window.open("Demanda.html", "_self");
     });
 
     document.getElementById("secao-demanda").appendChild(Dem_Cr);
@@ -112,7 +113,7 @@ function StatusColor(p) {
         p.classList.add("status-revisao");
     }
         
-    else if (stat.includes("concluido")) {
+    else if (stat.includes("concluída")) {
         p.classList.add("status-concluido");
     }
         
@@ -131,6 +132,7 @@ function correctDate(date){
     return date;
 }
 
+sessionStorage.setItem("DemandaAtual", "");
 const id = localStorage.getItem("Projeto");
 const usuario = localStorage.getItem("UsuarioLogado");
 let jsondemandas;
