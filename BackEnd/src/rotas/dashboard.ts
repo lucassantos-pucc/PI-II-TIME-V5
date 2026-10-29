@@ -13,7 +13,7 @@ const router = Router();
 
 router.use(express.json());
 
-router.get("/demandas/:id", async (req: Request, res: Response) => {
+router.get("/:id", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     //CONTADORES DOS STATUS
     let abertas= 0;
@@ -62,13 +62,17 @@ router.get("/demandas/:id", async (req: Request, res: Response) => {
         else if (demanda.tipo === "Defeito".toLowerCase()) {defeito++;}
         else if (demanda.tipo === "Documentacao".toLowerCase()) {doc++;}
 
-        diasFinalizar = demanda.prazo_finalizacao ? 
-        (demanda.prazo_finalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazo_finalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazo_finalizacao.getDate() - diaAtual.getDate()) : -1;
-        if ((diasFinalizar <= 3) && (diasFinalizar >= 0)) {final++;}
+        let prazo: Date = new Date;
+        if(demanda.prazoFinalizacao === null){
+            diasFinalizar = -1;
+        }else{
+            prazo = demanda.prazoFinalizacao;
+            diasFinalizar = prazo ? (demanda.prazoFinalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazoFinalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazoFinalizacao.getDate() - diaAtual.getDate()) : -1;
+        }
+        if ((diasFinalizar <= 7) && (diasFinalizar >= 0)) {final++;}
 
         if ((demanda.statusDemanda === "Aberta".toLowerCase()) && (demanda.prioridade === "Critica".toLowerCase())) {demcrit++;}
         total++;
-        console.log(diasFinalizar);
     }
     
     return res.status(200).json({
@@ -96,10 +100,6 @@ router.get("/demandas/:id", async (req: Request, res: Response) => {
         proximasDoPrazo: final,
         demandas_criticas_abertas: demcrit
     });
-});
-
-router.get("/projetos", (req: Request, res: Response) => {
-
 });
 
 //EXPORTAR A ROTA PARA O ARQUIVO INDEX.JS

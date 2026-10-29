@@ -136,6 +136,7 @@ router.post("/", async (req:Request, res:Response)=>{
         id_responsavel: responsavelFinal,
         descricao
     };
+    console.log(novaDemanda);
     const resposta = await Conexao.query("INSERT INTO demanda (titulo, tipo, dataCriacao, prazoFinalizacao, statusDemanda, prioridade, dataAlteracao, descricao, id_responsavel, id_projeto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [novaDemanda.titulo, novaDemanda.tipo, novaDemanda.dataCriacao, novaDemanda.prazoFinalizacao, novaDemanda.statusDemanda, novaDemanda.prioridade, novaDemanda.dataAlteracao, novaDemanda.descricao, novaDemanda.id_responsavel, novaDemanda.id_projeto]
     );

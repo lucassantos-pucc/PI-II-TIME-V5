@@ -37,7 +37,7 @@ create table demanda(
     dataCriacao datetime not null default current_timestamp(),
     prazoFinalizacao datetime,
     statusDemanda varchar(50) not null check (statusDemanda in ('Aberta', 'Em andamento', 'Em revisão', 'Concluída')),
-    prioridade varchar(50) not null,
+    prioridade varchar(50) not null check (prioridade in ('Baixa', 'Média', 'Alta', 'Crítica')),
     dataAlteracao datetime not null default current_timestamp() on update current_timestamp(),
     descricao text,
     

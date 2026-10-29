@@ -10,7 +10,7 @@ let comentarios = []; // Comentários da demanda
 // Pega a demanda: primeiro a que esta aba já guardou, senão a que a listagem salvou
 function CarregarDemanda() {
     let salva = sessionStorage.getItem("DemandaAtual");
-
+    console.log(salva)
     if (!salva) { // Primeira vez que a aba abre
         salva = localStorage.getItem("DemandaAtual");
         if (salva) {
@@ -96,16 +96,16 @@ function StatusColor(p) {
 
 // Coloca as informações da demanda na tela
 function ShowDemanda() {
-    document.title = demanda.nome + " - Demanda";
+    document.title = demanda.titulo + " - Demanda";
 
-    document.getElementById("dem-nome").textContent = demanda.nome;
+    document.getElementById("dem-nome").textContent = demanda.titulo;
     document.getElementById("dem-tipo").textContent = demanda.tipo;
     document.getElementById("dem-prioridade").textContent = demanda.prioridade;
-    document.getElementById("dem-status").textContent = demanda.status;
+    document.getElementById("dem-status").textContent = demanda.statusDemanda;
     document.getElementById("dem-projeto").textContent = demanda.projeto;
     document.getElementById("dem-responsavel").textContent = demanda.responsavel;
-    document.getElementById("dem-criacao").textContent = demanda.DTcriacao;
-    document.getElementById("dem-prazo").textContent = demanda.prazo;
+    document.getElementById("dem-criacao").textContent = demanda.dataCriacao;
+    document.getElementById("dem-prazo").textContent = demanda.prazoFinalizacao;
 
     demanda.descricao = demanda.descricao ? demanda.descricao : "Sem descrição"; // Se não houver descrição, exibe "Sem descrição"
     document.getElementById("dem-descricao").textContent = demanda.descricao;
@@ -208,7 +208,7 @@ function Edit() {
 
 CarregarDemanda();
 
-if (!demanda.nome) { // Abriu a página sem clicar em uma demanda
+if (!demanda.titulo) { // Abriu a página sem clicar em uma demanda
     document.getElementById("dem-vazio").hidden = false;
 }
 

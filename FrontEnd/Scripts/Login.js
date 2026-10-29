@@ -1,18 +1,20 @@
+import { ListarUsuariosApi } from "./Api.js";
+
 const form = document.querySelector("form");
-const campoUsuario = document.querySelector("#usuario");
+const campoEmail = document.querySelector("#email");
 const campoSenha = document.querySelector("#senha");
-const erroUsuario = document.querySelector("#erroUsuario");
+const erroEmail = document.querySelector("#erroEmail");
 const erroSenha = document.querySelector("#erroSenha");
 
 
 localStorage.removeItem("UsuarioLogado"); // Remove o usuário logado do localStorage ao carregar a página
 const camposComErro = [
-    campoUsuario,
+    campoEmail,
     campoSenha
 ];
 
 const mensagensDeErro = [
-    erroUsuario,
+    erroEmail,
     erroSenha
 ];
 
@@ -33,7 +35,7 @@ function limparErros() {
     });
 }
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", async function(event) {
     // 1. Evita que a página recarregue ao clicar em enviar
     event.preventDefault();
 
@@ -42,15 +44,15 @@ form.addEventListener("submit", function(event) {
 
     let Validation = true;
 
-    const usuario = campoUsuario.value.trim();
+    const email = campoEmail.value.trim();
     const senha = campoSenha.value.trim();
 
     // Validar e-mail
-    if (usuario === "") {
-        ErroValidation(campoUsuario, erroUsuario, "O E-mail é obrigatório.");
+    if (email === "") {
+        ErroValidation(campoEmail, erroEmail, "O E-mail é obrigatório.");
         Validation = false;
-    } else if (!usuario.includes("@")) {
-        ErroValidation(campoUsuario, erroUsuario, "O E-mail é inválido.");
+    } else if (!email.includes("@")) {
+        ErroValidation(campoEmail, erroEmail, "O E-mail é inválido.");
         Validation = false;
     }
 
@@ -73,23 +75,25 @@ form.addEventListener("submit", function(event) {
     }
 
     const login = {
-        usuario: campoUsuario.value,
+        email: campoEmail.value,
         senha: campoSenha.value
     };
-
-
-    if (localStorage.getItem("Usuarios")) { // Ver usuarios cadastrados no localStorage
-        const usuarios = JSON.parse(localStorage.getItem("Usuarios"));
-        const usuarioEncontrado = usuarios.find((u) => u.usuario === login.usuario && u.senha === login.senha);
-        if (usuarioEncontrado) {
-            localStorage.setItem("UsuarioLogado", JSON.stringify(usuarioEncontrado));
-            open("Dashboard_Projeto.html", "_self");
-        } else {
-            ErroValidation(campoUsuario, erroUsuario, "Usuário ou senha inválidos.");
-            ErroValidation(campoSenha, erroSenha, "Usuário ou senha inválidos.");
+    const usuarios = await ListarUsuariosApi();
+    if(usuarios.usuarios.length === 0){
+        console.log("Nenhum usuario encontrado");
+    }
+    let valido = false;
+    for (const usuario of usuarios.usuarios){
+        console.log(usuario);
+        if(usuario.email === login.email && usuario.senha === login.senha){
+            valido = true;
+            localStorage.setItem("UsuarioLogado", JSON.stringify(usuario));
+            console.log("Logando Usuario");
         }
     }
-
-    console.log("Dados enviados:", JSON.stringify(login, null, 2));
+    if(!valido){
+        ErroValidation(campoEmail, erroEmail, "Usuário ou senha inválidos.");
+        ErroValidation(campoSenha, erroSenha, "Usuário ou senha inválidos.");
+    }
+    open("Listagem_Projeto.html", "_self");
 });
- //!!VALIDAÇAO POR BANCO DE DADOS QUANDO O BANCO DE DADOS FOR IMPLEMENTADO!!

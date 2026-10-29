@@ -2,7 +2,8 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { ListarProjetosApi, ListarUsuarioApi } from "./Api.js";
+import { ListarProjetosApi, ListarProjetosUsuarioApi, ListarUsuarioApi } from "./Api.js";
+
 
 async function CreateProjeto(info) {
     const lider = await ListarUsuarioApi(info.id_lider)
@@ -16,14 +17,12 @@ async function CreateProjeto(info) {
     Proj_Cr.appendChild(document.createElement('hr'));
     const box = document.createElement('div');
     box.classList.add("caixa");
-    box.appendChild(ProjetoContent("lider-gen", "Lider: " + lider.nome));
-    box.appendChild(ProjetoContent("descricao-gen", "Descrição: " + info.descricao));
-
+    box.appendChild(ProjetoContent("lider-gen", "Lider: " + lider.usuario.nome));
     Proj_Cr.appendChild(box);
 
     
-    //Proj_Cr.addEventListener("click", function() {ShowDialog(this);});
     Proj_Cr.addEventListener("click", () => {
+        localStorage.setItem("Projeto", info.id_projeto);
         open("Dashboard_Demanda.html", "_self");
     }); 
 
@@ -43,6 +42,7 @@ function ProjetoContent(classe, texto) {
     return content;
 }
 
+
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON
 /*
 const jsonprojetos = []; // !! Temporario
@@ -51,16 +51,15 @@ jsonprojetos[1] = '{"nome":"Teste2", "lider":"Sr.Exemplilson", "status":"Em anda
 jsonprojetos[2] = '{"nome":"Teste3", "lider":"Sr.Exemplilson", "status":"Concluido", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 3"}';
 jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancelado", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 4"}';
 */
-const jsonprojetos = await ListarProjetosApi();
-
-for (const projeto of jsonprojetos) {
-    CreateProjeto(projeto);
+const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
+let jsonprojetos;
+if (usuario.papel === "Administrador"){
+    jsonprojetos = await ListarProjetosApi();
+}else{
+    jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario);
 }
-
-// Obtém os elementos de status com base na classe geral de status
-const ElementosStatus = document.getElementsByClassName("status-gen");
-    
-// Itera por todos os status
-for (const status of ElementosStatus) {
-    StatusColor(status);
+console.log(jsonprojetos);
+for (const projeto of jsonprojetos) {
+    console.log(projeto);   
+    CreateProjeto(projeto);
 }
