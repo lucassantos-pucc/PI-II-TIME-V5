@@ -9,18 +9,10 @@ let comentarios = []; // Comentários da demanda
 
 // Pega a demanda: primeiro a que esta aba já guardou, senão a que a listagem salvou
 function CarregarDemanda() {
-    let salva = sessionStorage.getItem("DemandaAtual");
+    let salva = localStorage.getItem("DemandaAtual");
+    sessionStorage.setItem("DemandaAtual", salva); // Guarda na aba, assim se abrir outra demanda em outra aba, esta nao muda
     console.log(salva)
-    if (!salva) { // Primeira vez que a aba abre
-        salva = localStorage.getItem("DemandaAtual");
-        if (salva) {
-            sessionStorage.setItem("DemandaAtual", salva); // Guarda na aba, assim se abrir outra demanda em outra aba, esta nao muda
-        }
-    }
-
-    if (salva) {
-        demanda = JSON.parse(salva);
-    }
+    demanda = JSON.parse(salva);
 }
 
 // Cada demanda tem a sua lista de comentários no localStorage
@@ -225,7 +217,7 @@ else {
 
     document.getElementById("dem-autor").addEventListener("input", ValidarComentario);
     document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
-    document.getElementById("dem-texto").addEventListener("keydown", AtalhoComentario);
+    document.getElementById("dem-texto").addEventListener("keydown", console.log("Keydown"));
     document.getElementById("dem-form").addEventListener("submit", AddComentario);
     document.getElementById("dem-editar").addEventListener("click", Edit);
 }
