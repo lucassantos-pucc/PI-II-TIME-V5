@@ -76,20 +76,20 @@ create table comentario(
 -- ****************************************************
 
 insert into usuario (nome, email, senha, papel) values
-('lucas silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
-('mariana santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
-('pedro costa', 'pedro@gmail.com', 'Senha_789', 'Lider de Projeto'),
-('ana silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
-('joao souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
+('Lucas Silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
+('Mariana Santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
+('Pedro Costa', 'pedro@gmail.com', 'Senha_789', 'Lider de Projeto'),
+('Ana Silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
+('João Souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
 
 -- ****************************************************
 -- inserindo projetos
 -- ****************************************************
 
 insert into projeto (titulo, id_lider) values
-('sistema de gerenciamento de tarefas', 2),
-('sistema de controle financeiro',2),
-('plataforma de estudos',3);
+('Sistema de gerenciamento de tarefas', 2),
+('Sistema de controle financeiro',2),
+('Plataforma de estudos',3);
 
 -- ****************************************************
 -- inserindo participacoes dos usuarios nos projetos
@@ -113,53 +113,53 @@ insert into demanda
 (descricao, titulo, tipo, prazoFinalizacao,
  statusDemanda, prioridade,  id_responsavel, id_projeto)
 values
-('criar a tela de login do sistema', 'tela de login',
- 'tarefa', '2026-11-05 18:00:00',
- 'em andamento', 'alta', 1, 1),
+('Criar a tela de login do sistema', 'Tela de login',
+ 'Tarefa', '2026-11-05 18:00:00',
+ 'Em andamento', 'Alta', 1, 1),
 
-('corrigir erros na validacao dos formularios', 'validacao de formularios',
- 'defeito', '2026-11-08 18:00:00',
- 'aberta', 'media', 2, 1),
+('Corrigir erros na validacao dos formularios', 'Validacao de formularios',
+ 'Defeito', '2026-11-08 18:00:00',
+ 'Aberta', 'Média', 2, 1),
 
-('desenvolver a pagina inicial', 'pagina inicial',
- 'tarefa', '2026-11-10 18:00:00',
- 'em revisao', 'alta', 3, 1),
+('Desenvolver a pagina inicial', 'Pagina inicial',
+ 'Tarefa', '2026-11-10 18:00:00',
+ 'Em revisão', 'Alta', 3, 1),
 
-('adicionar relatorio mensal', 'relatorio mensal',
- 'melhoria', '2026-11-15 18:00:00',
- 'aberta', 'baixa', 4, 2),
+('Adicionar relatorio mensal', 'Relatorio mensal',
+ 'Melhoria', '2026-11-15 18:00:00',
+ 'Aberta', 'Baixa', 4, 2),
 
-('documentar as funcionalidades', 'documentacao do sistema',
- 'documentacao', '2026-11-20 18:00:00',
- 'concluida', 'media', 5, 3),
+('Documentar as funcionalidades', 'Documentacao do sistema',
+ 'Documentacao', '2026-11-20 18:00:00',
+ 'Concluída', 'Média', 5, 3),
 
-('documentar as funcionalidades do sistema', 'documentacao',
- 'documentacao', '2026-12-20 18:00:00',
- 'concluida', 'media', NULL, 3);
+('Documentar as funcionalidades do sistema', 'Documentacao',
+ 'Documentacao', '2026-12-20 18:00:00',
+ 'Concluída', 'Média', NULL, 3);
 
 -- ****************************************************
 -- inserindo historicos
 -- ****************************************************
 
 insert into historico (descricao, id_autor, id_demanda) values
-('demanda criada', 1, 1),
-('demanda criada', 2, 2),
-('status alterado para em revisao', 3, 3),
-('demanda criada', 4, 4),
-('demanda marcada como concluida', 5, 5),
-('prioridade da demanda alterada', 1, 1);
+('Demanda criada', 1, 1),
+('Demanda criada', 2, 2),
+('Status alterado para em revisao', 3, 3),
+('Demanda criada', 4, 4),
+('Demanda marcada como concluida', 5, 5),
+('Prioridade da demanda alterada', 1, 1);
 
 -- ****************************************************
 -- inserindo comentarios
 -- ****************************************************
 
 insert into comentario (conteudo, id_demanda, id_autor) values
-( 'ja comecei a desenvolver a tela de login', 1, 1),
-('encontrei um erro na validacao do formulario', 2, 3),
-('a pagina inicial esta quase pronta', 3, 2),
-('vou iniciar o desenvolvimento do relatorio', 4, 4),
-('a documentacao foi finalizada', 5, 5),
-('podemos revisar essa demanda juntos', 1, 2);
+('Já comecei a desenvolver a tela de login', 1, 1),
+('Encontrei um erro na validacao do formulario', 2, 3),
+('A pagina inicial esta quase pronta', 3, 2),
+('Vou iniciar o desenvolvimento do relatorio', 4, 4),
+('A documentacao foi finalizada', 5, 5),
+('Podemos revisar essa demanda juntos', 1, 2);
 
 -- ****************************************************
 -- selects das tabelas
