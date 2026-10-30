@@ -17,17 +17,15 @@ const router = Router();
 router.get("/", async (req: Request, res: Response) => {
     //retorna todos os projetos
     const id  = Number(req.query.id);
-    const id_projeto  = Number(req.query.id_projeto);
-    let [projetos] = await Conexao.query<ProjetoRow[]>(
-        "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
-        "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario;");
+    const id_projeto  = Number(req.query.id_projeto)
+    let query = "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
+                "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario "
+    let [projetos] = await Conexao.query<ProjetoRow[]>(query);
 
     if (id){
-        [projetos] = await Conexao.query<ProjetoRow[]>(
-            "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
-            "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario " +
+        [projetos] = await Conexao.query<ProjetoRow[]>(query + 
             "INNER JOIN usuario_projeto_participa ON projeto.id_projeto = usuario_projeto_participa.id_projeto " +
-            "WHERE usuario_projeto_participa.id_usuario = ?;", [id] );
+            "WHERE usuario_projeto_participa.id_usuario = ?", [id] );
     }
 
     else if(id_projeto){

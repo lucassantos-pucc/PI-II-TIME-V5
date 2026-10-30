@@ -36,13 +36,18 @@ router.get("/", async (req: Request, res: Response) => {
         return res.status(200).json(demanda);
     }
 
-    let [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
+    let query = "SELECT demanda.id_demanda,  demanda.titulo, demanda.tipo, " +
+        "demanda.dataCriacao, demanda.prazoFinalizacao, demanda.statusDemanda, " +
+        "demanda.prioridade, demanda.dataAlteracao, demanda.descricao, demanda.id_responsavel, usuario.nome, demanda.id_projeto " +
+        "FROM demanda INNER JOIN usuario ON demanda.id_responsavel = usuario.id_usuario "
+    let [demandas] = await Conexao.query<DemandaRow[]>(query);
     if (projeto){
-        [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
+        [demandas] = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ?", [projeto]);
 
     }
+
     if(id_usuario > 0){ 
-        [demandas]  = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
+        [demandas]  = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
     }
     
     const tipo = req.query.tipo;
@@ -58,7 +63,7 @@ router.get("/", async (req: Request, res: Response) => {
 
     if (status) { filtro = filtro.filter((i) => i.statusDemanda === status); }
     
-    if (responsavel) { filtro = filtro.filter((i) => i.id_responsavel === Number(responsavel)); }
+    if (responsavel) { filtro = filtro.filter((i) => i.nome.includes(responsavel)); }
     return res.status(200).json(filtro);
 });
 
