@@ -13,7 +13,7 @@ const router = Router();
 
 router.use(express.json());
 
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/demandas/:id", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     //CONTADORES DOS STATUS
     let abertas= 0;
@@ -46,33 +46,29 @@ router.get("/:id", async (req: Request, res: Response) => {
     const diaAtual = new Date();
     const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where demanda.id_projeto = ?", [id]);
     for (const demanda of demandas) {
-        if (demanda.statusDemanda === "Aberta") {abertas++;}
-        else if (demanda.statusDemanda === "Em andamento") {andam++;}
-        else if (demanda.statusDemanda === "Em revisão") {rev++;}
-        else if (demanda.statusDemanda === "Concluída") {conc++;}
-        else if (demanda.statusDemanda === "Cancelada") {canc++;}
+        if (demanda.statusDemanda === "Aberta".toLowerCase()) {abertas++;}
+        else if (demanda.statusDemanda === "Em andamento".toLowerCase()) {andam++;}
+        else if (demanda.statusDemanda === "Em revisao".toLowerCase()) {rev++;}
+        else if (demanda.statusDemanda === "Concluida".toLowerCase()) {conc++;}
+        else if (demanda.statusDemanda === "Cancelada".toLowerCase()) {canc++;}
 
-        if (demanda.prioridade === "Crítica") {crit++;}
-        else if (demanda.prioridade === "Alta") {alta++;}
-        else if (demanda.prioridade === "Média") {media++;}
-        else if (demanda.prioridade === "Baixa") {baixa++;}
+        if (demanda.prioridade === "Critica".toLowerCase()) {crit++;}
+        else if (demanda.prioridade === "Alta".toLowerCase()) {alta++;}
+        else if (demanda.prioridade === "Media".toLowerCase()) {media++;}
+        else if (demanda.prioridade === "Baixa".toLowerCase()) {baixa++;}
 
-        if (demanda.tipo === "Tarefa") {tarefa++;}
-        else if (demanda.tipo === "Melhoria") {melhoria++;}
-        else if (demanda.tipo === "Defeito") {defeito++;}
-        else if (demanda.tipo === "Documentação") {doc++;}
+        if (demanda.tipo === "Tarefa".toLowerCase()) {tarefa++;}
+        else if (demanda.tipo === "Melhoria".toLowerCase()) {melhoria++;}
+        else if (demanda.tipo === "Defeito".toLowerCase()) {defeito++;}
+        else if (demanda.tipo === "Documentacao".toLowerCase()) {doc++;}
 
-        let prazo: Date = new Date;
-        if(demanda.prazoFinalizacao === null){
-            diasFinalizar = -1;
-        }else{
-            prazo = demanda.prazoFinalizacao;
-            diasFinalizar = prazo ? (demanda.prazoFinalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazoFinalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazoFinalizacao.getDate() - diaAtual.getDate()) : -1;
-        }
-        if ((diasFinalizar <= 7) && (diasFinalizar >= 0)) {final++;}
+        diasFinalizar = demanda.prazo_finalizacao ? 
+        (demanda.prazo_finalizacao.getFullYear() - diaAtual.getFullYear()) * 365 + (demanda.prazo_finalizacao.getMonth() - diaAtual.getMonth()) * 30 + (demanda.prazo_finalizacao.getDate() - diaAtual.getDate()) : -1;
+        if ((diasFinalizar <= 3) && (diasFinalizar >= 0)) {final++;}
 
         if ((demanda.statusDemanda === "Aberta".toLowerCase()) && (demanda.prioridade === "Critica".toLowerCase())) {demcrit++;}
         total++;
+        console.log(diasFinalizar);
     }
     
     return res.status(200).json({
@@ -100,6 +96,10 @@ router.get("/:id", async (req: Request, res: Response) => {
         proximasDoPrazo: final,
         demandas_criticas_abertas: demcrit
     });
+});
+
+router.get("/projetos", (req: Request, res: Response) => {
+
 });
 
 //EXPORTAR A ROTA PARA O ARQUIVO INDEX.JS

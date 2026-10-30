@@ -100,6 +100,7 @@ Teste invalido
 */
 router.post("/", async (req: Request, res: Response) => {
   const {nome, email, senha, papel } = req.body || {};
+
   if (!nome || typeof nome !== "string" || nome.trim() === "") {
     return res.status(400).json({ mensagem: "O nome é obrigatório." });
   }
@@ -144,7 +145,8 @@ router.post("/", async (req: Request, res: Response) => {
     "INSERT INTO usuario (nome, email, senha, papel) VALUES (?, ?, ?, ?);",
     [novoUsuario.nome, novoUsuario.email, novoUsuario.senha, novoUsuario.papel]
   );
-  return res.status(201).json({ usuario: resultado, mensagem: "Usuário cadastrado com sucesso." });
+  console.log(resultado);
+  return res.status(201).json({ usuario: semSenha(novoUsuario), mensagem: "Usuário cadastrado com sucesso." });
 });
 
 export default router;

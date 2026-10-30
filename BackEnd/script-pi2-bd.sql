@@ -37,7 +37,7 @@ create table demanda(
     dataCriacao datetime not null default current_timestamp(),
     prazoFinalizacao datetime,
     statusDemanda varchar(50) not null check (statusDemanda in ('Aberta', 'Em andamento', 'Em revisão', 'Concluída')),
-    prioridade varchar(50) not null check (prioridade in ('Baixa', 'Média', 'Alta', 'Crítica')),
+    prioridade varchar(50) not null,
     dataAlteracao datetime not null default current_timestamp() on update current_timestamp(),
     descricao text,
     
@@ -76,20 +76,20 @@ create table comentario(
 -- ****************************************************
 
 insert into usuario (nome, email, senha, papel) values
-('Lucas Silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
-('Mariana Santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
-('Pedro Costa', 'pedro@gmail.com', 'Senha_789', 'Lider de Projeto'),
-('Ana Silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
-('João Souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
+('lucas silva', 'lucas@gmail.com', 'Senha_123', 'Administrador'),
+('mariana santos', 'mariana@gmail.com', 'Senha_456', 'Lider de Projeto'),
+('pedro costa', 'pedro@gmail.com', 'Senha_789', 'Lider de Projeto'),
+('ana silva', 'ana@gmail.com', 'Senha_321', 'Membro da equipe'),
+('joao souza', 'joao@gmail.com', 'Senha_654', 'Membro da equipe');
 
 -- ****************************************************
 -- inserindo projetos
 -- ****************************************************
 
 insert into projeto (titulo, id_lider) values
-('Sistema de gerenciamento de tarefas', 2),
-('Sistema de controle financeiro',2),
-('Plataforma de estudos',3);
+('sistema de gerenciamento de tarefas', 2),
+('sistema de controle financeiro',2),
+('plataforma de estudos',3);
 
 -- ****************************************************
 -- inserindo participacoes dos usuarios nos projetos
@@ -113,53 +113,53 @@ insert into demanda
 (descricao, titulo, tipo, prazoFinalizacao,
  statusDemanda, prioridade,  id_responsavel, id_projeto)
 values
-('Criar a tela de login do sistema', 'Tela de login',
- 'Tarefa', '2026-11-05 18:00:00',
- 'Em andamento', 'Alta', 1, 1),
+('criar a tela de login do sistema', 'tela de login',
+ 'tarefa', '2026-11-05 18:00:00',
+ 'em andamento', 'alta', 1, 1),
 
-('Corrigir erros na validacao dos formularios', 'Validacao de formularios',
- 'Defeito', '2026-11-08 18:00:00',
- 'Aberta', 'Média', 2, 1),
+('corrigir erros na validacao dos formularios', 'validacao de formularios',
+ 'defeito', '2026-11-08 18:00:00',
+ 'aberta', 'media', 2, 1),
 
-('Desenvolver a pagina inicial', 'Pagina inicial',
- 'Tarefa', '2026-11-10 18:00:00',
- 'Em revisão', 'Alta', 3, 1),
+('desenvolver a pagina inicial', 'pagina inicial',
+ 'tarefa', '2026-11-10 18:00:00',
+ 'em revisao', 'alta', 3, 1),
 
-('Adicionar relatorio mensal', 'Relatorio mensal',
- 'Melhoria', '2026-11-15 18:00:00',
- 'Aberta', 'Baixa', 4, 2),
+('adicionar relatorio mensal', 'relatorio mensal',
+ 'melhoria', '2026-11-15 18:00:00',
+ 'aberta', 'baixa', 4, 2),
 
-('Documentar as funcionalidades', 'Documentacao do sistema',
- 'Documentacao', '2026-11-20 18:00:00',
- 'Concluída', 'Média', 5, 3),
+('documentar as funcionalidades', 'documentacao do sistema',
+ 'documentacao', '2026-11-20 18:00:00',
+ 'concluida', 'media', 5, 3),
 
-('Documentar as funcionalidades do sistema', 'Documentacao',
- 'Documentacao', '2026-12-20 18:00:00',
- 'Concluída', 'Média', NULL, 3);
+('documentar as funcionalidades do sistema', 'documentacao',
+ 'documentacao', '2026-12-20 18:00:00',
+ 'concluida', 'media', NULL, 3);
 
 -- ****************************************************
 -- inserindo historicos
 -- ****************************************************
 
 insert into historico (descricao, id_autor, id_demanda) values
-('Demanda criada', 1, 1),
-('Demanda criada', 2, 2),
-('Status alterado para em revisao', 3, 3),
-('Demanda criada', 4, 4),
-('Demanda marcada como concluida', 5, 5),
-('Prioridade da demanda alterada', 1, 1);
+('demanda criada', 1, 1),
+('demanda criada', 2, 2),
+('status alterado para em revisao', 3, 3),
+('demanda criada', 4, 4),
+('demanda marcada como concluida', 5, 5),
+('prioridade da demanda alterada', 1, 1);
 
 -- ****************************************************
 -- inserindo comentarios
 -- ****************************************************
 
 insert into comentario (conteudo, id_demanda, id_autor) values
-('Já comecei a desenvolver a tela de login', 1, 1),
-('Encontrei um erro na validacao do formulario', 2, 3),
-('A pagina inicial esta quase pronta', 3, 2),
-('Vou iniciar o desenvolvimento do relatorio', 4, 4),
-('A documentacao foi finalizada', 5, 5),
-('Podemos revisar essa demanda juntos', 1, 2);
+( 'ja comecei a desenvolver a tela de login', 1, 1),
+('encontrei um erro na validacao do formulario', 2, 3),
+('a pagina inicial esta quase pronta', 3, 2),
+('vou iniciar o desenvolvimento do relatorio', 4, 4),
+('a documentacao foi finalizada', 5, 5),
+('podemos revisar essa demanda juntos', 1, 2);
 
 -- ****************************************************
 -- selects das tabelas
@@ -179,19 +179,14 @@ select * from demanda;
 -- todos os historicos
 select * from historico;
 
--- todos os comentarios
+-- todos os todos os comentarios
 select * from comentario;
 
 -- usuarios que sao administradores
 select * from usuario where papel = 'Administrador';
 
--- pega um id de usuário e retorna seu papel
-select usuario.id_usuario, usuario.papel
-from usuario
-where usuario.id_usuario = 1;
-
 -- select de qual usuario esta em que projeto e qual o seu papel-- usuarios, projetos e seus papeis
-select usuario.id_usuario, usuario.nome, projeto.titulo, usuario.papel
+select usuario.nome, projeto.titulo, usuario.papel
 from usuario, usuario_projeto_participa, projeto
 where usuario.id_usuario = usuario_projeto_participa.id_usuario
 and projeto.id_projeto = usuario_projeto_participa.id_projeto;
@@ -199,7 +194,7 @@ and projeto.id_projeto = usuario_projeto_participa.id_projeto;
 -- select demandas especificas de um projeto
 select demanda.titulo, demanda.descricao, usuario.nome, projeto.titulo
 from demanda, usuario, projeto
-where demanda.id_responsavel = usuario.id_usuario
+where demanda.id_usuario = usuario.id_usuario
 and demanda.id_projeto = projeto.id_projeto
 and demanda.id_projeto = 1;
 
@@ -209,14 +204,14 @@ select * from historico where id_demanda = 1;
 -- historico da demanda com nome do usuario
 select historico.dataHora, historico.descricao, usuario.nome
 from historico, usuario
-where historico.id_autor = usuario.id_usuario
+where historico.id_usuario = usuario.id_usuario
 and historico.id_demanda = 1;
 
 
 -- comentarios da demanda com nome do usuario
 select comentario.dataHora, comentario.conteudo, usuario.nome
 from comentario, usuario
-where comentario.id_autor = usuario.id_usuario
+where comentario.id_usuario = usuario.id_usuario
 and comentario.id_demanda = 1;
 
 -- historico geral do projeto com demanda e usuario
@@ -224,5 +219,8 @@ select historico.dataHora, historico.descricao,
        demanda.titulo, usuario.nome
 from historico, demanda, usuario
 where historico.id_demanda = demanda.id_demanda
-and historico.id_autor = usuario.id_usuario
+and historico.id_usuario = usuario.id_usuario
 and demanda.id_projeto = 1;
+
+
+

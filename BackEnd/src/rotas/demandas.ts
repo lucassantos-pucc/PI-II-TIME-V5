@@ -24,12 +24,10 @@ Teste invalido
 */
 router.get("/", async (req: Request, res: Response) => {
     const projeto = Number(req.query.id_projeto);
-    const id_demanda = Number(req.query.id_demanda);
-    const id_usuario = Number(req.query.id_usuario);
-    
-    if (id_demanda){
+    const id = Number(req.query.id);
+    if (id){
         const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
-        const demanda = demandas.find((d) => d.id_demanda === id_demanda);
+        const demanda = demandas.find((d) => d.id_demanda === id);
         if (!demanda) {
             return res.status(404).json({ error: "Demanda não encontrada" });
         }
@@ -59,6 +57,7 @@ router.get("/", async (req: Request, res: Response) => {
     if (status) { filtro = filtro.filter((i) => i.statusDemanda === status); }
     
     if (responsavel) { filtro = filtro.filter((i) => i.id_responsavel === Number(responsavel)); }
+
     return res.status(200).json(filtro);
 });
 
@@ -145,7 +144,6 @@ router.post("/", async (req:Request, res:Response)=>{
         id_responsavel: responsavelFinal,
         descricao: descricao
     };
-    console.log(novaDemanda);
     const resposta = await Conexao.query("INSERT INTO demanda (titulo, tipo, dataCriacao, prazoFinalizacao, statusDemanda, prioridade, dataAlteracao, descricao, id_responsavel, id_projeto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [novaDemanda.titulo, novaDemanda.tipo, novaDemanda.dataCriacao, novaDemanda.prazoFinalizacao, novaDemanda.statusDemanda, novaDemanda.prioridade, novaDemanda.dataAlteracao, novaDemanda.descricao, novaDemanda.id_responsavel, novaDemanda.id_projeto]
     );

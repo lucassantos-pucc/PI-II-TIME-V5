@@ -1,29 +1,22 @@
-import { CadastrarUsuarioApi } from "./Api.js";
-
 const form = document.querySelector("form");
-const campoEmail = document.querySelector("#email");
-const campoNome = document.querySelector("#nome");
+const campoUsuario = document.querySelector("#usuario");
 const campoSenha = document.querySelector("#senha");
 const campoConf_senha = document.querySelector("#conf_senha");
 const campoTipo = document.querySelector("#Tipo");
-
-const erroEmail = document.querySelector("#erroEmail");
-const erroNome = document.querySelector("#erroNome");
+const erroUsuario = document.querySelector("#erroUsuario");
 const erroSenha = document.querySelector("#erroSenha");
 const erroConf_Senha = document.querySelector("#erroConf_Senha");
 const erroTipo = document.querySelector("#erroTipo");
 
 const camposComErro = [
-    campoEmail,
-    campoNome,
+    campoUsuario,
     campoSenha,
     campoConf_senha,
     campoTipo
 ];
 
 const mensagensDeErro = [
-    erroEmail,
-    erroNome,
+    erroUsuario,
     erroSenha,
     erroConf_Senha,
     erroTipo
@@ -46,7 +39,7 @@ function limparErros() {
     });
 }
 
-form.addEventListener("submit", async function(event) {
+form.addEventListener("submit", function(event) {
     // 1. Evita que a página recarregue ao clicar em enviar
     event.preventDefault();
 
@@ -55,27 +48,17 @@ form.addEventListener("submit", async function(event) {
 
     let Validation = true;
 
-    const email = campoEmail.value.trim();
-    const nome = campoNome.value.trim();
+    const usuario = campoUsuario.value.trim();
     const senha = campoSenha.value.trim();
     const conf_senha = campoConf_senha.value.trim();
     const tipo = campoTipo.value.trim();
-    console.log(nome);
-    // Validar e-mail
-    if (email === "") {
-        ErroValidation(campoEmail, erroEmail, "O E-mail é obrigatório.");
-        Validation = false;
-    } else if (!email.includes("@")) {
-        ErroValidation(campoEmail, erroEmail, "O E-mail é inválido.");
-        Validation = false;
-    }
 
-    // Validar nome
-    if (nome === "") {
-        ErroValidation(campoNome, erroNome, "O nome é obrigatório.");
+    // Validar e-mail
+    if (usuario === "") {
+        ErroValidation(campoUsuario, erroUsuario, "O E-mail é obrigatório.");
         Validation = false;
-    } else if (nome.length < 3 ) {
-        ErroValidation(campoNome, erroNome, "O nome é curto demais.");
+    } else if (!usuario.includes("@")) {
+        ErroValidation(campoUsuario, erroUsuario, "O E-mail é inválido.");
         Validation = false;
     }
 
@@ -120,13 +103,16 @@ form.addEventListener("submit", async function(event) {
     if (!Validation) {
         return;
     }
+
     const user = {
-        nome: campoEmail.value,
-        email: campoEmail.value,
+        usuario: campoUsuario.value,
         senha: campoSenha.value,
-        papel: campoTipo.value
+        tipo: campoTipo.value
     };
-    console.log(await CadastrarUsuarioApi(user));
+    const users = JSON.parse(localStorage.getItem("Usuarios") || "[]");
+    users.push(user);
+    localStorage.setItem("Usuarios", JSON.stringify(users));
+
     open("Login.html", "_self");
 
 });
