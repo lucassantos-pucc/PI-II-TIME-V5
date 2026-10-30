@@ -8,11 +8,14 @@ localStorage.setItem("DemandaAtual", JSON.stringify({})); // Para limpar o campo
 
 async function CreateDemanda(info) {
 
-    console.log("Criando demanda:", info);
+    //console.log("Criando demanda:", info);
     const [projeto] = await BuscarProjetoApi(localStorage.getItem("Projeto"));
     const responsavel = await ListarUsuarioApi(projeto.id_lider);
     let criação = correctDate(new Date(info.dataCriacao));
     let prazo = correctDate(new Date(info.prazoFinalizacao));
+    if(correctDate(new Date(info.prazoFinalizacao)) === correctDate(new Date(null))){
+        prazo = "Não definido"
+    }
     const Dem_Cr = document.createElement('button'); // Demanda Criada
     Dem_Cr.classList.add("demanda-card");
 

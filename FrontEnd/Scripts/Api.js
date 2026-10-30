@@ -55,7 +55,7 @@ export async function CadastrarDemandasApi(demanda) {
     return await TratarRespostaApi(resposta);
 }
 
-export async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe a rota Put, portanto essa função é um placeholder
+export async function EditarDemandasApi(id, demanda) { 
     const resposta = await fetch(`${Url_Api}/demandas/${id}`,
         {
             method: "PUT",
@@ -168,5 +168,20 @@ export async function RegistrarHistoricoApi(historico) {
             body: JSON.stringify(historico)
         }
     );
+    return await TratarRespostaApi(resposta);
+}
+
+// Comentarios
+export async function ListarComentarios(id){
+    const resposta = await fetch(`${Url_Api}/demandas/${id}/comentarios`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function CadastrarComentario(id_demanda,comentario){
+    const resposta = await fetch(`${Url_Api}/demandas/${id_demanda}/comentarios`,{
+        method: "POST",
+        header: {"Content-Type": "application/json"},
+        body: JSON.stringify(comentario)
+    });
     return await TratarRespostaApi(resposta);
 }

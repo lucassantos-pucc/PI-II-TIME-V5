@@ -11,7 +11,6 @@ let comentarios = []; // Comentários da demanda
 function CarregarDemanda() {
     let salva = localStorage.getItem("DemandaAtual");
     sessionStorage.setItem("DemandaAtual", salva); // Guarda na aba, assim se abrir outra demanda em outra aba, esta nao muda
-    console.log(salva)
     demanda = JSON.parse(salva);
 }
 
@@ -20,7 +19,7 @@ function ChaveComentarios() {
     return "comentarios:" + demanda.nome + "|" + demanda.projeto + "|" + demanda.DTcriacao;
 }
 
-function CarregarComentarios() {
+async function CarregarComentarios() {
     if (localStorage.getItem(ChaveComentarios())) {
         comentarios = JSON.parse(localStorage.getItem(ChaveComentarios()));
     }
@@ -72,11 +71,11 @@ function StatusColor(p) {
         p.classList.add("status-andamento");
     }
 
-    else if (stat.includes("revisão") || stat.includes("revisão")) {
+    else if (stat.includes("revisao") || stat.includes("revisão")) {
         p.classList.add("status-revisao");
     }
 
-    else if (stat.includes("concluída") || stat.includes("concluída")) {
+    else if (stat.includes("concluido") || stat.includes("concluída")) {
         p.classList.add("status-concluido");
     }
 
@@ -108,7 +107,7 @@ function ShowDemanda() {
 
 
 // Cria um comentário na tela
-function CreateComentario(info, posicao) {
+function CreateComentario(info) {
     const Com_Cr = document.createElement('li'); // Comentário Criado
     Com_Cr.classList.add("dem-coment");
 
@@ -203,7 +202,6 @@ CarregarDemanda();
 if (!demanda.titulo) { // Abriu a página sem clicar em uma demanda
     document.getElementById("dem-vazio").hidden = false;
 }
-
 else {
     document.getElementById("dem-conteudo").hidden = false;
 
@@ -215,18 +213,8 @@ else {
     document.getElementById("dem-autor").value = localStorage.getItem("ComentarioAutor") || "";
     ValidarComentario();
 
-    document.getElementById("dem-autor").addEventListener("input", ValidarComentario);
-    document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
-
-    document.getElementById("dem-texto").addEventListener("keydown", console.log("Keydown"));
-
+    document.getElementById("dem-autor").addEventListener("input", ValidarComentario());
+    document.getElementById("dem-texto").addEventListener("input", ValidarComentario());
     document.getElementById("dem-form").addEventListener("submit", AddComentario);
     document.getElementById("dem-editar").addEventListener("click", Edit);
-
-    document.getElementById("dem-historico").addEventListener("click", () => {
-        console.log("Clicou no botão de historicoo!");
-    window.location.href = "historico.html";
-});
-
-
 }
