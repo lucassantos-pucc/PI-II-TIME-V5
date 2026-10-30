@@ -5,23 +5,93 @@
     RA: 26007167
 */
 
-// Carrega botões do menu
-function CreateButton() {
+/* 
+    Editado por: Lucas Studach Kaid Ludemann
+    RA: 26006454
+*/
 
-}
+const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
+const tipoUsuario = usuarioLogado ? usuarioLogado.tipo: null;
+console.log(tipoUsuario);
+
+
+const menuAdm = [
+    { texto: 'Dashboard de Demandas', href: 'Dashboard_Demanda.html' },
+    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
+    { texto: 'Histórico',             href: 'historico.html' },
+    { texto: 'Dashboard de Projetos', href: 'Dashboard_Projeto.html' },
+    { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Usuários',              href: 'Listagem_Usuario.html' },
+    { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
+];
+
+const menuMembro = [
+    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
+    { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Histórico',             href: 'historico.html' },
+    { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
+];
+
+const menuLider = [
+    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
+    { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Histórico',             href: 'historico.html' },
+    { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
+]
+
+const menusPorTipo = {
+    "Administrador": menuAdm,
+    "Lider de Projeto": menuLider,
+    "Membro de equipe": menuMembro
+};
+
+// Carrega o Menu.html e coloca o conteúdo dentro da página atual
+
+function criarMenu() {
+        const linksMenu = menusPorTipo[tipoUsuario];
+        if (!linksMenu) return null;
+
+        const nav = document.createElement('nav');
+        nav.className = 'MenuLinks';
+
+        //Construção dos menus para Administrador,
+        //Lider de Projeto e Membro de Equipe
+        linksMenu.forEach(item => {
+            const a = document.createElement('a');
+            a.className = 'btn';
+            if (item.btnsair) {
+                a.classList.add(item.btnsair);
+            }
+            a.href = item.href;
+            a.textContent = item.texto;
+            nav.appendChild(a);
+        });
+
+        return nav;
+    }
 
  
 // Carrega o Menu.html e coloca o conteúdo dentro da página atual
 async function LoadMenu() {
-    // Busca o arquivo Menu.html
+    const nav = criarMenu();
+    if (!nav) {
+        window.location.href = 'Login.html'; // sem usuário logado
+        return;
+    }
+    // Busca o Menu.html e coloca no body
     const response = await fetch("Menu.html");
- 
-    // Transforma a resposta em texto (o código HTML do menu)
+    if (!response.ok) {
+        console.error("Não foi possível carregar o Menu.html:", response.status);
+        return;
+    }
+
     const html = await response.text();
- 
-    // Insere o HTML do menu no final do <body> da página
+
     document.body.insertAdjacentHTML("beforeend", html);
- 
+
+    // Insere o menu específico dentro da Box
+    document.getElementById("MenuLinksBox").appendChild(nav);
+
     // O botão que abre o menu foi inserido no body, mas precisa ficar dentro do header
     // ("body > header" ignora o <header> que existe dentro do popup de detalhes)
     const header = document.querySelector("body > header");
@@ -81,14 +151,7 @@ function MarkCurrentPage() {
     }
 }
 
-// Carrega os elementos de acordo com o nível de acesso
-const Usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
 
-if (Usuario.papel === "Administrador") {
-    
-}
-
- 
 // Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
 if (document.querySelector("body > header")) {
     LoadMenu();
