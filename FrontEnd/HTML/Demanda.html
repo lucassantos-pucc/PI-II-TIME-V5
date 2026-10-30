@@ -1,0 +1,92 @@
+<!--
+    Feito por: Kauã Gaiofato Santana Lima de Jesus
+    RA: 26000195
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demanda</title>
+
+    <link rel="stylesheet" href="../Styles/Style.css">
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    <link rel="stylesheet" href="../Styles/Demanda_Style.css">
+
+    <script src="../Scripts/Menu.js" defer></script>
+    <script src="../Scripts/Demanda.js" type="module" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="dem-nome" class="logo"><b>Demanda</b></h1>
+    </header>
+
+    <!-- Aparece quando a página é aberta sem ter clicado em uma demanda -->
+    <main class="dem-pagina" id="dem-vazio" hidden>
+        <p class="dem-aviso">Nenhuma demanda selecionada.</p>
+        <a class="btn dem-btn" href="Listagem_Demanda.html">&larr; Voltar para a listagem</a>
+    </main>
+
+    <main class="dem-pagina" id="dem-conteudo" hidden>
+        <br>
+        <a class="dem-voltar" href="Listagem_Demanda.html">&larr; Voltar para a listagem</a>
+
+        <div class="dem-titulo">
+            <button class="btn dem-btn" id="dem-editar" type="button">Editar demanda</button>
+            <button class="btn dem-btn" id="dem-historico" type="button">Ver histórico</button>
+        </div>
+
+        <div class="dem-layout">
+            <!-- Coluna principal: descrição + comentários -->
+            <div class="dem-principal">
+                <section class="dem-caixa">
+                    <div class="dem-caixa-cab">Descrição</div>
+                    <p class="dem-caixa-corpo" id="dem-descricao"></p>
+                </section>
+
+                <section class="dem-comentarios" aria-labelledby="dem-coment-titulo">
+                    <h3 id="dem-coment-titulo">Comentários <span class="dem-contador" id="dem-contador">0</span></h3>
+                    <form class="dem-caixa" id="dem-form">
+                        <!-- Checkbox invisível para para abrir e fechar comentario via CSS-->
+                        <input type="checkbox" id="dem-comentario-escondido" class="invisivel">
+                        
+                        <label for="dem-comentario-escondido" class="dem-caixa-cab">+ Novo comentário</label>
+                        
+                        <div class="dem-caixa-corpo">
+                            <label class="dem-label" for="dem-autor">Seu nome</label>
+                            <input type="text" id="dem-autor" maxlength="60" placeholder="" disabled>
+
+                            <label class="dem-label" for="dem-texto">Comentário</label>
+                            <textarea id="dem-texto" maxlength="1000" rows="4" placeholder="Escreva um comentário..."></textarea>
+
+                            <div class="dem-rodape">
+                                <h></h> <!--Colocado para garantir a posição certa do botão "Comentar"-->
+                                <button class="btn dem-btn dem-primario" id="dem-enviar" type="submit" disabled>Comentar</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <ol class="dem-lista" id="dem-lista"></ol>
+                    <p class="dem-aviso" id="dem-sem-coment">Nenhum comentário ainda. Seja o primeiro a comentar.</p>
+
+                </section>
+            </div>
+
+            <!-- Coluna lateral: informações da demanda -->
+            <aside class="dem-lateral" aria-label="Informações da demanda">
+                <dl>
+                    <div class="dem-info"><dt>Tipo</dt><dd id="dem-tipo"></dd></div>
+                    <div class="dem-info"><dt>Prioridade</dt><dd><span class="dem-selo" id="dem-prioridade"></span></dd></div>
+                    <div class="dem-info"><dt>Status</dt><dd><span class="dem-selo" id="dem-status"></span></dd></div>
+                    <div class="dem-info"><dt>Projeto</dt><dd id="dem-projeto"></dd></div>
+                    <div class="dem-info"><dt>Responsável</dt><dd id="dem-responsavel"></dd></div>
+                    <div class="dem-info"><dt>Data de criação</dt><dd id="dem-criacao"></dd></div>
+                    <div class="dem-info"><dt>Prazo</dt><dd id="dem-prazo"></dd></div>
+                </dl>
+            </aside>
+        </div>
+    </main>
+</body>
+</html>

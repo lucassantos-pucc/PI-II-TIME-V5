@@ -1,0 +1,88 @@
+<!--
+
+Feito por: Kauã Gaiofato Santana Lima de Jesus
+RA: 26000195
+
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Demandas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../Styles/Style.css">
+    <link rel="stylesheet" href="../Styles/Listagem_Style.css">
+    <link rel="stylesheet" href="../Styles/Details.css">
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    
+    <script src="../Scripts/Menu.js" defer></script>
+    <script src="../Scripts/Listagem_Demanda.js" type="module" defer></script>
+
+    <script src="../Scripts/Detalhes_Demanda.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="logo"><b>Listagem de Demandas</b></h1>
+    </header>
+    <!-- isso vai se usado para esconder o menu de pesquisa(gambiarra porque nao vimos javascript)--> 
+    <input type="checkbox" id="escondido" class="invisivel">
+    <a class="btn dem-btn" href="Dashboard_Demanda.html">&larr; Voltar para a dashboard</a>
+    <label for="escondido" class="btn-personalizado">Buscar / Filtrar</label>
+        <div id="painel-pesquisa" class="painel-pesquisa">
+
+            <div class="grupo-filtro">
+                <label for="filtro_tipo">Tipo de Demanda</label>
+                <select id="filtro_tipo">
+                    <option value="">Todos os tipos</option>
+                    <option value="Tarefa">Tarefa</option>
+                    <option value="Defeito">Defeito</option>
+                    <option value="Melhoria">Melhoria</option>
+                    <option value="Documentação">Documentação</option>
+                </select>
+            </div>
+
+            <div class="grupo-filtro">
+                <label for="filtro_prioridade">Prioridade</label>
+                <select id="filtro_prioridade">
+                    <option value="">Todas</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Crítica">Crítica</option>
+                </select>
+            </div>
+
+            <div class="grupo-filtro">
+                <label for="filtro_status">Status</label>
+                <select id="filtro_status">
+                    <option value="">Todos</option>
+                    <option value="Aberta">Aberta</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Em revisão">Em revisão</option>
+                    <option value="Concluída">Concluída</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+            </div>
+
+            <div class="grupo-filtro">
+                <label for="filtro_responsavel">Responsável</label>
+                <input type="text" id="filtro_responsavel" placeholder="Nome do responsável...">
+            </div>
+
+        <div class="grupo-botao-filtro">
+            <button id="btn-filtrar" class="btn-personalizado" type="button">Aplicar Filtros</button>
+        </div>
+    </div>
+
+    <!-- !! Podem tirar se quiserem, deixei pra navegacao ser mais rapida pra testar -->
+
+    <section class="demanda" id="secao-demanda">
+    </section>
+    <footer class="bolha" id="footer">
+        <a class="btn" href="Cadastro_Demanda.html">+</a>
+
+    </footer>
+</body>
+</html>

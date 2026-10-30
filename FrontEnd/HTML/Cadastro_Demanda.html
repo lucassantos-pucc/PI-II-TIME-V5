@@ -1,0 +1,88 @@
+
+<!--
+
+Feito por: Lucas de Oliveira Santos
+RA: 26887166
+
+-->
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Demandas</title>
+
+    <link rel="stylesheet" href="../Styles/Style.css">
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    
+    <script src="../Scripts/Menu.js" defer></script>
+
+    <link rel="stylesheet" href="../Styles/Cadastro_Demanda.css">
+    <script src="../Scripts/Cadastro_Demanda.js" type="module" defer></script>
+
+</head>
+<body>
+
+    <form>
+        <h1 id="cadastro">Cadastro de Demandas</h1>
+
+        <div class="campo">
+            <label for="titulo_id">Título</label>
+            <input type="text" name="Titulo" id="titulo_id">
+        </div>
+
+        <div class="campo">
+            <label for="tipos_id">Tipo</label>
+            <select id="tipos_id" name="Tipos">
+                <option value="Defeito">Defeito</option>
+                <option value="Tarefa">Tarefa</option>
+                <option value="Melhoria">Melhoria</option>
+                <option value="Documentação">Documentação</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prazo_id">Prazo</label>
+            <input type="date" name="prazo" id="prazo_id">
+        </div>
+
+        <div class="campo">
+            <label for="status_id">Status</label>
+            <select id="status_id" name="Status">
+                <option value="Aberta">Aberta</option>
+                <option value="Em andamento">Em Andamento</option>
+                <option value="Em revisão">Em Revisão</option>
+                <option value="Concluída">Concluída</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="prioridade_id">Prioridade</label>
+            <select id="prioridade_id" name="Prioridade">
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Crítica">Crítica</option>
+            </select>
+        </div>
+
+        <div class="campo">
+            <label for="Responsavel_id">Responsável</label>
+            <input type="text" name="Responsavel" id="Responsavel_id">
+        </div>
+
+        <div class="descricao">
+            <label for="descricao_id">Descrição</label>
+            <textarea id="descricao_id" name="Descricao" maxlength="200"></textarea>
+        </div>
+
+        <div class="botoes">
+            <a id="voltar" class="btn" href="Listagem_Demanda.html" target="_self">Voltar</a>
+            <button id="botaoCriar_id" class="btn" type="submit" value="Criar">Criar</button>
+        </div>
+    </form>
+</body>
+</html>
