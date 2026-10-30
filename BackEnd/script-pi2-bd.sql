@@ -33,7 +33,7 @@ create table usuario_projeto_participa(
 create table demanda(
     id_demanda int primary key auto_increment,
     titulo varchar(150) not null,
-    tipo varchar(50) not null check (tipo in ('Defeito', 'Tarefa', 'Melhoria', 'Documentacao')),
+    tipo varchar(50) not null check (tipo in ('Defeito', 'Tarefa', 'Melhoria', 'Documentação')),
     dataCriacao datetime not null default current_timestamp(),
     prazoFinalizacao datetime,
     statusDemanda varchar(50) not null check (statusDemanda in ('Aberta', 'Em andamento', 'Em revisão', 'Concluída')),

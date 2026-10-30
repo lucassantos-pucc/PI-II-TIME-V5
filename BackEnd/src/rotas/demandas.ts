@@ -33,7 +33,16 @@ router.get("/", async (req: Request, res: Response) => {
         }
         return res.status(200).json(demanda);
     }
-    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
+
+    let [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
+    if (projeto){
+        [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ?", [projeto]);
+
+    }
+    if(id_usuario > 0){ 
+        [demandas]  = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
+    }
+    
     const tipo = req.query.tipo;
     const prioridade = req.query.prioridade;
     const status = req.query.status;
@@ -82,9 +91,9 @@ router.post("/", async (req:Request, res:Response)=>{
     //pega dados apartir da requisicao
     const {titulo, tipo, prazoFinalizacao, statusDemanda, prioridade, descricao, id_projeto, id_responsavel} = req.body;
     //validacao dos dados
-    if(!titulo || !tipo || !prioridade || !id_projeto || !descricao){
+    if (!titulo || !tipo || !prioridade || !id_projeto || !descricao?.trim()) {
         return res.status(400).json({
-            mensagem: "titulo, tipo, prioridade, id_projeto, descricao e statusDemanda são obrigatorios"
+            mensagem: "titulo, tipo, prioridade, id_projeto e statusDemanda são obrigatorios"
         })
     }
     let statusFinal: Status;
@@ -103,8 +112,7 @@ router.post("/", async (req:Request, res:Response)=>{
     }
 
     const [projetos] = await Conexao.query<ProjetoRow[]>("SELECT * FROM projeto");
-    const projetoExiste = projetos.find((item)=> item.id_projeto === id_projeto);
-
+    const projetoExiste = projetos.find((item)=> item.id_projeto === Number(id_projeto));
     if(!projetoExiste){
         return res.status(404).json({mensagem: "Projeto Atribuído não encontrado."})
     }
@@ -134,7 +142,7 @@ router.post("/", async (req:Request, res:Response)=>{
         prioridade: prioridade as Prioridade, // Informa ao TypeScript que a prioridade pertence ao conjunto de prioridades permitidas.
         id_projeto, 
         id_responsavel: responsavelFinal,
-        descricao
+        descricao: descricao
     };
     const resposta = await Conexao.query("INSERT INTO demanda (titulo, tipo, dataCriacao, prazoFinalizacao, statusDemanda, prioridade, dataAlteracao, descricao, id_responsavel, id_projeto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [novaDemanda.titulo, novaDemanda.tipo, novaDemanda.dataCriacao, novaDemanda.prazoFinalizacao, novaDemanda.statusDemanda, novaDemanda.prioridade, novaDemanda.dataAlteracao, novaDemanda.descricao, novaDemanda.id_responsavel, novaDemanda.id_projeto]
