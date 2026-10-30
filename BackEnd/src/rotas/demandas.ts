@@ -24,10 +24,12 @@ Teste invalido
 */
 router.get("/", async (req: Request, res: Response) => {
     const projeto = Number(req.query.id_projeto);
-    const id = Number(req.query.id);
-    if (id){
+    const id_demanda = Number(req.query.id_demanda);
+    const id_usuario = Number(req.query.id_usuario);
+    
+    if (id_demanda){
         const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
-        const demanda = demandas.find((d) => d.id_demanda === id);
+        const demanda = demandas.find((d) => d.id_demanda === id_demanda);
         if (!demanda) {
             return res.status(404).json({ error: "Demanda não encontrada" });
         }
@@ -57,7 +59,6 @@ router.get("/", async (req: Request, res: Response) => {
     if (status) { filtro = filtro.filter((i) => i.statusDemanda === status); }
     
     if (responsavel) { filtro = filtro.filter((i) => i.id_responsavel === Number(responsavel)); }
-
     return res.status(200).json(filtro);
 });
 

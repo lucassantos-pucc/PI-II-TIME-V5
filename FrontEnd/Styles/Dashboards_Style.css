@@ -63,3 +63,9 @@ span.valor {
     margin-top: auto;
     color: #ffffff;
 }
+
+.linha{
+    display: flex;
+    width: 500px;
+    justify-content: space-around;
+}

@@ -2,7 +2,6 @@
 // RA: 26007167
 
 import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi } from "./Api.js";
-
 localStorage.setItem("DemandaAtual", JSON.stringify({}));
 sessionStorage.setItem("DemandaAtual", "");
 
@@ -15,16 +14,6 @@ function FormatarPrazo(valor) {
 function FormatarCriacao(valor) {
     const d = new Date(valor);
     return isNaN(d) ? "" : d.toLocaleDateString("pt-BR");
-}
-
-// (branch Desenvolvimento) Não usar para o prazo: converte fuso e pode mostrar um dia a menos
-function correctDate(date){
-    const dia = date.getDate();
-    const mes = date.getMonth() + 1;
-    date = (dia < 10 ? "0" + dia : dia) + "/" +
-        (mes < 10 ? "0" + mes : mes) + "/" +
-        date.getFullYear();
-    return date;
 }
 
 const cacheUsuarios = {};
@@ -76,15 +65,15 @@ async function CreateDemanda(info, projeto) {
         id_projeto: info.id_projeto,
         projeto: projeto.titulo,
         id_responsavel: info.id_responsavel,
-        responsavel: nomeResp,
+        responsavel: nomeResp,            
         dataCriacao: criacao,
-        prazoFinalizacao: prazo,
-        descricao: info.descricao ?? ""
+        prazoFinalizacao: prazo,          
+        descricao: info.descricao ?? ""   
     };
 
     card.addEventListener("click", () => {
         localStorage.setItem("DemandaAtual", JSON.stringify(demanda));
-        window.open("Demanda.html", "_blank");
+        window.open("Demanda.html", "_self");
     });
 
     document.getElementById("secao-demanda").appendChild(card);
@@ -100,65 +89,68 @@ function PriorityColor(p) {
 }
 
 function StatusColor(p) {
-    if (!p) { // (Desenvolvimento) evita erro se o elemento estiver vazio
+    const stat = p.textContent.toLowerCase();
+    if (stat.includes("aberta")) p.classList.add("status-aberta");
+    else if (stat.includes("andamento")) p.classList.add("status-andamento");
+    else if (stat.includes("revisão")) p.classList.add("status-revisao");
+    else if (stat.includes("concluída")) p.classList.add("status-concluido");
+}
+const id_projeto = (localStorage.getItem("Projeto"));
+const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
+let projeto; 
+
+async function CarregarDemandas(filtros = {}) {
+    const projetos = await BuscarProjetoApi(id_projeto);
+    const projeto = projetos[0];
+    const { tipo = "", prioridade = "", status = "", responsavel = "" } = filtros;
+    const secao = document.getElementById("secao-demanda");
+    secao.innerHTML = "";
+     
+    const idFiltro = usuario.papel === "Membro da equipe" ? usuario.id_usuario : -1;
+    const jsondemandas = await ListarDemandasApi(id_projeto, idFiltro, tipo, prioridade, status, responsavel);
+
+    if (jsondemandas.length === 0) {
+        secao.textContent = (tipo || prioridade || status || responsavel)
+            ? "Nenhuma demanda corresponde aos filtros."
+            : "Nenhuma demanda encontrada.";
         return;
     }
 
-    const stat = p.textContent.toLowerCase();
+    for (const demanda of jsondemandas) {
+        await CreateDemanda(demanda, projeto);
+    }
 
-    // Aplica as cores de fundo respectivas
-    if (stat.includes("aberta")) {
-        p.classList.add("status-aberta");
-    }
-    else if (stat.includes("andamento")) {
-        p.classList.add("status-andamento");
-    }
-    else if (stat.includes("revisão") || stat.includes("revisao")) {
-        p.classList.add("status-revisao");
-    }
-    else if (stat.includes("concluída") || stat.includes("concluida")) {
-        p.classList.add("status-concluido");
-    }
-    else if (stat.includes("cancelado")) {
-        p.classList.add("status-cancelado");
-    }
+    // Aplica as cores de prioridade e de status
+    document.querySelectorAll(".prioridade-gen").forEach(PriorityColor);
+    document.querySelectorAll(".status-gen").forEach(StatusColor);
 }
 
-const PAPEL_MEMBRO = "Membro da equipe"; // mesmo texto gravado no banco
-
-const id_projeto = Number(localStorage.getItem("Projeto"));
-const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
-
-if (!usuario || !id_projeto) {
-    window.open("index.html", "_self"); // ajuste para a sua página de login/projetos
-} else {
-    // (Desenvolvimento) Membro de equipe não pode adicionar demanda
-    if (usuario.papel === PAPEL_MEMBRO) {
-        const adicionarDemanda = document.querySelector(".bolha");
-        if (adicionarDemanda) adicionarDemanda.style.display = "none";
-    }
-
+document.getElementById("btn-filtrar")?.addEventListener("click", async () => {
+    let tipo, prioridade, status, responsavel;
+    try { tipo = document.getElementById("filtro_tipo").value; }
+    catch { tipo = ""; }
+    try { prioridade = document.getElementById("filtro_prioridade").value; }
+    catch { prioridade = ""; }
+    try { status = document.getElementById("filtro_status").value; }
+    catch { status = ""; }
+    try { responsavel = document.getElementById("filtro_responsavel").value.trim(); }
+    catch { responsavel = ""; }
     try {
-        // (temp) Membro vê só as suas demandas; os outros veem todas (-1)
-        const idFiltro = usuario.papel === PAPEL_MEMBRO ? usuario.id_usuario : -1;
+        await CarregarDemandas({ tipo, prioridade, status, responsavel });
+    } catch (e) {
+        console.error(e);
+        document.getElementById("secao-demanda").textContent = "Não foi possível carregar as demandas.";
+    }
+});
 
-        const [projetos, demandas] = await Promise.all([
-            BuscarProjetoApi(id_projeto),
-            ListarDemandasApi(id_projeto, idFiltro)
-        ]);
-        const projeto = projetos[0];
-
-        if (demandas.length === 0) {
-            document.getElementById("secao-demanda").textContent = "Nenhuma demanda encontrada.";
-        }
-
-        for (const d of demandas) { // Criar demandas
-            await CreateDemanda(d, projeto);
-        }
-
-        // Aplica as cores de prioridade e de status
-        document.querySelectorAll(".prioridade-gen").forEach(PriorityColor);
-        document.querySelectorAll(".status-gen").forEach(StatusColor);
+if (usuario.papel === "Membro da equipe"){
+    document.getElementById("footer").hidden = true;
+}
+if (!usuario || !id_projeto) {
+    console.log("usuario ou projeto faltando");
+} else {
+    try {
+        await CarregarDemandas();
     } catch (e) {
         console.error(e);
         document.getElementById("secao-demanda").textContent = "Não foi possível carregar as demandas.";

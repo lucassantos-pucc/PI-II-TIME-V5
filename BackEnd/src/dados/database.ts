@@ -74,8 +74,12 @@ async function ReiniciarBanco(){
 }
 
 const TestarConexao = false;
+const Reiniciar = false;
 if (TestarConexao) {
     testarConexao();
+}
+if (Reiniciar) {
+    ReiniciarBanco();
 }
 
 export default conexao;

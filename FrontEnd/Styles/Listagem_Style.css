@@ -284,9 +284,9 @@ p {
 }
 
 .status-aberta {
-    background: #10b98133;
-    color: #6ee7b7;
-    border: 1px solid #10b9814d;
+    background: #d9ec2b33;
+    color: #636413;
+    border: 1px solid #9baf2c4d;
 }
 
 .status-andamento {
@@ -295,10 +295,10 @@ p {
     border: 1px solid #3b82f64d;
 }
 
-.status-concluido {
-    background: #10b98133;
-    color: #6ee7b7;
-    border: 1px solid #10b9814d;
+.status-revisao {
+    background: #7510b933;
+    color: #a011b3;
+    border: 1px solid #775cd64d;
 }
 
 .status-concluido {
@@ -319,4 +319,12 @@ p {
     font-size: 40px;
     padding-top: 0;
 
+}
+
+
+.dem-btn{
+    text-align: center;
+    margin-right: 20px;
+    font-size: 15px;
+    padding-top: 0;
 }

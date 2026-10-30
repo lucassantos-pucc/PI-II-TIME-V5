@@ -1,12 +1,11 @@
-
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { ListarProjetosApi, ListarUsuarioApi } from "./Api.js";
+import { ListarProjetosApi, ListarUsuarioApi, ListarProjetosUsuarioApi } from "./Api.js";
 
 async function CreateProjeto(info) {
     const lider = await ListarUsuarioApi(info.id_lider)
-    const Proj_Cr = document.createElement('button'); // !! Projeto Criado || Não sei se o projeto tem q ser uma div ou botão, deixei como tava no demandas mas podem mudar
+    const Proj_Cr = document.createElement('button'); // Projeto Criado
     Proj_Cr.classList.add("projeto-card");
 
     const h3 = document.createElement('h3');
@@ -16,14 +15,13 @@ async function CreateProjeto(info) {
     Proj_Cr.appendChild(document.createElement('hr'));
     const box = document.createElement('div');
     box.classList.add("caixa");
-    box.appendChild(ProjetoContent("lider-gen", "Lider: " + lider.nome));
-    box.appendChild(ProjetoContent("descricao-gen", "Descrição: " + info.descricao));
+    box.appendChild(ProjetoContent("lider-gen", "Lider: " + lider.usuario.nome));
 
     Proj_Cr.appendChild(box);
 
     
-    //Proj_Cr.addEventListener("click", function() {ShowDialog(this);});
     Proj_Cr.addEventListener("click", () => {
+        localStorage.setItem("Projeto", info.id_projeto)
         open("Dashboard_Demanda.html", "_self");
     }); 
 
@@ -44,23 +42,37 @@ function ProjetoContent(classe, texto) {
 }
 
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON
-/*
-const jsonprojetos = []; // !! Temporario
-jsonprojetos[0] = '{"nome":"Teste1", "lider":"Sr.Exemplilson", "status":"Aberta", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 1"}';
-jsonprojetos[1] = '{"nome":"Teste2", "lider":"Sr.Exemplilson", "status":"Em andamento", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 2"}';
-jsonprojetos[2] = '{"nome":"Teste3", "lider":"Sr.Exemplilson", "status":"Concluido", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 3"}';
-jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancelado", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 4"}';
-*/
-const jsonprojetos = await ListarProjetosApi();
 
-for (const projeto of jsonprojetos) {
+const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
+let jsonprojetos;
+if (usuario.papel === "Administrador") {
+    jsonprojetos = await ListarProjetosApi();
+}
+else {
+    jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario);
+}
+for (const projeto of jsonprojetos) { 
     CreateProjeto(projeto);
 }
 
-// Obtém os elementos de status com base na classe geral de status
-const ElementosStatus = document.getElementsByClassName("status-gen");
+document.getElementById("btn-filtrar").addEventListener("click", async () => {
+    document.getElementById("secao-projeto").innerHTML = "";
     
-// Itera por todos os status
-for (const status of ElementosStatus) {
-    StatusColor(status);
-}
+    let nome;
+    let lider;
+    try { nome = document.getElementById("filtro_nome").value; }
+    catch { nome = ""; }
+    try {lider = document.getElementById("filtro_lider").value; }
+    catch { lider = ""; }
+    
+    if (usuario.papel === "Administrador") {
+        jsonprojetos = await ListarProjetosApi(nome, lider);
+    }
+    
+    else {
+        jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario, nome, lider);
+    }
+    for (const projeto of jsonprojetos) {   
+        CreateProjeto(projeto);
+    }
+}); 

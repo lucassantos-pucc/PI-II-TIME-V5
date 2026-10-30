@@ -13,27 +13,25 @@ async function TratarRespostaApi(resposta) {
 
 // Demandas
 
-export async function ListarDemandasApi(id, tipo = "", prioridade = "", status = "", projeto = "", responsavel = "") {
-    let Url = `${Url_Api}/demandas/projeto/${id}`;
-
+export async function ListarDemandasApi(idProj, idUsu= "", tipo = "", prioridade = "", status = "", responsavel = "") {
+    let Url = `${Url_Api}/demandas/?id_projeto=${idProj}`;
+    if (idUsu) {
+        Url += `&id_usuario=${encodeURIComponent(idUsu)}`;
+    }
     if (tipo) {
-        Url += `?tipo=${encodeURIComponent(tipo)}&`;
+        Url += `&tipo=${encodeURIComponent(tipo)}`;
     }
     
     if (prioridade) {
-        Url += `?prioridade=${encodeURIComponent(prioridade)}&`;
+        Url += `&prioridade=${encodeURIComponent(prioridade)}`;
     }
 
     if (status) {
-        Url += `?status=${encodeURIComponent(status)}&`;
-    }
-
-    if (projeto) {
-        Url += `?id_projeto=${encodeURIComponent(projeto)}&`;
+        Url += `&status=${encodeURIComponent(status)}`;
     }
 
     if (responsavel) {
-        Url += `?responsavel=${encodeURIComponent(responsavel)}`;
+        Url += `&responsavel=${encodeURIComponent(responsavel)}`;
     }
 
     const resposta = await fetch(Url);
@@ -49,7 +47,7 @@ export async function CadastrarDemandasApi(demanda) {
     const resposta = await fetch(`${Url_Api}/demandas`,
         {
             method: "POST",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(demanda)
         }
     );
@@ -60,7 +58,7 @@ export async function EditarDemandasApi(id, demanda) {
     const resposta = await fetch(`${Url_Api}/demandas/${id}`,
         {
             method: "PUT",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(demanda)
         }
     );
@@ -82,7 +80,7 @@ export async function VerificarLoginApi(usuario) {
     const resposta = await fetch(`${Url_Api}/usuarios/login`,
         {
             method: "PUT",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(usuario)
         }
     );
@@ -100,10 +98,11 @@ export async function ListarUsuarioApi(id){
 }
 
 export async function CadastrarUsuarioApi(usuario) {
+    console.log(JSON.stringify(usuario));
     const resposta = await fetch(`${Url_Api}/usuarios`,
         {
             method: "POST",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(usuario)
         }
     );
@@ -112,8 +111,35 @@ export async function CadastrarUsuarioApi(usuario) {
 
 // Projetos
 
-export async function ListarProjetosApi() {
-    const resposta = await fetch(`${Url_Api}/projetos`);
+
+export async function ListarProjetosApi(nome = "", lider = "") {
+    let Url = `${Url_Api}/projetos/?`;
+    if (nome) {
+        Url += `nome=${encodeURIComponent(nome)}&`;
+    }
+    if (lider) {
+        Url += `lider=${encodeURIComponent(lider)}`;
+    }
+    const resposta = await fetch(Url);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function ListarProjetosUsuarioApi(id, nome = "", lider = "") {
+    let Url = `${Url_Api}/projetos/?id=${id}`;
+    if (nome) {
+        Url += `&nome=${encodeURIComponent(nome)}`;
+    }
+    if (lider) {
+        Url += `&lider=${encodeURIComponent(lider)}`;
+    }
+
+    const resposta = await fetch(Url);
+    return await TratarRespostaApi(resposta);
+}
+
+
+export async function BuscarProjetoApi(id) {
+    const resposta = await fetch(`${Url_Api}/projetos/?id_projeto=${id}`);
     return await TratarRespostaApi(resposta);
 }
 
@@ -121,7 +147,7 @@ export async function CadastrarProjetosApi(projeto) {
     const resposta = await fetch(`${Url_Api}/projetos`,
         {
             method: "POST",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(projeto)
         }
     );
@@ -132,7 +158,7 @@ export async function EditarProjetosApi(projeto) {
     const resposta = await fetch(`${Url_Api}/projetos`,
         {
             method: "PUT",
-            headers: { "Constent-Type" : "application/json" },
+            headers: { "Content-Type" : "application/json" },
             body: JSON.stringify(projeto)
         }
     );
@@ -142,12 +168,24 @@ export async function EditarProjetosApi(projeto) {
 // Dashboards
 
 export async function DashboardDemandasApi(id) {
-    const resposta = await fetch(`${Url_Api}/dashboard/demandas/${id}`);
+    const resposta = await fetch(`${Url_Api}/dashboard/${id}`);
     return await TratarRespostaApi(resposta);
 }
 
-export async function DashboardProjetosApi() {
-    const resposta = await fetch(`${Url_Api}/dashboard/projetos`);
+// Historico
+export async function CarregarHistoricoApi(id) {
+    const resposta = await fetch(`${Url_Api}/historico/${id}`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function RegistrarHistoricoApi(historico) {
+    const resposta = await fetch(`${Url_Api}/historico/`,
+        {
+            method: "POST",
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(historico)
+        }
+    );
     return await TratarRespostaApi(resposta);
 }
 
@@ -166,7 +204,7 @@ export async function CadastrarComentario(id_demanda,comentario){
     return await TratarRespostaApi(resposta);
 }
 
-const cacheFeriados = {}; // um ano só é buscado uma vez
+const cacheFeriados = {};
 
 export async function BuscarFeriadoNacional(dataISO) { // dataISO = "yyyy-mm-dd"
     const ano = dataISO.slice(0, 4);

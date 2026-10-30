@@ -33,28 +33,23 @@ RA: 26000195
 
         <div class="grupo-filtro">
             <label>Nome do Projeto</label>
-            <input type="text" placeholder="Pesquisar por projeto...">
+            <input type="text" placeholder="Pesquisar por projeto..." value="" id="filtro_nome">
         </div>
 
         <div class="grupo-filtro">
             <label>Líder de Projeto</label>
-            <input type="text" placeholder="Nome do líder...">
-        </div>
-
-        <div class="grupo-filtro">
-            <label>Status</label>
-            <select>
-                <option value="">Todos</option>
-                <option value="ativo">Ativo</option>
-                <option value="concluido">Concluído</option>
-            </select>
+            <input type="text" placeholder="Nome do líder..." value="" id="filtro_lider">
         </div>
 
         <div class="grupo-botao-filtro">
-            <button class="btn-personalizado">Aplicar Filtros</button>
+            <button class="btn-personalizado" id="btn-filtrar">Aplicar Filtros</button>
         </div>
     </div>
     <div class="projeto" id="secao-projeto">
     </div>
+    <footer class="bolha">
+        <a class="btn" href="Cadastro_Projeto.html">+</a>
+
+    </footer>
 </body>
 </html>

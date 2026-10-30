@@ -2,10 +2,14 @@
 // Feito por: Vitor Kenzo Pina Takemasa
 // RA: 26007167
 
-import { DashboardDemandasApi, DashboardProjetosApi } from "./Api.js";
+import { DashboardDemandasApi, BuscarProjetoApi } from "./Api.js";
 
 async function DemandasMostrar(id) {
     const info = await DashboardDemandasApi(id);
+
+    const projeto = document.getElementById("projeto");
+    const projtitle = await BuscarProjetoApi(localStorage.getItem("Projeto"));
+    projeto.textContent = projtitle[0].titulo;
 
     const total = document.getElementById("total");
     total.textContent = info.total;
@@ -46,7 +50,7 @@ async function DemandasMostrar(id) {
 async function ProjetosMostrar() {
 
 }
-
-if (document.title === "Dashboard_Demandas") { DemandasMostrar(1); } // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
+const projeto = localStorage.getItem("Projeto");
+if (document.title === "Dashboard_Demandas") { DemandasMostrar(projeto); } // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
 
 else if (document.title === "Dashboard_Projetos") { ProjetosMostrar(); }

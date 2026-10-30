@@ -28,77 +28,59 @@ RA: 26000195
     </header>
     <!-- isso vai se usado para esconder o menu de pesquisa(gambiarra porque nao vimos javascript)--> 
     <input type="checkbox" id="escondido" class="invisivel">
-
+    <a class="btn dem-btn" href="Dashboard_Demanda.html">&larr; Voltar para a dashboard</a>
     <label for="escondido" class="btn-personalizado">Buscar / Filtrar</label>
+        <div id="painel-pesquisa" class="painel-pesquisa">
 
-    <div id="painel-pesquisa" class="painel-pesquisa">
-        
-        <div class="grupo-filtro">
-            <label>Nome da Demanda</label>
-            <input type="text" placeholder="Pesquisar por nome...">
-        </div>
+            <div class="grupo-filtro">
+                <label for="filtro_tipo">Tipo de Demanda</label>
+                <select id="filtro_tipo">
+                    <option value="">Todos os tipos</option>
+                    <option value="Tarefa">Tarefa</option>
+                    <option value="Defeito">Defeito</option>
+                    <option value="Melhoria">Melhoria</option>
+                    <option value="Documentação">Documentação</option>
+                </select>
+            </div>
 
-        <div class="grupo-filtro">
-            <label>Tipo de Demanda</label>
-            <select>
-                <option value="">Todos os tipos</option>
-                <option value="tarefa">Tarefa</option>
-                <option value="defeito">Defeito</option>
-                <option value="melhoria">Melhoria</option>
-                <option value="documentacao">Documentação</option>
-            </select>
-        </div>
+            <div class="grupo-filtro">
+                <label for="filtro_prioridade">Prioridade</label>
+                <select id="filtro_prioridade">
+                    <option value="">Todas</option>
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                    <option value="Crítica">Crítica</option>
+                </select>
+            </div>
 
-        <div class="grupo-filtro">
-            <label>Prioridade</label>
-            <select>
-                <option value="">Todas</option>
-                <option value="baixa">Baixa</option>
-                <option value="media">Média</option>
-                <option value="alta">Alta</option>
-                <option value="critica">Crítica</option>
-            </select>
-        </div>
+            <div class="grupo-filtro">
+                <label for="filtro_status">Status</label>
+                <select id="filtro_status">
+                    <option value="">Todos</option>
+                    <option value="Aberta">Aberta</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Em revisão">Em revisão</option>
+                    <option value="Concluída">Concluída</option>
+                    <option value="Cancelado">Cancelado</option>
+                </select>
+            </div>
 
-        <div class="grupo-filtro">
-            <label>Status</label>
-            <select>
-                <option value="">Todos</option>
-                <option value="aberta">Aberta</option>
-                <option value="em-andamento">Em andamento</option>
-                <option value="em-revisao">Em revisão</option>
-                <option value="concluida">Concluída</option>
-                <option value="cancelada">Cancelada</option>
-            </select>
-        </div>
-
-        <div class="grupo-filtro">
-            <label>Projeto Vinculado</label>
-            <input type="text" placeholder="Nome do projeto...">
-        </div>
-
-        <div class="grupo-filtro">
-            <label>Responsável</label>
-            <input type="text" placeholder="Nome do responsável...">
-        </div>
-
-        <div class="grupo-filtro">
-            <label>Data de Criação</label>
-            <input type="date">
-        </div>
-
-        <div class="grupo-filtro">
-            <label>Prazo de Entrega</label>
-            <input type="date">
-        </div>
+            <div class="grupo-filtro">
+                <label for="filtro_responsavel">Responsável</label>
+                <input type="text" id="filtro_responsavel" placeholder="Nome do responsável...">
+            </div>
 
         <div class="grupo-botao-filtro">
-            <button class="btn-personalizado">Aplicar Filtros</button>
+            <button id="btn-filtrar" class="btn-personalizado" type="button">Aplicar Filtros</button>
         </div>
     </div>
+
+    <!-- !! Podem tirar se quiserem, deixei pra navegacao ser mais rapida pra testar -->
+
     <section class="demanda" id="secao-demanda">
     </section>
-    <footer class="bolha">
+    <footer class="bolha" id="footer">
         <a class="btn" href="Cadastro_Demanda.html">+</a>
 
     </footer>

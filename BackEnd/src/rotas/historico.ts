@@ -23,8 +23,16 @@ router.get("/:id_demanda", async (req: Request, res: Response) => {
     return res.status(200).json(historicos);
 });
 
-//post de historico
 
+//pega todos os historicos
+
+router.get("/", async (req: Request, res: Response) => {
+    const [historicos] = await Conexao.query<HistoricoRow[]>("select historico.dataHora, historico.descricao, demanda.titulo, usuario.nome from historico, usuario, demanda;");
+    return res.status(200).json(historicos);
+});
+
+
+//post de historico
 //TESTE VALIDO
 
 /*
@@ -56,7 +64,7 @@ router.post("/", async (req: Request, res: Response) => {
     
     if(!descricao || !id_autor || !id_demanda){
         return res.status(400).json({
-            mensagem: "dataHora, descricao, id_autor, id_demanda são obrigatorios"
+            mensagem: "descricao, id_autor e id_demanda são obrigatorios"
         });
     }
 
