@@ -44,13 +44,7 @@ function ProjetoContent(classe, texto) {
 
 
 // Cria os projetos dinamicamente na tela a partir de arquivos JSON
-/*
-const jsonprojetos = []; // !! Temporario
-jsonprojetos[0] = '{"nome":"Teste1", "lider":"Sr.Exemplilson", "status":"Aberta", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 1"}';
-jsonprojetos[1] = '{"nome":"Teste2", "lider":"Sr.Exemplilson", "status":"Em andamento", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 2"}';
-jsonprojetos[2] = '{"nome":"Teste3", "lider":"Sr.Exemplilson", "status":"Concluido", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 3"}';
-jsonprojetos[3] = '{"nome":"Teste4", "lider":"Sr.Exemplilson", "status":"Cancelado", "demandas":"3", "DTcriacao":"25/09/2026", "descricao":"Exemplo 4"}';
-*/
+
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
 let jsonprojetos;
 if (usuario.papel === "Administrador") {
@@ -62,7 +56,32 @@ else {
 }
 
 console.log(jsonprojetos);
-for (const projeto of jsonprojetos) {
-    console.log(projeto);   
+for (const projeto of jsonprojetos) { 
     CreateProjeto(projeto);
 }
+
+document.getElementById("btn-filtrar").addEventListener("click", async () => {
+    document.getElementById("secao-projeto").innerHTML = "";
+    
+    let nome;
+    let lider;
+    try { nome = document.getElementById("filtro_nome").value; }
+    catch { nome = ""; }
+    try {lider = document.getElementById("filtro_lider").value; }
+    catch { lider = ""; }
+    
+    console.log(nome);
+    console.log(lider);
+    if (usuario.papel === "Administrador") {
+        jsonprojetos = await ListarProjetosApi(nome, lider);
+    }
+
+    else {
+        jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario, nome, lider);
+    }
+
+    for (const projeto of jsonprojetos) {   
+        CreateProjeto(projeto);
+    }
+
+}); 

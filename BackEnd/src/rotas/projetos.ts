@@ -16,22 +16,33 @@ const router = Router();
 // GET PROJETOS
 router.get("/", async (req: Request, res: Response) => {
     //retorna todos os projetos
-    const id  = Number(req.query.id_usuario);
+    const id  = Number(req.query.id);
     const id_projeto  = Number(req.query.id_projeto);
+    let [projetos] = await Conexao.query<ProjetoRow[]>(
+        "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
+        "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario;");
+
     if (id){
-        const [projetos] = await Conexao.query<ProjetoRow[]>(
-            "select Distinct projeto.id_projeto, projeto.titulo, projeto.id_lider " +
-            "from usuario, usuario_projeto_participa, projeto " +
-            "where ? = usuario_projeto_participa.id_usuario " + 
-            "and projeto.id_projeto = usuario_projeto_participa.id_projeto;", [id]
-        );    
-        return res.status(200).json(projetos);
-    }else if(id_projeto){
-        const [projetos] = await Conexao.query<ProjetoRow[]>("select * from projeto where id_projeto = ?", [id_projeto]);
-        return res.status(200).json(projetos);
+        [projetos] = await Conexao.query<ProjetoRow[]>(
+            "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
+            "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario " +
+            "INNER JOIN usuario_projeto_participa ON projeto.id_projeto = usuario_projeto_participa.id_projeto " +
+            "WHERE usuario_projeto_participa.id_usuario = ?;", [id] );
     }
-    const [projetos] = await Conexao.query<ProjetoRow[]>("SELECT * FROM projeto");
-    return res.status(200).json(projetos);
+
+    else if(id_projeto){
+        [projetos] = await Conexao.query<ProjetoRow[]>("select * from projeto where id_projeto = ?", [id_projeto]);
+    }
+
+    const nome = req.query.nome; console.log(nome);
+    const lider = req.query.lider; console.log(lider);
+    let [filtro] = [projetos];
+
+    if (nome) { filtro = filtro.filter((i) => i.titulo.includes(nome.toString())); }
+
+    if (lider) { filtro = filtro.filter((i) => i.nome.includes(lider)); } console.log(filtro);
+
+    return res.status(200).json(filtro);
 });
 
 router.post("/", (req: Request, res: Response) => {

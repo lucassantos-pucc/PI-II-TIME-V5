@@ -112,13 +112,28 @@ export async function CadastrarUsuarioApi(usuario) {
 
 // Projetos
 
-export async function ListarProjetosApi() {
-    const resposta = await fetch(`${Url_Api}/projetos/`);
+export async function ListarProjetosApi(nome = "", lider = "") {
+    let Url = `${Url_Api}/projetos/?`;
+    if (nome) {
+        Url += `nome=${encodeURIComponent(nome)}&`;
+    }
+    if (lider) {
+        Url += `lider=${encodeURIComponent(lider)}`;
+    } console.log(Url);
+    const resposta = await fetch(Url);
     return await TratarRespostaApi(resposta);
 }
 
-export async function ListarProjetosUsuarioApi(id) {
-    const resposta = await fetch(`${Url_Api}/projetos/?id=${id}`);
+export async function ListarProjetosUsuarioApi(id, nome = "", lider = "") {
+    let Url = `${Url_Api}/projetos/?id=${id}`;
+    if (nome) {
+        Url += `&nome=${encodeURIComponent(nome)}`;
+    }
+    if (lider) {
+        Url += `&lider=${encodeURIComponent(lider)}`;
+    }
+
+    const resposta = await fetch(Url);
     return await TratarRespostaApi(resposta);
 }
 export async function BuscarProjetoApi(id) {
