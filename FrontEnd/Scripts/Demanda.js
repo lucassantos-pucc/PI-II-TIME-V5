@@ -2,7 +2,7 @@
     Feito por: Kauã Gaiofato Santana Lima de Jesus
     RA: 26000195
 */
-
+import {ListarComentarios, CadastrarComentario, ListarUsuarioApi} from "./Api.js"
 let demanda = {}; // Demanda que está sendo mostrada nesta aba
 let comentarios = []; // Comentários da demanda
 
@@ -11,24 +11,13 @@ let comentarios = []; // Comentários da demanda
 function CarregarDemanda() {
     let salva = localStorage.getItem("DemandaAtual");
     sessionStorage.setItem("DemandaAtual", salva); // Guarda na aba, assim se abrir outra demanda em outra aba, esta nao muda
-    console.log(salva)
     demanda = JSON.parse(salva);
 }
 
-// Cada demanda tem a sua lista de comentários no localStorage
-function ChaveComentarios() {
-    return "comentarios:" + demanda.nome + "|" + demanda.projeto + "|" + demanda.DTcriacao;
+async function CarregarComentarios() {
+    comentarios = await ListarComentarios(demanda.id_demanda)
 }
 
-function CarregarComentarios() {
-    if (localStorage.getItem(ChaveComentarios())) {
-        comentarios = JSON.parse(localStorage.getItem(ChaveComentarios()));
-    }
-}
-
-function SalvarComentarios() {
-    localStorage.setItem(ChaveComentarios(), JSON.stringify(comentarios));
-}
 
 
 function PriorityColor(p) {
@@ -72,11 +61,11 @@ function StatusColor(p) {
         p.classList.add("status-andamento");
     }
 
-    else if (stat.includes("revisão") || stat.includes("revisão")) {
+    else if (stat.includes("revisao") || stat.includes("revisão")) {
         p.classList.add("status-revisao");
     }
 
-    else if (stat.includes("concluída") || stat.includes("concluída")) {
+    else if (stat.includes("concluido") || stat.includes("concluída")) {
         p.classList.add("status-concluido");
     }
 
@@ -89,7 +78,7 @@ function StatusColor(p) {
 // Coloca as informações da demanda na tela
 function ShowDemanda() {
     document.title = demanda.titulo + " - Demanda";
-
+    console.log(demanda)
     document.getElementById("dem-nome").textContent = demanda.titulo;
     document.getElementById("dem-tipo").textContent = demanda.tipo;
     document.getElementById("dem-prioridade").textContent = demanda.prioridade;
@@ -108,13 +97,14 @@ function ShowDemanda() {
 
 
 // Cria um comentário na tela
-function CreateComentario(info, posicao) {
+async function CreateComentario(info) {
+    const auto = await ListarUsuarioApi(info.id_autor); //autor
     const Com_Cr = document.createElement('li'); // Comentário Criado
     Com_Cr.classList.add("dem-coment");
 
     const avatar = document.createElement('div');
     avatar.classList.add("dem-avatar");
-    avatar.appendChild(document.createTextNode(info.autor.charAt(0).toUpperCase())); // Primeira letra do nome
+    avatar.appendChild(document.createTextNode(auto.usuario.nome.charAt(0).toUpperCase())); // Primeira letra do nome
     Com_Cr.appendChild(avatar);
 
     const caixa = document.createElement('div');
@@ -124,7 +114,7 @@ function CreateComentario(info, posicao) {
     cab.classList.add("dem-caixa-cab");
 
     const autor = document.createElement('span');
-    autor.appendChild(document.createTextNode(info.autor + " comentou em " + FormatarData(info.data)));
+    autor.appendChild(document.createTextNode(auto.usuario.nome + " comentou em " + FormatarData(info.dataHora)));
     cab.appendChild(autor);
 
 
@@ -132,7 +122,7 @@ function CreateComentario(info, posicao) {
 
     const texto = document.createElement('p');
     texto.classList.add("dem-caixa-corpo");
-    texto.appendChild(document.createTextNode(info.texto));
+    texto.appendChild(document.createTextNode(info.conteudo));
     caixa.appendChild(texto);
 
     Com_Cr.appendChild(caixa);
@@ -147,9 +137,8 @@ function FormatarData(data) {
 // Apaga a lista da tela e cria todos os comentários de novo
 function ShowComentarios() {
     document.getElementById("dem-lista").innerHTML = "";
-
     for (let i = 0; i < comentarios.length; i++) {
-        CreateComentario(comentarios[i], i);
+        CreateComentario(comentarios[i]);
     }
 
     document.getElementById("dem-contador").textContent = comentarios.length;
@@ -160,35 +149,32 @@ function ShowComentarios() {
 
 // Habilita o botão de comentar só quando o nome e o comentário estiverem preenchidos
 function ValidarComentario() {
-    const autor = document.getElementById("dem-autor").value.trim();
     const texto = document.getElementById("dem-texto").value.trim();
-
-    document.getElementById("dem-enviar").disabled = !(autor && texto);
+    document.getElementById("dem-enviar").disabled = texto.length === 0;
 }
 
-function AddComentario(event) {
+async function AddComentario(event) {
     event.preventDefault(); // Não deixa o formulário recarregar a página
 
     const autor = document.getElementById("dem-autor");
     const texto = document.getElementById("dem-texto");
 
     if (!autor.value.trim() || !texto.value.trim()) {
+        console.log("Valores invalidos")
         return;
     }
 
-    localStorage.setItem("ComentarioAutor", autor.value.trim()); // Lembra o nome para os próximos comentários
+    const comentario = {
+        id_autor: JSON.parse(localStorage.getItem("UsuarioLogado")).id_usuario,
+        conteudo: texto.value
+    }
+    console.log(comentario)
+    const response = await CadastrarComentario(demanda.id_demanda, comentario )
+    console.log(response)
 
-    comentarios.push({
-        autor: autor.value.trim(),
-        texto: texto.value.trim(),
-        data: new Date().toISOString()
-    });
-
-    SalvarComentarios();
+    await CarregarComentarios();
     ShowComentarios();
-
     texto.value = ""; // Limpa o campo
-    ValidarComentario();
 }
 
 // O cadastro lê a DemandaAtual do localStorage, então salva a desta aba antes de ir para lá
@@ -203,30 +189,17 @@ CarregarDemanda();
 if (!demanda.titulo) { // Abriu a página sem clicar em uma demanda
     document.getElementById("dem-vazio").hidden = false;
 }
-
 else {
     document.getElementById("dem-conteudo").hidden = false;
 
     ShowDemanda();
 
-    CarregarComentarios();
+    await CarregarComentarios();
     ShowComentarios();
-
-    document.getElementById("dem-autor").value = localStorage.getItem("ComentarioAutor") || "";
+    document.getElementById("dem-autor").value = JSON.parse(localStorage.getItem("UsuarioLogado")).nome;
     ValidarComentario();
 
-    document.getElementById("dem-autor").addEventListener("input", ValidarComentario);
     document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
-
-    document.getElementById("dem-texto").addEventListener("keydown", console.log("Keydown"));
-
     document.getElementById("dem-form").addEventListener("submit", AddComentario);
     document.getElementById("dem-editar").addEventListener("click", Edit);
-
-    document.getElementById("dem-historico").addEventListener("click", () => {
-        console.log("Clicou no botão de historicoo!");
-    window.location.href = "historico.html";
-});
-
-
 }

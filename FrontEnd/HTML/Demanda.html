@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="../Styles/Demanda_Style.css">
 
     <script src="../Scripts/Menu.js" defer></script>
-    <script src="../Scripts/Demanda.js" defer></script>
+    <script src="../Scripts/Demanda.js" type="module" defer></script>
 </head>
 
 <body>
@@ -50,13 +50,13 @@
                     <h3 id="dem-coment-titulo">Comentários <span class="dem-contador" id="dem-contador">0</span></h3>
                     <form class="dem-caixa" id="dem-form">
                         <!-- Checkbox invisível para para abrir e fechar comentario via CSS-->
-                        <input type="checkbox" id="dem-comentario-escondido" class="invisivel" checked>
+                        <input type="checkbox" id="dem-comentario-escondido" class="invisivel">
                         
                         <label for="dem-comentario-escondido" class="dem-caixa-cab">+ Novo comentário</label>
                         
                         <div class="dem-caixa-corpo">
                             <label class="dem-label" for="dem-autor">Seu nome</label>
-                            <input type="text" id="dem-autor" maxlength="60" placeholder="Seu nome">
+                            <input type="text" id="dem-autor" maxlength="60" placeholder="" disabled>
 
                             <label class="dem-label" for="dem-texto">Comentário</label>
                             <textarea id="dem-texto" maxlength="1000" rows="4" placeholder="Escreva um comentário..."></textarea>

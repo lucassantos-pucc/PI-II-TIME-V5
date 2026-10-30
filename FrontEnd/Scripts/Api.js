@@ -55,7 +55,7 @@ export async function CadastrarDemandasApi(demanda) {
     return await TratarRespostaApi(resposta);
 }
 
-export async function EditarDemandasApi(id, demanda) { // TODO Ainda nao existe a rota Put, portanto essa função é um placeholder
+export async function EditarDemandasApi(id, demanda) { 
     const resposta = await fetch(`${Url_Api}/demandas/${id}`,
         {
             method: "PUT",
@@ -169,4 +169,38 @@ export async function RegistrarHistoricoApi(historico) {
         }
     );
     return await TratarRespostaApi(resposta);
+}
+
+// Comentarios
+export async function ListarComentarios(id){
+    const resposta = await fetch(`${Url_Api}/demandas/${id}/comentarios`);
+    return await TratarRespostaApi(resposta);
+}
+
+export async function CadastrarComentario(id_demanda,comentario){
+    const resposta = await fetch(`${Url_Api}/demandas/${id_demanda}/comentarios`,{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(comentario)
+    });
+    return await TratarRespostaApi(resposta);
+}
+
+const cacheFeriados = {}; // um ano só é buscado uma vez
+
+export async function BuscarFeriadoNacional(dataISO) { // dataISO = "yyyy-mm-dd"
+    const ano = dataISO.slice(0, 4);
+
+    cacheFeriados[ano] ??= fetch(`https://brasilapi.com.br/api/feriados/v1/${ano}`)
+        .then(r => {
+            if (!r.ok) throw new Error("Falha ao consultar a API de feriados.");
+            return r.json();
+        })
+        .catch(e => {
+            delete cacheFeriados[ano]; // não guarda a falha no cache
+            throw e;
+        });
+
+    const feriados = await cacheFeriados[ano];
+    return feriados.find(f => f.date === dataISO) ?? null; // feriado ou null
 }
