@@ -191,7 +191,6 @@ form.addEventListener("submit",async function (event) {
         id_projeto: Number(localStorage.getItem("Projeto")),
         id_responsavel: responsavel.value !== "" ? id_responsavel : null ,
     };
-
     try{
         if (editar ===0){
             console.log(await CadastrarDemandasApi(demanda));

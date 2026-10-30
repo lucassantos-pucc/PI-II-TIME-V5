@@ -12,16 +12,20 @@ RA: 26887166
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Demandas</title>
+    <title>Cadastro de Demandas</title>
+
     <link rel="stylesheet" href="../Styles/Style.css">
     <link rel="stylesheet" href="../Styles/Cadastro_Demanda.css">
-    <script src="../Scripts/Cadastro_Demanda.js" defer></script>
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    
+    <script src="../Scripts/Menu.js" defer></script>
+    <script src="../Scripts/Cadastro_Demanda.js" type="module" defer></script>
 </head>
 <body>
 
     <form>
-        <h1>Edição de Demandas</h1>
 
+        <h1 id="cadastro">Cadastro de Demandas</h1>
         <div class="campo">
             <label for="titulo_id">Título</label>
             <input type="text" name="Titulo" id="titulo_id">
@@ -47,9 +51,9 @@ RA: 26887166
             <select id="status_id" name="Status">
                 <option value="Aberta">Aberta</option>
                 <option value="Em andamento">Em Andamento</option>
-                <option value="Em revisao">Em Revisão</option>
-                <option value="Concluida">Concluída</option>
-                <option value="Cancelada">Cancelada</option>
+                <option value="Em revisão">Em Revisão</option>
+                <option value="Concluída">Concluída</option>
+                <option value="Cancelado">Cancelado</option>
             </select>
         </div>
 
@@ -78,6 +82,5 @@ RA: 26887166
             <button id="botaoCriar_id" class="btn" type="submit" value="Criar">Criar</button>
         </div>
     </form>
-
 </body>
 </html>
