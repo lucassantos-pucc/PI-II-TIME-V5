@@ -4,12 +4,6 @@
 let demanda = {}; // Demanda que está sendo mostrada nesta aba
 let comentarios = []; // Comentários da demanda
 
-//Dados de teste
-const papel = [
-    {papel: 'Administrador' },
-    {papel: 'Lider de Projeto' },
-    {papel: 'Membro de Equipe' }
-];
 
 // Pega a demanda: primeiro a que esta aba já guardou, senão a que a listagem salvou
 function CarregarDemanda() {
@@ -95,7 +89,7 @@ function mudarStatus() {
     const opcoes = [
       { texto: 'Aberta', valor: 'Aberta' },
       { texto: 'Em andamento', valor: 'Em andamento' },
-      { texto: 'Em revisao', valor: 'Em revisao' },
+      { texto: 'Em revisão', valor: 'Em revisao' },
       { texto: 'Concluida', valor: 'Concluida' },
       { texto: 'Cancelado', valor: 'Cancelado' }
     ];  
@@ -105,44 +99,74 @@ function mudarStatus() {
 
     // REGRAS DE TRANSIÇÃO:
     // Aberta -> Em andamento
-    // Em andamento -> Em revisao
+    // Em andamento -> Em revisao 
     // Em revisao -> Concluida / Em andamento
     // Qualquer status -> Cancelada
+
+    //Membro de equipe só pode mudar:
+    // Aberta-> Em andamento;
+    // Em andamento -> Em revisao
 
     if (atual !== 'Concluida' && atual !== 'Cancelado') { // Ajustado para 'Cancelada'
       const escolha = document.createElement('select');
       escolha.id = 'status_id';
       escolha.name = 'Status';  
 
+      // Item inicial, para o "change" poder disparar mesmo com uma só opção
+      const inicial = document.createElement('option');
+      inicial.text = 'Alterar status...';
+      inicial.value = '';
+      inicial.disabled = true;
+      inicial.selected = true;
+      escolha.appendChild(inicial);
+
       opcoes.forEach(item => {
       const option = document.createElement('option');
       option.value = item.valor;
-      option.text = item.texto;     
-      if (atual === 'Aberta' && (item.valor === 'Em andamento' || item.valor === 'Cancelado')) {
+      option.text = item.texto;   
+      
+      if (usuario.papel === "Membro da equipe") {
+        if (atual === 'Aberta' && item.valor === 'Em andamento'){
+          escolha.appendChild(option);
+        }
+        else if (atual === 'Em andamento' && item.valor === 'Em revisao'){
+          escolha.appendChild(option);
+        }
+      }
+
+      else {
+        if (atual === 'Aberta' && (item.valor === 'Em andamento' || item.valor === 'Cancelado')) {
         escolha.appendChild(option);
       } else if (atual === 'Em andamento' && (item.valor === 'Em revisao' || item.valor === 'Cancelado')) {
         escolha.appendChild(option);
       } else if (atual === 'Em revisao' && (item.valor === "Em andamento" || item.valor === 'Concluida' || item.valor === 'Cancelado')) {
         escolha.appendChild(option);
       }
-      });   
+        }
+      });  
 
-      dd.appendChild(escolha);  
+      dd.appendChild(escolha); 
+
       function atualizarSelo() {
-        seloStatus.textContent = escolha.options[escolha.selectedIndex].text;
-        console.log(seloStatus);
+        const novo = escolha.options[escolha.selectedIndex].text;
+
+        seloStatus.textContent = novo;
         StatusColor(seloStatus);
 
-        demanda.status = escolha.options[escolha.selectedIndex].text;
-        localStorage.setItem("DemandaAtual", JSON.stringify(demanda));
+        demanda.statusDemanda = novo;
+        const json = JSON.stringify(demanda);
+        localStorage.setItem("DemandaAtual", json);
+        sessionStorage.setItem("DemandaAtual", json);
+
       } 
 
       escolha.addEventListener('change', item => {
         console.log('Valor selecionado:', item.target.value);
         atualizarSelo();
       });
-  } 
-} 
+      }
+}
+  
 
 // Coloca as informações da demanda na tela
 function ShowDemanda() {
@@ -150,11 +174,11 @@ function ShowDemanda() {
   document.getElementById("dem-nome").textContent = demanda.titulo;
   document.getElementById("dem-tipo").textContent = demanda.tipo;
   document.getElementById("dem-prioridade").textContent = demanda.prioridade;
-  document.getElementById("dem-status").textContent = demanda.status;
-  document.getElementById("dem-projeto").textContent = demanda.id_projeto;
+  document.getElementById("dem-status").textContent = demanda.statusDemanda;
+  document.getElementById("dem-projeto").textContent = demanda.projeto;
   document.getElementById("dem-responsavel").textContent = demanda.responsavel;
-  document.getElementById("dem-criacao").textContent = demanda.data_criacao;
-  document.getElementById("dem-prazo").textContent = demanda.prazo_finalizacao;
+  document.getElementById("dem-criacao").textContent = demanda.dataCriacao;
+  document.getElementById("dem-prazo").textContent = demanda.prazoFinalizacao;
   
   demanda.descricao = demanda.descricao ? demanda.descricao : "Sem descrição"; 
   document.getElementById("dem-descricao").textContent = demanda.descricao;
@@ -240,7 +264,7 @@ function AddComentario(event) {
 // O cadastro lê a DemandaAtual do localStorage, então salva a desta aba antes de ir para lá
 function Edit() {
   localStorage.setItem("DemandaAtual", JSON.stringify(demanda));
-  open("Cadastro_Demanda.html", "_self");
+  open("Editar_Demanda.html", "_self");
 }
 
 function Historico() {
@@ -248,6 +272,8 @@ function Historico() {
     open("historico.html", "_self");
 }
 // Inicialização da página
+const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null"); 
+
 CarregarDemanda();
 
 // Verificação adaptada para aceitar tanto .nome quanto .titulo
@@ -266,7 +292,16 @@ else {
   document.getElementById("dem-autor").addEventListener("input", ValidarComentario);
   document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
   document.getElementById("dem-form").addEventListener("submit", AddComentario);
-  document.getElementById("dem-editar").addEventListener("click", Edit);
-  document.getElementById("dem-historico").addEventListener("click", Historico);
   
+  const botaoEditar = document.getElementById("dem-editar");
+
+  //Se for membro de equipe, não pode editar demanda
+  if (usuario.papel === "Membro da equipe") {
+    botaoEditar.style.display = "none"; 
+  }
+  else {
+    botaoEditar.addEventListener("click", Edit);
+  }  
+  document.getElementById("dem-historico").addEventListener("click", Historico);
+
 }

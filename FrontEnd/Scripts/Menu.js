@@ -3,6 +3,11 @@
     RA: 26000195
 */
 
+// Carrega botões do menu
+function CreateButton() {
+
+}
+
 /* 
     Alterado por: Lucas Studach Kaid Ludemann
     RA: 26006454
@@ -146,6 +151,14 @@ function MarkCurrentPage() {
         }
     }
 }
+
+// Carrega os elementos de acordo com o nível de acesso
+const Usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
+
+if (Usuario.papel === "Administrador") {
+    
+}
+
  
 // Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
 document.addEventListener('DOMContentLoaded', () => {
