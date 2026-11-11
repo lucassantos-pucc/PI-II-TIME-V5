@@ -145,9 +145,11 @@ document.getElementById("btn-filtrar")?.addEventListener("click", async () => {
     }
 });
 
+// Inviabilizar o Membro da equipe de criar demanda
 if (usuario.papel === "Membro da equipe"){
     document.getElementById("footer").hidden = true;
 }
+
 if (!usuario || !id_projeto) {
     console.log("usuario ou projeto faltando");
 } else {

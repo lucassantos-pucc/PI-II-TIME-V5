@@ -45,12 +45,20 @@ function ProjetoContent(classe, texto) {
 
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
 let jsonprojetos;
+
+// Inviabilizar o Membro da equipe de criar projeto
+if (usuario.papel === "Membro da equipe"){
+    document.getElementById("footer").style.display = "none";
+}
+
 if (usuario.papel === "Administrador") {
     jsonprojetos = await ListarProjetosApi();
 }
 else {
     jsonprojetos = await ListarProjetosUsuarioApi(usuario.id_usuario);
 }
+
+
 for (const projeto of jsonprojetos) { 
     CreateProjeto(projeto);
 }
@@ -76,3 +84,5 @@ document.getElementById("btn-filtrar").addEventListener("click", async () => {
         CreateProjeto(projeto);
     }
 }); 
+
+

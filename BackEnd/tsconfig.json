@@ -1,6 +1,6 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  "extends": "./node_modules/@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     // File Layout
     "rootDir": "./src",

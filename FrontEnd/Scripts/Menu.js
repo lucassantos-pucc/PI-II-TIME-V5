@@ -11,15 +11,13 @@
 */
 
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
-const tipoUsuario = usuarioLogado ? usuarioLogado.tipo: null;
-console.log(tipoUsuario);
+const tipoUsuario = usuarioLogado ? usuarioLogado.papel: null;
 
 
 const menuAdm = [
     { texto: 'Dashboard de Demandas', href: 'Dashboard_Demanda.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Histórico',             href: 'historico.html' },
-    { texto: 'Dashboard de Projetos', href: 'Dashboard_Projeto.html' },
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Usuários',              href: 'Listagem_Usuario.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
@@ -37,15 +35,14 @@ const menuLider = [
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
-]
+];
 
 const menusPorTipo = {
     "Administrador": menuAdm,
     "Lider de Projeto": menuLider,
-    "Membro de equipe": menuMembro
+    "Membro da equipe": menuMembro
 };
 
-// Carrega o Menu.html e coloca o conteúdo dentro da página atual
 
 function criarMenu() {
         const linksMenu = menusPorTipo[tipoUsuario];
@@ -152,7 +149,7 @@ function MarkCurrentPage() {
 }
 
 
-// Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
-//if (document.querySelector("body > header")) { 
-//    LoadMenu(); Temporario até arrumar
-//}
+//Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
+if (document.querySelector("body > header")) { 
+   LoadMenu(); 
+}
