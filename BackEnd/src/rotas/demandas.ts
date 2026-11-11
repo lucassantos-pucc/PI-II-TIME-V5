@@ -102,18 +102,25 @@ router.post("/", async (req:Request, res:Response)=>{
             mensagem: "titulo, tipo, prioridade, id_projeto e statusDemanda são obrigatorios"
         })
     }
+
     let statusFinal: Status;
-    if(!["Defeito", "Tarefa", "Melhoria", "Documentação"].includes(tipo)){
+    if(!["Defeito", "Tarefa", "Melhoria", "Documentação"].includes(tipo)) {
         return res.status(400).json({ mensagem: "Tipo inválido."});
     }
-    if(!["Baixa", "Média", "Alta", "Crítica"].includes(prioridade)){
+
+    if(!["Baixa", "Média", "Alta", "Crítica"].includes(prioridade)) {
         return res.status(400).json({mensagem: "Prioridade inválida."});
     }
-    if(!statusDemanda){
+
+    if(!statusDemanda) {
         statusFinal = "Aberta";
-    }else if(!["Aberta", "Em andamento", "Em revisão", "Concluída"].includes(statusDemanda)){
+    }
+    
+    else if(!["Aberta", "Em andamento", "Em revisão", "Concluída"].includes(statusDemanda)) { 
         return res.status(400).json({mensagem: "Status inválido."});
-    }else{
+    }
+
+    else {
         statusFinal = statusDemanda as Status;
     }
 
@@ -174,8 +181,8 @@ PUT /999
 */
 router.put("/:id", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
-    const {titulo, tipo, prazoFinalizacao, prioridade, descricao, id_responsavel} = req.body;
- 
+    const {titulo, tipo, statusDemanda, prazoFinalizacao, prioridade, descricao, id_responsavel} = req.body;
+
     const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
     const demanda = demandas.find((d) => d.id_demanda === id);
  
@@ -202,6 +209,13 @@ router.put("/:id", async (req: Request, res: Response) => {
         }
         campos.push("tipo = ?");
         valores.push(tipo);
+    }
+    if (statusDemanda !== undefined) {
+        if (!["Aberta", "Em andamento", "Em revisão", "Concluída", "Cancelada"].includes(statusDemanda)) {
+            return res.status(400).json({ mensagem: "Status inválido." });
+        }
+        campos.push("statusDemanda = ?");
+        valores.push(statusDemanda);
     }
     if (prioridade !== undefined) {
         if (!["Baixa", "Média", "Alta", "Crítica"].includes(prioridade)) {
@@ -296,57 +310,6 @@ router.patch("/:id/cancelar", async (req: Request, res: Response) => {
     );
  
     return res.status(200).json({ id_demanda: id, statusDemanda: "Cancelada" as Status });
-});
-
-router.put("/:id", async (req: Request, res: Response) => {
-    const id = Number(req.params.id);
-    const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
-    const demanda = demandas.find((d) => d.id === id);
-
-    if (!demanda) {
-        return res.status(404).json({ error: "Demanda não encontrada" });
-    }
-
-    //pega dados apartir da requisicao
-    const {titulo, tipo, prazo_finalizacao, prioridade, descricao} = req.body; // TODO Implementar status dinamico
-
-    //validacao dos dados
-    if(!titulo || !tipo || !prioridade || !descricao){
-        return res.status(400).json({
-            mensagem: "titulo, tipo, prioridade e descricao são obrigatorios"
-        })
-    }
-
-    if(tipo !== "Defeito" && tipo !== "Tarefa" && tipo !== "Melhoria" && tipo !== "Documentação" ){
-        return res.status(400).json({ mensagem: "Tipo inválido."});
-    }
-    if(prioridade !== "Baixa"  && prioridade !== "Média"  && prioridade !== "Alta" && prioridade !== "Crítica"){
-        return res.status(400).json({mensagem: "Prioridade inválida."});
-    }
-
-    let prazo: Date | null;
-
-    //se tiver um prazo de finalização (em string) converte para Date
-    if (prazo_finalizacao) {
-        prazo = new Date(prazo_finalizacao);
-    } 
-    // se n tiver deixa null
-    else {
-        prazo = null;
-    }
-
-    demanda.titulo = titulo;
-    demanda.tipo = tipo;
-    demanda.data_ultima_alteracao = new Date();
-    demanda.prioridade = prioridade;
-    demanda.prazo_finalizacao = prazo;
-    demanda.descricao = descricao;
-
-    return res.status(200).json(demanda);
-});
-
-router.delete("/", (req: Request, res: Response) => {
-
 });
 
 export default router;

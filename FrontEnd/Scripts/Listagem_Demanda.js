@@ -94,6 +94,7 @@ function StatusColor(p) {
     else if (stat.includes("andamento")) p.classList.add("status-andamento");
     else if (stat.includes("revisão")) p.classList.add("status-revisao");
     else if (stat.includes("concluída")) p.classList.add("status-concluido");
+    else if (stat.includes("cancelada")) p.classList.add("status-cancelada");
 }
 const id_projeto = (localStorage.getItem("Projeto"));
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
@@ -137,7 +138,8 @@ document.getElementById("btn-filtrar")?.addEventListener("click", async () => {
     catch { responsavel = ""; }
     try {
         await CarregarDemandas({ tipo, prioridade, status, responsavel });
-    } catch (e) {
+    }
+    catch (e) {
         console.error(e);
         document.getElementById("secao-demanda").textContent = "Não foi possível carregar as demandas.";
     }

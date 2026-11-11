@@ -153,6 +153,6 @@ function MarkCurrentPage() {
 
 
 // Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
-if (document.querySelector("body > header")) {
-    LoadMenu();
-}
+//if (document.querySelector("body > header")) { 
+//    LoadMenu(); Temporario até arrumar
+//}

@@ -69,8 +69,8 @@ function StatusColor(p) {
         p.classList.add("status-concluido");
     }
 
-    else if (stat.includes("cancelado") || stat.includes("cancelada")) {
-        p.classList.add("status-cancelado");
+    else if (stat.includes("cancelada") || stat.includes("cancelada")) {
+        p.classList.add("status-cancelada");
     }
 }
 

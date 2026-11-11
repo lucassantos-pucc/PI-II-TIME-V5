@@ -80,12 +80,12 @@ RA: 26000195
     border-color: #a855f7;
 }
 
-.historico-cancelado {
+.historico-cancelada {
     border: 1px solid #ef44444d;
     background: #ef44441a;
 }
 
-.historico-cancelado:hover {
+.historico-cancelada:hover {
     transform: translateY(-2px);
     background: #ef444433;
     border-color: #ef444474;

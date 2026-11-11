@@ -44,7 +44,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 router.post("/", (req: Request, res: Response) => {
-
+    
 });
 
 router.put("/:id", (req: Request, res: Response) => {

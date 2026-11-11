@@ -106,7 +106,7 @@ function StatusColorDialog(p) {
         "status-ativo",
         "status-andamento",
         "status-concluido",
-        "status-cancelado"
+        "status-cancelada"
     );
 
     if (status.includes("ativo")) { //adicionar baseado no texto
@@ -115,8 +115,8 @@ function StatusColorDialog(p) {
         p.classList.add("status-andamento");
     } else if (status.includes("concluido")) {
         p.classList.add("status-concluido");
-    } else if (status.includes("cancelado")) {
-        p.classList.add("status-cancelado");
+    } else if (status.includes("cancelada")) {
+        p.classList.add("status-cancelada");
     }
 }
 

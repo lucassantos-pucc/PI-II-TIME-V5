@@ -14,11 +14,11 @@ const TRANSICOES_MEMBRO = {
 };
 
 const TRANSICOES = { 
-    "Aberta":       ["Em andamento", "Cancelado"],
-    "Em andamento": ["Em revisão", "Cancelado"],          
-    "Em revisão":   ["Concluída", "Em andamento", "Cancelado"],
+    "Aberta":       ["Em andamento", "Cancelada"],
+    "Em andamento": ["Em revisão", "Cancelada"],          
+    "Em revisão":   ["Concluída", "Em andamento", "Cancelada"],
     "Concluída":    [],                                    
-    "Cancelado":    []
+    "Cancelada":    []
 };
 function StatusPermitidos(statusAtual) {
     const tabela = ehMembro ? TRANSICOES_MEMBRO : TRANSICOES;
@@ -123,7 +123,7 @@ if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual")
     id_demanda = demandaAtual.id_demanda;
     statusOriginal = demandaAtual.statusDemanda;
     AplicarRegrasDeStatus(statusOriginal);
-    if (ehMembro) TravarCamposParaMembro();
+    if (ehMembro) { TravarCamposParaMembro(); }
     
 }
 if (editar === 0 && ehMembro) {
@@ -191,11 +191,14 @@ form.addEventListener("submit",async function (event) {
         id_projeto: Number(localStorage.getItem("Projeto")),
         id_responsavel: responsavel.value !== "" ? id_responsavel : null ,
     };
-    try{
-        if (editar ===0){
+
+    try {
+        if (editar === 0) {
             console.log(await CadastrarDemandasApi(demanda));
             open("Listagem_Demanda.html", "_self");
-        }else{        
+        }
+        
+        else {        
             const antiga = JSON.parse(localStorage.getItem("DemandaAtual") || "{}");
             const descricaoHistorico = GerarDescricaoHistorico(antiga, {
                 ...demanda,
@@ -228,7 +231,9 @@ form.addEventListener("submit",async function (event) {
             sessionStorage.setItem("DemandaAtual", json);
             open("Demanda.html", "_self");
         }
-    }catch (e){
+    }
+
+    catch (e) {
         alert(e.message)
     }
 });
