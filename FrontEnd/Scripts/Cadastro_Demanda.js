@@ -1,13 +1,20 @@
 /*
     Feito por Arthur Cardoso Martin
     RA: 26006506
+    Modificado por: Lucas Studach Kaid Ludemann
+    RA: 26006454 
 */
 
-import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeriadoNacional, RegistrarHistoricoApi } from "./Api.js";
+import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeriadoNacional, RegistrarHistoricoApi, BuscarVinculadosProjeto } from "./Api.js";
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
+const Projeto = JSON.parse(localStorage.getItem("Projeto") || "null");
+
 
 const ehMembro = usuarioLogado?.papel === "Membro da equipe";
-console.log(ehMembro);
+const id_usuario = usuarioLogado ? usuarioLogado.id_usuario: null;
+const id_projeto = Projeto? Projeto:null;
+
+
 const TRANSICOES_MEMBRO = {
     "Aberta":       ["Em andamento"],
     "Em andamento": ["Em revisão"]
@@ -58,6 +65,21 @@ const CAMPOS_HISTORICO = [
     ["descricao", "Descrição"],
 ];
 
+// Um dropdown para escolher um responsavel da demanda dentre os usuários do projeto
+async function DropdownResponsavel(id_projeto)
+{
+    const projeto = await BuscarVinculadosProjeto(id_usuario, id_projeto);
+    responsavel.innerHTML = "";
+
+    projeto.forEach(item => {
+        const escolha = document.createElement('option');
+        escolha.value = item.id_usuario;
+        escolha.innerHTML = item.nome;
+        responsavel.appendChild(escolha);
+        console.log(item);
+    });
+}
+
 // Deixa o valor legível e no mesmo formato nos dois lados da comparação
 function ValorParaHistorico(chave, valor) {
     if (valor === null || valor === undefined || String(valor).trim() === "") {
@@ -98,12 +120,15 @@ const form = document.querySelector("form");
 
 const titulo = document.getElementById("titulo_id");
 const prazo = document.getElementById("prazo_id");
-const responsavel = document.getElementById("Responsavel_id");
+const responsavel = document.getElementById("responsavel_id");
 const descricao = document.getElementById("descricao_id");
 const usuarios = await ListarUsuariosApi();
 let id_responsavel, id_demanda;
 let editar = 0;
 let prazoOriginal = "";
+
+//Criacao do dropdown
+await DropdownResponsavel(id_projeto);
 
 if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual") !== "{}") { // Pega os valores armazenados no localStorage e coloca nos inputs
     const demandaAtual = JSON.parse(localStorage.getItem("DemandaAtual"));
@@ -117,7 +142,7 @@ if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual")
     document.getElementById("prioridade_id").value = demandaAtual.prioridade;
     document.getElementById("status_id").value = demandaAtual.statusDemanda;
     document.getElementById("tipos_id").value = demandaAtual.tipo;
-    responsavel.value = demandaAtual.responsavel;
+    responsavel.value = demandaAtual.id_responsavel;
     descricao.value = demandaAtual.descricao;
     editar =1
     id_demanda = demandaAtual.id_demanda;
@@ -134,8 +159,9 @@ if (editar === 0 && ehMembro) {
 
 form.addEventListener("submit",async function (event) {
     event.preventDefault();
-    const nomeResp = responsavel.value.trim();
-    id_responsavel = undefined;
+
+    id_responsavel = responsavel.value !== "" ? Number(responsavel.value) : null;
+    const nomeResp = responsavel.selectedOptions[0]?.textContent ?? "";
     for (const usuario of usuarios.usuarios){
         if (nomeResp.toLowerCase() === usuario.nome.toLowerCase()) {
             id_responsavel = usuario.id_usuario;

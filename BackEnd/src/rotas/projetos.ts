@@ -3,6 +3,8 @@
     RA: 26887166
     Modificado por: Arthur Cardoso Martin
     RA: 26006506
+    Modificado por: Lucas Studach Kaid Ludemann
+    RA: 26006454 
 */
 
 //importando dados testes
@@ -22,7 +24,16 @@ router.get("/", async (req: Request, res: Response) => {
                 "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario "
     let [projetos] = await Conexao.query<ProjetoRow[]>(query);
 
-    if (id){
+    if(id && id_projeto){
+        let query2= "SELECT projeto.id_projeto, projeto.titulo, usuario_projeto_participa.id_usuario AS id_usuario, usuario.nome AS nome " +
+                    "FROM projeto " +
+                    "INNER JOIN usuario_projeto_participa ON projeto.id_projeto = usuario_projeto_participa.id_projeto " +
+                    "INNER JOIN usuario ON usuario.id_usuario = usuario_projeto_participa.id_usuario " +
+                    "WHERE projeto.id_projeto = ?";
+        [projetos] = await Conexao.query<ProjetoRow[]>(query2, [id_projeto]);
+    }
+
+    else if (id){
         [projetos] = await Conexao.query<ProjetoRow[]>(query + 
             "INNER JOIN usuario_projeto_participa ON projeto.id_projeto = usuario_projeto_participa.id_projeto " +
             "WHERE usuario_projeto_participa.id_usuario = ?", [id] );
@@ -31,6 +42,8 @@ router.get("/", async (req: Request, res: Response) => {
     else if(id_projeto){
         [projetos] = await Conexao.query<ProjetoRow[]>("select * from projeto where id_projeto = ?", [id_projeto]);
     }
+
+    
 
     const nome = req.query.nome; 
     const lider = req.query.lider; 

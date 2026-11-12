@@ -143,6 +143,11 @@ export async function BuscarProjetoApi(id) {
     return await TratarRespostaApi(resposta);
 }
 
+export async function BuscarVinculadosProjeto(id, id_projeto) {
+    const resposta = await fetch(`${Url_Api}/projetos/?id=${id}&id_projeto=${id_projeto}`);
+    return await TratarRespostaApi(resposta);
+}
+
 export async function CadastrarProjetosApi(projeto) {
     const resposta = await fetch(`${Url_Api}/projetos`,
         {

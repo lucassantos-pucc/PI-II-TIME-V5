@@ -1,6 +1,8 @@
 /*
     Feito por: Kauã Gaiofato Santana Lima de Jesus
     RA: 26000195
+    Modificado por: Lucas Studach Kaid Ludemann
+    RA: 26006454
 */
 import {ListarComentarios, CadastrarComentario, ListarUsuarioApi} from "./Api.js"
 let demanda = {}; // Demanda que está sendo mostrada nesta aba
@@ -182,8 +184,15 @@ function Edit() {
     open("Cadastro_Demanda.html", "_self");
 }
 
+function VoltarListagem(){
+    localStorage.setItem("DemandaAtual", "{}");
+    open("Listagem_Demanda.html", "_self");
+}
 
 CarregarDemanda();
+
+document.getElementById("dem-voltar-vazio").addEventListener("click", VoltarListagem);
+document.getElementById("dem-voltar").addEventListener("click", VoltarListagem);
 
 if (!demanda.titulo) { // Abriu a página sem clicar em uma demanda
     document.getElementById("dem-vazio").hidden = false;
