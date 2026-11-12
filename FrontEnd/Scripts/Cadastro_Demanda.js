@@ -6,8 +6,8 @@
 import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeriadoNacional, RegistrarHistoricoApi } from "./Api.js";
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 
-const ehMembro = usuarioLogado?.papel === "Membro da Equipe";
-
+const ehMembro = usuarioLogado?.papel === "Membro da equipe";
+console.log(ehMembro);
 const TRANSICOES_MEMBRO = {
     "Aberta":       ["Em andamento"],
     "Em andamento": ["Em revisão"]
@@ -108,7 +108,6 @@ let prazoOriginal = "";
 if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual") !== "{}") { // Pega os valores armazenados no localStorage e coloca nos inputs
     const demandaAtual = JSON.parse(localStorage.getItem("DemandaAtual"));
     titulo.value = demandaAtual.titulo;
-    console.log(demandaAtual.prazoFinalizacao)
     prazo.value = demandaAtual.prazoFinalizacao
         ? demandaAtual.prazoFinalizacao.split("/").reverse().join("-")
         : "";

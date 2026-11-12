@@ -12,9 +12,8 @@
 
 ## Instruções
 
-- Executar: 'npm i express', 'npm i dotenv'
-- Executar:  'npm i' e 'npx tsc' , vai criar as pastas do node_modules e lib
-- Criar uma instância local do mysql workbench em sua máquina local
+- Executar na pasta BackEnd: 'npm i' e 'npx tsc' , vai criar as pastas do node_modules e lib
+- Criar uma instância local do mysql workbench em sua máquina local e criar uma banco chamado PI2
 - Criar um arquivo na raiz do repositório chamado .env, e inserir o seguinte conteúdo:
     DB_HOST=localhost
     DB_USER={nome de usuario do mysql workbench}

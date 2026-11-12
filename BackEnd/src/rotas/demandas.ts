@@ -28,7 +28,7 @@ router.get("/", async (req: Request, res: Response) => {
     const id_usuario = Number(req.query.id_usuario);
     
     if (id_demanda){
-        const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda");
+        const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda WHERE id_demanda = ?", id_demanda);
         const demanda = demandas.find((d) => d.id_demanda === id_demanda);
         if (!demanda) {
             return res.status(404).json({ error: "Demanda não encontrada" });
@@ -39,7 +39,7 @@ router.get("/", async (req: Request, res: Response) => {
     let query = "SELECT demanda.id_demanda,  demanda.titulo, demanda.tipo, " +
         "demanda.dataCriacao, demanda.prazoFinalizacao, demanda.statusDemanda, " +
         "demanda.prioridade, demanda.dataAlteracao, demanda.descricao, demanda.id_responsavel, usuario.nome, demanda.id_projeto " +
-        "FROM demanda INNER JOIN usuario ON demanda.id_responsavel = usuario.id_usuario "
+        "FROM demanda LEFT JOIN usuario ON demanda.id_responsavel = usuario.id_usuario "
     let [demandas] = await Conexao.query<DemandaRow[]>(query);
     if (projeto){
         [demandas] = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ?", [projeto]);
@@ -49,6 +49,7 @@ router.get("/", async (req: Request, res: Response) => {
     if(id_usuario > 0){ 
         [demandas]  = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
     }
+    console.log(demandas);
     
     const tipo = req.query.tipo;
     const prioridade = req.query.prioridade;

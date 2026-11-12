@@ -203,15 +203,6 @@ else {
 
     const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 
-    const botaoEditar = document.getElementById("dem-editar");
-    //Se for membro de equipe, não pode editar demanda
-    if (usuario.papel === "Membro da equipe") {
-        botaoEditar.style.display = "none"; 
-    }
-    else {
-        botaoEditar.addEventListener("click", Edit);
-    }  
-
     document.getElementById("dem-editar").addEventListener("click", Edit);
     document.getElementById("dem-historico").addEventListener("click", () => {
     console.log("Clicou no botão de historicoo!");
