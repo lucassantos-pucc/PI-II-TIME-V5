@@ -112,7 +112,8 @@ if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual")
         ? demandaAtual.prazoFinalizacao.split("/").reverse().join("-")
         : "";
     prazoOriginal = prazo.value;
-    document.getElementById("cadastro").innerHTML = "Editar Demanda"
+    document.getElementById("cadastro").innerHTML = "Editar Demanda";
+    document.getElementById("botaoCriar_id").innerText = "Editar";
     document.getElementById("prioridade_id").value = demandaAtual.prioridade;
     document.getElementById("status_id").value = demandaAtual.statusDemanda;
     document.getElementById("tipos_id").value = demandaAtual.tipo;
