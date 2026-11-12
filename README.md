@@ -9,3 +9,17 @@
 - Luca de Oliveira Santos
 - Lucas Studach Kaid Ludemann
 - Vitor Kenzo Pina Takemasa
+
+## Instruções
+
+- Executar: 'npm i express', 'npm i dotenv'
+- Executar:  'npm i' e 'npx tsc' , vai criar as pastas do node_modules e lib
+- Criar uma instância local do mysql workbench em sua máquina local
+- Criar um arquivo na raiz do repositório chamado .env, e inserir o seguinte conteúdo:
+    DB_HOST=localhost
+    DB_USER={nome de usuario do mysql workbench}
+    DB_PASSWORD={senha do mysql workbench}
+    DB_NAME=PI2
+    DB_PORT=3306
+- Por fim, 'npm start' pra rodar o servidor
+- Caso existam inconsistências no banco, alterar a linha 77 do arquivo BackEnd/src/dados/database.ts para true, e depois retornar a false reiniciará o banco com dados pré definidos.

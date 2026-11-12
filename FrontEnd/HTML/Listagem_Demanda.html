@@ -27,11 +27,12 @@ RA: 26000195
         <h1 class="logo"><b>Listagem de Demandas</b></h1>
     </header>
     <!-- isso vai se usado para esconder o menu de pesquisa(gambiarra porque nao vimos javascript)--> 
-    <input type="checkbox" id="escondido" class="invisivel">
-    <a class="btn dem-btn" href="Dashboard_Demanda.html">&larr; Voltar para a dashboard</a>
-    <label for="escondido" class="btn-personalizado">Buscar / Filtrar</label>
+    <section class="btn-section">
+        <a class="btn dem-btn" href="Dashboard_Demanda.html">&larr; Voltar para a dashboard</a>
+        <input type="checkbox" id="escondido" class="invisivel">
+        <label for="escondido" class="btn-personalizado">Buscar / Filtrar</label>
         <div id="painel-pesquisa" class="painel-pesquisa">
-
+    
             <div class="grupo-filtro">
                 <label for="filtro_tipo">Tipo de Demanda</label>
                 <select id="filtro_tipo">
@@ -42,7 +43,7 @@ RA: 26000195
                     <option value="Documentação">Documentação</option>
                 </select>
             </div>
-
+    
             <div class="grupo-filtro">
                 <label for="filtro_prioridade">Prioridade</label>
                 <select id="filtro_prioridade">
@@ -53,7 +54,7 @@ RA: 26000195
                     <option value="Crítica">Crítica</option>
                 </select>
             </div>
-
+    
             <div class="grupo-filtro">
                 <label for="filtro_status">Status</label>
                 <select id="filtro_status">
@@ -65,16 +66,17 @@ RA: 26000195
                     <option value="Cancelada">Cancelada</option>
                 </select>
             </div>
-
+    
             <div class="grupo-filtro">
                 <label for="filtro_responsavel">Responsável</label>
                 <input type="text" id="filtro_responsavel" placeholder="Nome do responsável...">
             </div>
-
-        <div class="grupo-botao-filtro">
-            <button id="btn-filtrar" class="btn-personalizado" type="button">Aplicar Filtros</button>
+    
+            <div class="grupo-botao-filtro">
+                <button id="btn-filtrar" class="btn-personalizado" type="button">Aplicar Filtros</button>
+            </div>
         </div>
-    </div>
+    </section>
 
     <!-- !! Podem tirar se quiserem, deixei pra navegacao ser mais rapida pra testar -->
 

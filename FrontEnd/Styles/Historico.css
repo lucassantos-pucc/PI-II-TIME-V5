@@ -15,6 +15,18 @@ RA: 26000195
     box-sizing: border-box;
 }
 
+.dem-btn {
+    margin: 0;
+    padding: 10px 18px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    width: fit-content;
+}
+
 .historico-container {
     display: flex;
     flex-direction: column;

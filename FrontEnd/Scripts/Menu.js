@@ -15,24 +15,24 @@ const tipoUsuario = usuarioLogado ? usuarioLogado.papel: null;
 
 
 const menuAdm = [
+    { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Dashboard de Demandas', href: 'Dashboard_Demanda.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Histórico',             href: 'historico.html' },
-    { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Usuários',              href: 'Listagem_Usuario.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
 
 const menuMembro = [
-    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
 
 const menuLider = [
-    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
@@ -70,6 +70,7 @@ function criarMenu() {
  
 // Carrega o Menu.html e coloca o conteúdo dentro da página atual
 async function LoadMenu() {
+    
     const nav = criarMenu();
     if (!nav) {
         window.location.href = 'Login.html'; // sem usuário logado
@@ -105,6 +106,8 @@ async function LoadMenu() {
  
     // Destaca o botão da página em que o usuário está
     MarkCurrentPage();
+
+    document.getElementById("NomeUsuario").innerHTML = usuarioLogado ? usuarioLogado.nome: null;
 }
  
 // Abre o menu (chamada pelo botão ☰ através do onclick no Menu.html)
@@ -151,5 +154,5 @@ function MarkCurrentPage() {
 
 //Só carrega o menu em páginas que têm header (Login e SignUp ficam sem menu)
 if (document.querySelector("body > header")) { 
-   LoadMenu(); 
+    LoadMenu();
 }
