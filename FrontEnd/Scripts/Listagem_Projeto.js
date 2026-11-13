@@ -46,11 +46,6 @@ function ProjetoContent(classe, texto) {
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado"));
 let jsonprojetos;
 
-// Inviabilizar o Membro da equipe de criar projeto
-if (usuario.papel === "Membro da equipe"){
-    document.getElementById("footer").style.display = "none";
-}
-
 if (usuario.papel === "Administrador") {
     jsonprojetos = await ListarProjetosApi();
 }
