@@ -5,101 +5,98 @@
     right: 0;
     bottom: 0;
     left: auto;
-    width: 600px;
+    width: 100%;
+    max-width: 480px;
     height: 100dvh;
     margin: 0;
-    padding: 32px;
-    border: 2px solid black;
-    border-radius: 20px;
-    background-color: #30003f;
+    padding: 30px;
+    border: none;
+    border-left: 1px solid #334155;
+    border-radius: 0;
+    background-color: #090d16f2;
+    backdrop-filter: blur(20px);
     overflow: hidden;
     flex-direction: column;
     min-width: 0;
     max-height: none;
+    box-shadow: -10px 0 30px #00000080;
+    color: #ffffff;
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }
-
 
 .Popup[open] {
     display: flex;
     animation: slideIn 0.4s ease-out forwards;
 }
 
-
 @keyframes slideOut {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(100%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
 }
 
 .Popup.closing {
     animation: slideOut 0.4s ease-in forwards;
 }
 
-
 .Popup header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    font-size: 30px;
-    background-color: transparent;
-    background: transparent;
-    color: white;
+    font-size: 24px;
+    background-color: #00000000;
+    background: #00000000;
+    color: #ffffff;
     width: 100%;
     height: fit-content;
     box-shadow: none;
-    margin: 0 0 0 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    margin: 0 0 15px 0;
+    border-radius: 0;
 }
+
 .Popup header h1 {
-    background-color:transparent ;
+    background-color: #00000000;
     margin: 0;
+    font-size: 22px;
 }
+
 .Details {
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
-    gap: 20px;
-    margin: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 10px 0;
 }
 
 span {
     display: block;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    height: 40px;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 8px 0;
+    height: auto;
 }
 
 .Description {
-    margin-top: 25px;
+    margin-top: 15px;
     width: 100%;
     flex: 1;
     min-height: 0;
-    border-radius: 20px;
-    background-color: rgba(94, 20, 133, 0.3);
-    margin-bottom: 40px;
+    border-radius: 12px;
+    background-color: #ffffff0a;
+    border: 1px solid #334155;
+    margin-bottom: 25px;
+    overflow-y: auto;
 }
 
 .Description p {
-    padding: 25px;
-    color: white;
-    font-weight: 0;
-
+    padding: 20px;
+    color: #cbd5e1;
+    font-weight: normal;
+    font-size: 14px;
+    margin: 0;
 }
 
 #edit {

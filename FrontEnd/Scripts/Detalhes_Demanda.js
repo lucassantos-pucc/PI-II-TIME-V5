@@ -24,7 +24,7 @@ function ShowDialog(info) {
     
     const dialogPriority = document.getElementById("DialogPriority");
     dialogPriority.textContent = "Prioridade: " + info.prioridade;
-
+    const dialogStatus = document.getElementById("DialogStatus");
     //Colocar as informações no popup
     document.getElementById("DialogTitle").textContent = info.nome;
     document.getElementById("DialogType").textContent = "Tipo: " + info.tipo;
@@ -106,7 +106,7 @@ function StatusColorDialog(p) {
         "status-ativo",
         "status-andamento",
         "status-concluido",
-        "status-cancelado"
+        "status-cancelada"
     );
 
     if (status.includes("ativo")) { //adicionar baseado no texto
@@ -115,12 +115,12 @@ function StatusColorDialog(p) {
         p.classList.add("status-andamento");
     } else if (status.includes("concluido")) {
         p.classList.add("status-concluido");
-    } else if (status.includes("cancelado")) {
-        p.classList.add("status-cancelado");
+    } else if (status.includes("cancelada")) {
+        p.classList.add("status-cancelada");
     }
 }
 
 
 function Edit(demanda){
-    open("Gerenciamento_Demandas.html", "_self");
+    open("Cadastro_Demanda.html", "_self");
 }

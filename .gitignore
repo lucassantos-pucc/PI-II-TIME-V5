@@ -3,7 +3,9 @@ node_modules/
 
 # Ignorar arquivos com informações sensíveis
 .env
-.env.*
 
 # Ignora pasta lib
 lib
+
+# Ignora a pasta de testes da API
+API

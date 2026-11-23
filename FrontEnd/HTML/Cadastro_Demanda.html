@@ -12,15 +12,21 @@ RA: 26887166
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Demandas</title>
+    <title>Cadastro de Demandas</title>
+
     <link rel="stylesheet" href="../Styles/Style.css">
-    <link rel="stylesheet" href="../Styles/Gerenciamento_Demandas.css">
-    <script src="../Scripts/Gerenciamento_demanda.js" defer></script>
+    <link rel="stylesheet" href="../Styles/Menu.css">
+    
+    <script src="../Scripts/Menu.js" defer></script>
+
+    <link rel="stylesheet" href="../Styles/Cadastro_Demanda.css">
+    <script src="../Scripts/Cadastro_Demanda.js" type="module" defer></script>
+
 </head>
 <body>
 
     <form>
-        <h1>Cadastro de Demandas</h1>
+        <h1 id="cadastro">Cadastro de Demandas</h1>
 
         <div class="campo">
             <label for="titulo_id">Título</label>
@@ -47,8 +53,8 @@ RA: 26887166
             <select id="status_id" name="Status">
                 <option value="Aberta">Aberta</option>
                 <option value="Em andamento">Em Andamento</option>
-                <option value="Em revisao">Em Revisão</option>
-                <option value="Concluida">Concluída</option>
+                <option value="Em revisão">Em revisão</option>
+                <option value="Concluída">Concluída</option>
                 <option value="Cancelada">Cancelada</option>
             </select>
         </div>
@@ -63,9 +69,10 @@ RA: 26887166
             </select>
         </div>
 
+        <!-- Select construido em Cadastro_Demanda.js-->
         <div class="campo">
-            <label for="Responsavel_id">Responsável</label>
-            <input type="text" name="Responsavel" id="Responsavel_id">
+            <label for="responsavel_id">Responsável:</label>
+            <select name="responsavel" id="responsavel_id"></select>
         </div>
 
         <div class="descricao">
@@ -74,10 +81,9 @@ RA: 26887166
         </div>
 
         <div class="botoes">
-            <a id="voltar" class="btn" href="Listagem_Demandas.html" target="_self">Voltar</a>
+            <a id="voltar" class="btn" href="Listagem_Demanda.html" target="_self">Voltar</a>
             <button id="botaoCriar_id" class="btn" type="submit" value="Criar">Criar</button>
         </div>
     </form>
-
 </body>
 </html>
