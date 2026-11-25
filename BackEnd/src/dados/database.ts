@@ -1,9 +1,20 @@
-//Feito por: Lucas de Oliveira Santos
-//RA: 26887166
+/*
+Autores:
 
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+    Feito por: Lucas de Oliveira Santos
+    RA: 26887166
 
+*/
+
+
+//conexao do backend com o banco
+
+// Configuração da conexão do Backend com o banco de dados
+
+import mysql from "mysql2/promise"; // Importa a biblioteca mysql2, que permite a comunicação com o banco de dados utilizando Promises, possibilitando o uso de async e await
+import dotenv from "dotenv"; // Importa a biblioteca dotenv, que permite carregar as configurações armazenadas no arquivo .env
+
+// Carrega as informações do arquivo .env para serem utilizadas no código
 dotenv.config();
 
 const host = process.env.DB_HOST;
@@ -12,13 +23,14 @@ const senha = process.env.DB_PASSWORD;
 const banco = process.env.DB_NAME;
 const porta = Number(process.env.DB_PORT) || 3306;
 
-// se ao consultar os valores no .env faltar algo mostra o erro
+// Verifica se as configurações essenciais do arquivo .env foram preenchidas
 if (!host || !user || !senha || !banco) {
     console.log("Faltam configurações no arquivo .env");
     console.log(host, user, senha, banco);
     throw new Error("Faltam configurações no arquivo .env");
 }
 
+// Cria um pool de conexões com o banco de dados, permitindo que as conexões sejam reutilizadas e gerenciadas conforme a necessidade do Backend
 const conexao = mysql.createPool({
     host: host,
     user: user,
@@ -34,11 +46,12 @@ async function testarConexao() {
         const [linhas] = await conexao.query("select * from usuario;");
         console.log(linhas);
         console.log("Consulta de teste realizada com sucesso!");
-        conexaoTeste.release();
+        conexaoTeste.release(); // Devolve a conexão individual ao pool para que ela possa ser reutilizada
     } catch (erro) {
         console.error("Erro ao conectar ao banco de dados:", erro);
     }
 }
+
 async function ReiniciarBanco(){
     try {
         let resposta = await conexao.query("Drop table if exists historico, comentario, demanda, usuario_projeto_participa, projeto, usuario;");
@@ -75,6 +88,7 @@ async function ReiniciarBanco(){
 
 const TestarConexao = false;
 const Reiniciar = false;
+
 if (TestarConexao) {
     testarConexao();
 }

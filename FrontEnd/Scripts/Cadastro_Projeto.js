@@ -1,3 +1,8 @@
+/*
+Autores: 
+
+*/
+
 const formulario = document.querySelector("#formulario");
 
 const campoTitulo = document.querySelector("#titulo_id");

@@ -1,6 +1,10 @@
+/*
+Autores: 
+    
+    Feito por: Vitor Kenzo Pina Takemasa
+    RA: 26007167
+*/
 
-// Feito por: Vitor Kenzo Pina Takemasa
-// RA: 26007167
 
 async function LoadDialog() {
     const response = await fetch("Detalhes_Projeto.html");

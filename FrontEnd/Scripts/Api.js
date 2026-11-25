@@ -1,3 +1,8 @@
+/*
+Autores: 
+
+*/
+
 const Url_Api = "http://localhost:3000";
 
 async function TratarRespostaApi(resposta) {

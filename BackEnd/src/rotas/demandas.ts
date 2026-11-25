@@ -1,4 +1,5 @@
 /*
+Autores:
     Feito por: Lucas de Oliveira Santos
     RA: 26887166
     Modificado por: Arthur Cardoso Martin
@@ -8,9 +9,11 @@
 //importando dados testes
 
 import { Request, Response, Router } from "express";
-import {Demanda, DemandaRow, ProjetoRow, UsuarioRow, Tipo , Prioridade, Status} from "../dados/dados";
+// Importa as interfaces utilizadas para tipar os dados retornados das consultas ao banco
+import {Demanda, DemandaRow, ProjetoRow, UsuarioRow, Tipo , Prioridade, Status} from "../dados/dados"; 
 import Conexao from "../dados/database";
 
+// Cria um Router para organizar as rotas
 const router = Router();
 
 /*Listagem de demandas por projeto e filtros
@@ -23,34 +26,40 @@ Teste invalido
 /?id_projeto=a
 */
 router.get("/", async (req: Request, res: Response) => {
+    //pega os parametros da url
     const projeto = Number(req.query.id_projeto);
     const id_demanda = Number(req.query.id_demanda);
     const id_usuario = Number(req.query.id_usuario);
     
+    //se tiver id faz a busca no banco
     if (id_demanda){
         const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda WHERE id_demanda = ?", id_demanda);
         const demanda = demandas.find((d) => d.id_demanda === id_demanda);
+        //se o id nao existir no banco
         if (!demanda) {
             return res.status(404).json({ error: "Demanda não encontrada" });
         }
         return res.status(200).json(demanda);
     }
 
+    //consulta para procurar demandas e responsaveis
     let query = "SELECT demanda.id_demanda,  demanda.titulo, demanda.tipo, " +
         "demanda.dataCriacao, demanda.prazoFinalizacao, demanda.statusDemanda, " +
         "demanda.prioridade, demanda.dataAlteracao, demanda.descricao, demanda.id_responsavel, usuario.nome, demanda.id_projeto " +
         "FROM demanda LEFT JOIN usuario ON demanda.id_responsavel = usuario.id_usuario "
     let [demandas] = await Conexao.query<DemandaRow[]>(query);
+    
     if (projeto){
         [demandas] = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ?", [projeto]);
 
     }
-
+    //filtra por projeto
     if(id_usuario > 0){ 
         [demandas]  = await Conexao.query<DemandaRow[]>(query + "where id_projeto = ? and id_responsavel = ?", [projeto, id_usuario]);
     }
     console.log(demandas);
     
+    // executa os filtros do site 
     const tipo = req.query.tipo;
     const prioridade = req.query.prioridade;
     const status = req.query.status;
@@ -124,7 +133,7 @@ router.post("/", async (req:Request, res:Response)=>{
     else {
         statusFinal = statusDemanda as Status;
     }
-
+    //verifica se o projeto existe
     const [projetos] = await Conexao.query<ProjetoRow[]>("SELECT * FROM projeto");
     const projetoExiste = projetos.find((item)=> item.id_projeto === Number(id_projeto));
     if(!projetoExiste){
@@ -190,10 +199,13 @@ router.put("/:id", async (req: Request, res: Response) => {
     if (!demanda) {
         return res.status(404).json({ mensagem: "Demanda não encontrada." });
     }
- 
+    
+    //uma lista para guardar os campos, outra pra guardar os valores
     const campos: string[] = [];
     const valores: any[] = [];
- 
+    
+    // Verifica cada campo enviado para atualização, validando se foi informado e se está no formato correto.
+
     if (titulo !== undefined) {
         if (!titulo) { return res.status(400).json({ mensagem: "Título não pode ser vazio." }); }
         campos.push("titulo = ?");
@@ -269,6 +281,8 @@ Teste invalido
  "statusDemanda": "status_invalido"
 }
 */
+
+// PATCH altera parcialmente um registro, permitindo atualizar apenas um campo.
 router.patch("/:id/status", async (req: Request, res: Response) => {
     const id = Number(req.params.id);
     const {statusDemanda} = req.body;

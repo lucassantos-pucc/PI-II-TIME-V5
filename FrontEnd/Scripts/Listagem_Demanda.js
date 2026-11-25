@@ -1,5 +1,10 @@
-// Feito por: Vitor Kenzo Pina Takemasa
-// RA: 26007167
+/*
+Autores: 
+
+    Feito por: Vitor Kenzo Pina Takemasa
+    RA: 26007167
+
+*/
 
 import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi } from "./Api.js";
 localStorage.setItem("DemandaAtual", JSON.stringify({}));

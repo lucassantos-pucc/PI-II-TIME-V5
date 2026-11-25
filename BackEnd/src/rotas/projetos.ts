@@ -1,8 +1,12 @@
 /*
+Autores:
+
     Feito por: Lucas de Oliveira Santos
     RA: 26887166
+
     Modificado por: Arthur Cardoso Martin
     RA: 26006506
+
     Modificado por: Lucas Studach Kaid Ludemann
     RA: 26006454 
 */
@@ -17,13 +21,14 @@ const router = Router();
 
 // GET PROJETOS
 router.get("/", async (req: Request, res: Response) => {
-    //retorna todos os projetos
+    //consulta para retornar os projetos e seus respectivos lideres
     const id  = Number(req.query.id);
     const id_projeto  = Number(req.query.id_projeto)
     let query = "SELECT projeto.id_projeto, projeto.titulo, projeto.id_lider, usuario.nome " +
                 "FROM projeto INNER JOIN usuario ON projeto.id_lider = usuario.id_usuario "
     let [projetos] = await Conexao.query<ProjetoRow[]>(query);
 
+    //retorna os projetos em q é membro
     if(id && id_projeto){
         let query2= "SELECT projeto.id_projeto, projeto.titulo, usuario_projeto_participa.id_usuario AS id_usuario, usuario.nome AS nome " +
                     "FROM projeto " +
@@ -33,6 +38,7 @@ router.get("/", async (req: Request, res: Response) => {
         [projetos] = await Conexao.query<ProjetoRow[]>(query2, [id_projeto]);
     }
 
+    //retorna os projetos em que o usuario participa
     else if (id){
         [projetos] = await Conexao.query<ProjetoRow[]>(query + 
             "INNER JOIN usuario_projeto_participa ON projeto.id_projeto = usuario_projeto_participa.id_projeto " +
@@ -44,7 +50,7 @@ router.get("/", async (req: Request, res: Response) => {
     }
 
     
-
+    //aplica os filtros do site
     const nome = req.query.nome; 
     const lider = req.query.lider; 
     let [filtro] = [projetos];

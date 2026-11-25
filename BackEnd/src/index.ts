@@ -1,9 +1,13 @@
 /*
+Autores:
+
     Feito por: Lucas de Oliveira Santos
     RA: 26887166
+
     Modificado por: Arthur Cardoso Martin
     RA: 26006506
 */
+
 
 // !! Pra rodar localmente na máquina de vocês, 
 // dem right click na pasta do backend, em open integrated terminal
@@ -31,12 +35,9 @@ app.use(express.json());
 // Conectando as rotas
 app.use("/demandas", demandasRotas);
 app.use("/projetos", projetosRotas);
-
 app.use("/historico", historicoRotas);
-
 app.use("/dashboard", dashboardRotas);
 app.use("/demandas/:id/comentarios", comentariosRotas);
-
 app.use("/usuarios", usuariosRotas);
 
 

@@ -1,15 +1,17 @@
-//Feito por: Lucas de Oliveira Santos
-//RA: 26887166
-
 /*
-Modificado por; Arthur Cardoso Martin
-RA: 26006506
+Autores:
+
+    Feito por: Lucas de Oliveira Santos
+    RA: 26887166
+
+    Modificado por; Arthur Cardoso Martin
+    RA: 26006506
 */
 
 //Importando o pacote RowdataPacket do mysql2
 import { RowDataPacket } from "mysql2";
 
-// DEFININDO INTERFACE DE DEMANDA E DE PROJETOS
+// DEFININDO INTERFACE DE DEMANDA, COMENTARIOS E HISTORICO
 export type Tipo = "Defeito" | "Tarefa" | "Melhoria" | "Documentação" 
 export type Status = "Aberta" | "Em andamento" | "Em revisão" | "Concluída" | "Cancelada" 
 export type Prioridade = "Baixa"  | "Média"  | "Alta" | "Crítica"  
@@ -22,6 +24,8 @@ export interface Usuario {
     senha: string;
     papel: TipoUsuario;
 }
+
+// Define uma interface que herda as características de Usuario e RowDataPacket para facilitar o tratamento e manipulação dos dados recebidos do banco de dados
 export interface UsuarioRow extends RowDataPacket, Usuario {}
 
 

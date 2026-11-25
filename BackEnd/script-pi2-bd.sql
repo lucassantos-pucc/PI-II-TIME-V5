@@ -1,3 +1,9 @@
+/*
+Autores: 
+
+*/
+
+
 create database PI2;
 use PI2;
 

@@ -1,3 +1,11 @@
+<!--
+    Autores:
+
+    Modificado por: Lucas de Oliveira Santos
+    RA: 26887166
+
+-->
+
 # PI-II-TIME-V5
 
 ## Sistema de Acompanhamento de Demandas de Desenvolvimento

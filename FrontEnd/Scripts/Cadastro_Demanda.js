@@ -1,9 +1,13 @@
 /*
+Autores: 
+
     Feito por Arthur Cardoso Martin
     RA: 26006506
+
     Modificado por: Lucas Studach Kaid Ludemann
     RA: 26006454 
-*/
+
+    */
 
 import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeriadoNacional, RegistrarHistoricoApi, BuscarVinculadosProjeto } from "./Api.js";
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");

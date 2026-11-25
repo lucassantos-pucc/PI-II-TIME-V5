@@ -1,6 +1,9 @@
 /*
+Autores: 
+
     Feito por Arthur Cardoso Martin
     RA: 26006506
+    
 */
 
 async function LoadDialog() {

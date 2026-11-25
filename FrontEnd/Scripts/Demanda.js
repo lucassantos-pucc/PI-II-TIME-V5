@@ -1,8 +1,12 @@
 /*
+Autores: 
+
     Feito por: Kauã Gaiofato Santana Lima de Jesus
     RA: 26000195
+
     Modificado por: Lucas Studach Kaid Ludemann
     RA: 26006454
+
 */
 import {ListarComentarios, CadastrarComentario, ListarUsuarioApi} from "./Api.js"
 let demanda = {}; // Demanda que está sendo mostrada nesta aba

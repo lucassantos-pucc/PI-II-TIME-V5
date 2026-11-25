@@ -1,5 +1,10 @@
-// Feito por: Arthur Cardoso Martin
-// RA: 26006506
+/*
+Autores: 
+
+    Feito por: Arthur Cardoso Martin
+    RA: 26006506
+*/
+
  
 import { ListarUsuariosApi } from "./Api.js";
  

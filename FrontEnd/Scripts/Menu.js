@@ -1,11 +1,12 @@
 /*
+Autores: 
+
     Feito por: Kauã Gaiofato Santana Lima de Jesus
     RA: 26000195
+    
     Editado por: Vitor Kenzo Pina Takemasa
     RA: 26007167
-*/
 
-/* 
     Editado por: Lucas Studach Kaid Ludemann
     RA: 26006454
 */

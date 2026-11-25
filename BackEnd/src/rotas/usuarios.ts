@@ -1,6 +1,9 @@
 /*
+Autores:
+
     Feito por: Kauã Gaiofato Santana Lima de Jesus 
     RA: 26000195
+
     Modificado por: Arthur Cardoso Martin
     RA: 26006506
 */
@@ -35,8 +38,10 @@ Teste invalido
 */
 
 router.post("/login", async (req: Request, res: Response) => {
+  //recebe os dados
   const { email, senha } = req.body;
 
+  // faz a verificação para estarem no formato requisitado
   if (!email || typeof email !== "string" || email.trim() === "") {
     return res.status(400).json({ mensagem: "O e-mail é obrigatório." });
   }
@@ -44,6 +49,7 @@ router.post("/login", async (req: Request, res: Response) => {
   if (!senha || typeof senha !== "string" || senha.trim() === "") {
     return res.status(400).json({ mensagem: "A senha é obrigatória." });
   }
+  // consulta e verifica se o usuario tem uma conta no banco 
   const [Usuarios] = await conexao.query<UsuarioRow[]>("SELECT * FROM usuario;");
   const usuarioEncontrado = Usuarios.find(
     (u) =>
@@ -59,6 +65,8 @@ router.post("/login", async (req: Request, res: Response) => {
 });
 
 // GET /usuarios
+
+//retorna todos os usuarios do banco
 router.get("/", async (req: Request, res: Response) => {
   const [lista] = await conexao.query<UsuarioRow[]>("SELECT * FROM usuario;");
 
@@ -69,6 +77,7 @@ router.get("/", async (req: Request, res: Response) => {
   return res.status(200).json({ usuarios: lista, mensagem: "Usuários encontrados." });
 });
 
+//retorna usuario baseado no id
 router.get("/:id", async (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const [lista] = await conexao.query<UsuarioRow[]>("SELECT * FROM usuario where id_usuario = ?;", [id]);
@@ -98,7 +107,10 @@ Teste invalido
   "papel": "Administrador"
 }
 */
+
+//cadastra o usuario
 router.post("/", async (req: Request, res: Response) => {
+  //recebe os dados e faz as verificações
   const {nome, email, senha, papel } = req.body || {};
   if (!nome || typeof nome !== "string" || nome.trim() === "") {
     return res.status(400).json({ mensagem: "O nome é obrigatório." });
@@ -133,6 +145,7 @@ router.post("/", async (req: Request, res: Response) => {
     return res.status(400).json({ mensagem: "Usuário já cadastrado." });
   }
 
+  //se passou em todas as verificaçõesinsere no banco
   const novoUsuario: Omit<Usuario, 'id_usuario'> = {
     nome: nome.trim(),
     email: email.trim(),

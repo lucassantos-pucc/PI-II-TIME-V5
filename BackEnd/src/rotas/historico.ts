@@ -1,21 +1,21 @@
-//Feito por: Lucas de Oliveira Santos
-//RA: 26887166
+/*
+Autores:
 
+    Feito por: Lucas de Oliveira Santos
+    RA: 26887166
+
+*/
 import { Request, Response, Router } from "express";
 import {HistoricoRow, UsuarioRow, Historico} from "../dados/dados";
 import Conexao from "../dados/database";
 
-
 const router = Router();
-
-
 
 
 //get historico de uma demanda em especifico
 
 //TESTE VALIDO
 // /1
-
 
 router.get("/:id_demanda", async (req: Request, res: Response) => {
     let id = Number(req.params.id_demanda);

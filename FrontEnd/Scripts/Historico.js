@@ -1,6 +1,10 @@
-// Feito por: Lucas de Oliveira Santos
-// RA: 26887166
+/*
+Autores: 
 
+    Feito por: Lucas de Oliveira Santos
+    RA: 26887166
+
+*/
 //CRIAR HISTORICO NO FRONT
 
 import { CarregarHistoricoApi, RegistrarHistoricoApi, BuscarDemandasApi, BuscarProjetoApi,  } from "./Api.js";

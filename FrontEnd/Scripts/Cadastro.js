@@ -1,3 +1,8 @@
+/*
+Autores: 
+
+*/
+
 import { CadastrarUsuarioApi } from "./Api.js";
 
 const form = document.querySelector("form");
