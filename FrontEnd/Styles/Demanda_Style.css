@@ -17,6 +17,10 @@ Autores:
     flex-direction: column;
 }
 
+/*
+   O display: flex de cima faria a área aparecer mesmo com o atributo "hidden".
+   Esta regra corrige isso: com hidden, a área some de verdade.
+*/
 .dem-pagina[hidden] {
     display: none;
 }
@@ -79,6 +83,10 @@ Autores:
     border-color: #a855f7;
 }
 
+/*
+   Divide a página em 2 colunas com CSS Grid: a principal (1fr = o que sobrar) e a lateral de 300px.
+   O minmax(0, 1fr) evita que textos grandes estourem a coluna.
+*/
 .dem-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 300px;
@@ -128,6 +136,7 @@ Autores:
     overflow-wrap: anywhere;
 }
 
+/* O pre-wrap mantém as quebras de linha que o usuário digitou. */
 p.dem-caixa-corpo {
     white-space: pre-wrap;
 }
@@ -164,6 +173,7 @@ p.dem-caixa-corpo {
     overflow-wrap: anywhere;
 }
 
+/* Selo (etiqueta) de prioridade e status. As cores abaixo são colocadas pelo Demanda.js (PriorityColor e StatusColor). */
 .dem-selo {
     display: inline-block;
     padding: 4px 12px;
@@ -287,6 +297,7 @@ p.dem-caixa-corpo {
     min-width: 0;
 }
 
+/*dem-coment-data, .dem-excluir e .dem-dica não são usados atualmente.*/
 .dem-coment-data {
     color: #94a3b8;
     font-size: 12px;
@@ -354,6 +365,7 @@ p.dem-caixa-corpo {
     font-size: 12px;
 }
 
+/* Em telas pequenas vira 1 coluna, e o order: -1 coloca as informações da demanda no topo. */
 @media (max-width: 820px) {
     .dem-layout {
         grid-template-columns: 1fr;
@@ -368,6 +380,10 @@ p.dem-caixa-corpo {
     }
 }
 
+/*
+   GAMBIARRA DA CHECKBOX: o checkbox fica escondido e o <label> funciona como botão.
+   Quando o checkbox está marcado (:checked), o CSS abre o formulário de comentário, sem usar JavaScript.
+*/
 .invisivel {
     display: none;
 }
@@ -383,6 +399,10 @@ p.dem-caixa-corpo {
     border-color: #a855f7;
 }
 
+/*
+   Formulário fechado: altura 0 e transparente. Usamos max-height porque não dá para animar até "auto".
+   Por isso, aberto, usamos um limite de 500px (precisa ser maior que o conteúdo).
+*/
 #dem-form .dem-caixa-corpo {
     max-height: 0;
     opacity: 0;

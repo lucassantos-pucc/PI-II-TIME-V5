@@ -86,6 +86,7 @@ form.addEventListener("submit", async function(event) {
     }
 
     // Validar senha
+// Regras da senha: cada regex (/.../) verifica se tem pelo menos 1 maiúscula, minúscula, número ou caractere especial (_@!?).
     const possuiMaiuscula = /[A-Z]/.test(senha);
     const possuiMinuscula = /[a-z]/.test(senha);
     const possuiNumero = /[0-9]/.test(senha);
@@ -126,8 +127,9 @@ form.addEventListener("submit", async function(event) {
     if (!Validation) {
         return;
     }
+// Objeto que é enviado para o back-end.
     const user = {
-        nome: campoEmail.value,
+        nome: campoNome.value,
         email: campoEmail.value,
         senha: campoSenha.value,
         papel: campoTipo.value

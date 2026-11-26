@@ -44,6 +44,10 @@ p {
     display: none;
 }
 
+/*
+   Painel de filtros. Começa fechado (max-height: 0 e opacity: 0) e abre com animação.
+   A borda começa transparente (#33415500) para aparecer aos poucos.
+*/
 .painel-pesquisa, .painel-projetos {
     display: flex;
     flex-wrap: wrap;
@@ -63,6 +67,11 @@ p {
     transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease, border 0.4s ease;
 }
 
+/*
+   GAMBIARRA DA CHECKBOX: Quando o checkbox é marcado (clicando no label "Buscar / Filtrar"), o painel abre.
+   O ~ pega o painel que vem depois do checkbox no HTML.
+   O max-height: 500px é só um limite alto para a animação funcionar.
+*/
 .invisivel:checked ~ .painel-pesquisa,
 .invisivel:checked ~ .painel-projetos {
     max-height: 500px; 
@@ -200,6 +209,10 @@ p {
     margin-top: 10px;
 }
 
+/*
+   Estilo base das etiquetas dos cartões (data, tipo, projeto, responsável, prazo...).
+   As classes *-gen abaixo só mudam a cor. Várias são iguais e poderiam virar uma só.
+*/
 .gen {
     display: flex;
     text-align: center;
@@ -314,6 +327,10 @@ p {
     border: 1px solid #ef44444d;
 }
 
+/*
+   Muda o .btn só nesta página: vira o botão "+" grande do rodapé, usado para criar demanda.
+   O margin-right: 50px afasta ele da borda direita.
+*/
 .btn{
     text-align: center;
     margin-right: 50px;
@@ -338,7 +355,6 @@ p {
 .btn-section {
     display: flex;
     flex-direction: column;
-    align-items: left;
     margin: 30px auto;
     width: 100%;
     padding: 0 15px;

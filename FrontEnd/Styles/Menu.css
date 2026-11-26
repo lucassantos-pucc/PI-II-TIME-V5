@@ -22,6 +22,10 @@ body > header {
     cursor: pointer;
 }
 
+/*
+   O menu é um <dialog> (janela do HTML). Por padrão ele aparece no meio da tela,
+   então aqui zeramos esses valores e fixamos ele na esquerda, ocupando a altura toda.
+*/
 .Menu {
     box-sizing: border-box;
     position: fixed;
@@ -56,6 +60,7 @@ body > header {
     to { transform: translateX(0); }
 }
 
+/* O display: flex só vale com o menu aberto. Senão o menu ficaria visível o tempo todo. */
 .Menu[open] {
     display: flex;
     animation: MenuSlideIn 0.4s ease-out forwards;
@@ -66,6 +71,10 @@ body > header {
     to { transform: translateX(-100%); }
 }
 
+/*
+   A classe "closing" é colocada pelo HideMenu() (Menu.js) para tocar a animação de saída.
+   O tempo (0.4s) é o mesmo do setTimeout de 400ms no JS.
+*/
 .Menu.closing {
     animation: MenuSlideOut 0.4s ease-in forwards;
 }

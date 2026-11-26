@@ -3,6 +3,9 @@ Autores:
 
     Feito por: Lucas de Oliveira Santos
     RA: 26887166
+    
+    modificado por: Kauã Gaiofato Santana Lima de Jesus
+    RA: 26000195
 
 */
 
@@ -174,6 +177,7 @@ h1 {
     background-color: #22c55e66;
 }
 
+/* As mensagens de erro e de sucesso começam escondidas (display: none). O Cadastro_Projeto.js mostra quando precisar. */
 .erro {
     display: none;
     margin-top: 6px;

@@ -14,6 +14,7 @@ let comentarios = []; // Comentários da demanda
 
 
 // Pega a demanda: primeiro a que esta aba já guardou, senão a que a listagem salvou
+// A listagem guarda a demanda clicada no localStorage ("DemandaAtual"). Aqui ela também é copiada para o sessionStorage (da aba).
 function CarregarDemanda() {
     let salva = localStorage.getItem("DemandaAtual");
     sessionStorage.setItem("DemandaAtual", salva); // Guarda na aba, assim se abrir outra demanda em outra aba, esta nao muda
@@ -75,7 +76,7 @@ function StatusColor(p) {
         p.classList.add("status-concluido");
     }
 
-    else if (stat.includes("cancelada") || stat.includes("cancelada")) {
+    else if (stat.includes("cancelada")) {
         p.classList.add("status-cancelada");
     }
 }
@@ -102,7 +103,7 @@ function ShowDemanda() {
 
 
 // Cria um comentário na tela
-async function CreateComentario(info) {
+await async function CreateComentario(info) {
     const auto = await ListarUsuarioApi(info.id_autor); //autor
     const Com_Cr = document.createElement('li'); // Cria o html elemento do comentario e cria o seus campos
     Com_Cr.classList.add("dem-coment");
@@ -154,7 +155,7 @@ function ShowComentarios() {
     document.getElementById("dem-sem-coment").hidden = comentarios.length > 0;
 }
 
-// Habilita o botão de comentar só quando o nome e o comentário estiverem preenchidos
+// Habilita o botão de comentar só quando o comentário estiver preenchido
 function ValidarComentario() {
     const texto = document.getElementById("dem-texto").value.trim();
     document.getElementById("dem-enviar").disabled = texto.length === 0;

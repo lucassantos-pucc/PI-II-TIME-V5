@@ -93,6 +93,7 @@ Autores:
     border-color: #a855f7;
 }
 
+/* Versão vermelha para itens cancelados. Obs: nenhum script usa esta classe. */
 .historico-cancelada {
     border: 1px solid #ef44444d;
     background: #ef44441a;

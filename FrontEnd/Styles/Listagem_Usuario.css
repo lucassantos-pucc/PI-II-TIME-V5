@@ -142,6 +142,7 @@ Autores:
 }
 
 @media (max-width: 480px) {
+/* O !important faz esse tamanho valer mesmo com o font-size definido no Style.css. */
     .logo {
         font-size: 24px !important;
         text-align: center;

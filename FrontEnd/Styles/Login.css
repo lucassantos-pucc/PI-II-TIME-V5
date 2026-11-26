@@ -1,8 +1,13 @@
 /*
 Autores: 
 
-*/
+    Feito por: Kauã Gaiofato Santana Lima de Jesus
+    RA: 26000195
 
+*/
+/*
+   Este CSS serve para o Login e para o Cadastro de usuário (as duas telas são parecidas).
+*/
 body {
     display: flex;
     flex-direction: column;

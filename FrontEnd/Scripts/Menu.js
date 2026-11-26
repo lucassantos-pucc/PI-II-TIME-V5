@@ -11,6 +11,9 @@ Autores:
     RA: 26006454
 */
 
+// Pega o usuário que o Login.js salvou no localStorage (memória do navegador).
+// O JSON.parse transforma o texto salvo em objeto. O "|| 'null'" evita erro se ninguém estiver logado.
+// O tipoUsuario (papel) define qual menu aparece.
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 const tipoUsuario = usuarioLogado ? usuarioLogado.papel: null;
 
@@ -38,6 +41,7 @@ const menuLider = [
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
 
+// Liga cada papel ao seu menu. Os nomes precisam ser iguais ao campo "papel" do banco.
 const menusPorTipo = {
     "Administrador": menuAdm,
     "Lider de Projeto": menuLider,

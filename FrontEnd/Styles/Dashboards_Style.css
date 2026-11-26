@@ -3,7 +3,9 @@ Autores:
 
     Feito por: Lucas Studach Kaid Ludemann
     RA: 26006454
-
+    
+    modificado por: Kauã Gaiofato Santana Lima de Jesus
+    RA: 26000195
 */
 body {
     margin: 0;
@@ -21,6 +23,7 @@ body {
     align-items: center;
 }
 
+/*Cartão de cada informação do dashboard.*/
 .informação {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -56,6 +59,7 @@ h3 {
     text-transform: uppercase;
 }
 
+/* O margin-top: auto joga o valor para o fim do cartão. */
 span.valor {
     font-size: 25px;
     font-weight: bold;
