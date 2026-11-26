@@ -1,11 +1,11 @@
 /*
 Autores:
 
-    Feito por: Kauã Gaiofato Santana Lima de Jesus 
-    RA: 26000195
-
-    Modificado por: Arthur Cardoso Martin
-    RA: 26006506
+    Feito por: 
+      Kauã Gaiofato Santana Lima de Jesus - RA: 26000195
+      
+    Modificado por: 
+      Arthur Cardoso Martin - RA: 26006506
 */
 
 import { Request, Response } from "express";

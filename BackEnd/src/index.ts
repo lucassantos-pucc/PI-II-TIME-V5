@@ -1,11 +1,11 @@
 /*
 Autores:
 
-    Feito por: Lucas de Oliveira Santos
-    RA: 26887166
+    Feito por: 
+        Lucas de Oliveira Santos - RA: 26887166
 
-    Modificado por: Arthur Cardoso Martin
-    RA: 26006506
+    Modificado por: 
+        Arthur Cardoso Martin - RA: 26006506
 */
 
 

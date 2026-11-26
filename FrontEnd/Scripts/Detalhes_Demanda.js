@@ -1,8 +1,9 @@
 /*
+Arquivo nao utilizado, mas mantido para fins de referencia futura
 Autores: 
 
-    Feito por Arthur Cardoso Martin
-    RA: 26006506
+    Feito por:
+        Arthur Cardoso Martin - RA: 26006506
     
 */
 

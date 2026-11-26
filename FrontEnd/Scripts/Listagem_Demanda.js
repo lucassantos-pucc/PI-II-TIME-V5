@@ -1,8 +1,8 @@
 /*
 Autores: 
 
-    Feito por: Vitor Kenzo Pina Takemasa
-    RA: 26007167
+    Feito por: 
+        Vitor Kenzo Pina Takemasa - RA: 26007167
 
 */
 
@@ -12,8 +12,8 @@ sessionStorage.setItem("DemandaAtual", "");
 
 function FormatarPrazo(valor) {
     if (!valor) return "";
-    const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(valor);
-    return m ? `${m[3]}/${m[2]}/${m[1]}` : "";
+    const m = new Date(valor).toLocaleDateString("pt-BR");
+    return m ? m: "";
 }
 
 function FormatarCriacao(valor) {
@@ -38,6 +38,7 @@ function DemandaContent(classe, texto) {
 }
 
 async function CreateDemanda(info, projeto) {
+    // Busca o nome do responsável e guarda para uso futuro
     const nomeResp = info.nome_responsavel ?? await NomeUsuario(info.id_responsavel);
     const criacao = FormatarCriacao(info.dataCriacao);
     const prazo = FormatarPrazo(info.prazoFinalizacao);
@@ -60,7 +61,7 @@ async function CreateDemanda(info, projeto) {
     box.appendChild(DemandaContent("DTcriacao-gen", "Data de criação: " + criacao));
     box.appendChild(DemandaContent("prazo-gen", "Prazo: " + (prazo || "Não definido")));
     card.appendChild(box);
-
+    // Guarda as informações da demanda em uma variavel para uso futuro
     const demanda = {
         id_demanda: info.id_demanda,
         titulo: info.titulo,
@@ -76,7 +77,7 @@ async function CreateDemanda(info, projeto) {
         descricao: info.descricao ?? ""   
     };
 
-    card.addEventListener("click", () => {
+    card.addEventListener("click", () => { // Cria um evento de clique no card da demanda para abrir a página de detalhes da demanda
         localStorage.setItem("DemandaAtual", JSON.stringify(demanda));
         window.open("Demanda.html", "_self");
     });
@@ -84,7 +85,7 @@ async function CreateDemanda(info, projeto) {
     document.getElementById("secao-demanda").appendChild(card);
 }
 
-
+// Colorir a prioridade e status de acordo com o valor do texto
 function PriorityColor(p) {
     const prio = p.textContent.toLowerCase();
     if (prio.includes("baixa")) p.classList.add("prioridade-b-gen");
@@ -101,11 +102,13 @@ function StatusColor(p) {
     else if (stat.includes("concluída")) p.classList.add("status-concluido");
     else if (stat.includes("cancelada")) p.classList.add("status-cancelada");
 }
+
+
 const id_projeto = (localStorage.getItem("Projeto"));
 const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
-let projeto; 
 
 async function CarregarDemandas(filtros = {}) {
+    // Busca o projeto para exibir o nome do projeto na demanda e usa para buscar as demandas do projeto com ou sem os filtros
     const projetos = await BuscarProjetoApi(id_projeto);
     const projeto = projetos[0];
     const { tipo = "", prioridade = "", status = "", responsavel = "" } = filtros;
@@ -150,7 +153,7 @@ document.getElementById("btn-filtrar")?.addEventListener("click", async () => {
     }
 });
 
-// Inviabilizar o Membro da equipe de criar demanda
+// Inviabilizar o Membro da equipe de criar demanda escondendo o botão
 if (usuario.papel === "Membro da equipe"){
     document.getElementById("footer").hidden = true;
 }

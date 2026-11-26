@@ -1,12 +1,12 @@
 /*
 Autores: 
 
-    Feito por: Kauã Gaiofato Santana Lima de Jesus
-    RA: 26000195
+    Feito por: 
+        Kauã Gaiofato Santana Lima de Jesus - RA: 26000195
 
-    Modificado por: Lucas Studach Kaid Ludemann
-    RA: 26006454
-
+    Modificado por: 
+        Lucas Studach Kaid Ludemann - RA: 26006454
+        Arthur Cardoso Martin - RA: 26006506
 */
 import {ListarComentarios, CadastrarComentario, ListarUsuarioApi} from "./Api.js"
 let demanda = {}; // Demanda que está sendo mostrada nesta aba
@@ -104,7 +104,7 @@ function ShowDemanda() {
 // Cria um comentário na tela
 async function CreateComentario(info) {
     const auto = await ListarUsuarioApi(info.id_autor); //autor
-    const Com_Cr = document.createElement('li'); // Comentário Criado
+    const Com_Cr = document.createElement('li'); // Cria o html elemento do comentario e cria o seus campos
     Com_Cr.classList.add("dem-coment");
 
     const avatar = document.createElement('div');
@@ -136,7 +136,9 @@ async function CreateComentario(info) {
 }
 
 function FormatarData(data) {
-    return new Date(data).toLocaleString("pt-BR");
+    return new Date(data).toLocaleString("pt-BR"); 
+    // Descobri esse metodo de converter data em formato brasileiro no final da data de entrega do projeto 
+    // entao nao usei ele em outros lugares com medo de quebrar algo mas ja fiz essa parte usando ele  
 }
 
 // Apaga a lista da tela e cria todos os comentários de novo
@@ -214,11 +216,10 @@ else {
     document.getElementById("dem-texto").addEventListener("input", ValidarComentario);
     document.getElementById("dem-form").addEventListener("submit", AddComentario);
 
-    const usuario = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 
     document.getElementById("dem-editar").addEventListener("click", Edit);
     document.getElementById("dem-historico").addEventListener("click", () => {
-    console.log("Clicou no botão de historicoo!");
+    console.log("Clicou no botão de historico!");
     window.location.href = "historico.html";
 });
 

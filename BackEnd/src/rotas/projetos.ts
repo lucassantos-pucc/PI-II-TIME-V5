@@ -1,17 +1,13 @@
 /*
 Autores:
 
-    Feito por: Lucas de Oliveira Santos
-    RA: 26887166
+    Feito por: 
+        Lucas de Oliveira Santos - RA: 26887166
 
-    Modificado por: Arthur Cardoso Martin
-    RA: 26006506
-
-    Modificado por: Lucas Studach Kaid Ludemann
-    RA: 26006454 
+    Modificado por: 
+        Arthur Cardoso Martin - RA: 26006506
+        Lucas Studach Kaid Ludemann - RA: 26006454 
 */
-
-//importando dados testes
 
 import { Request, Response, Router } from "express";
 import { ProjetoRow } from "../dados/dados";
@@ -60,14 +56,6 @@ router.get("/", async (req: Request, res: Response) => {
     if (lider) { filtro = filtro.filter((i) => i.nome.includes(lider)); };
 
     return res.status(200).json(filtro);
-});
-
-router.post("/", (req: Request, res: Response) => {
-    
-});
-
-router.put("/:id", (req: Request, res: Response) => {
-
 });
 
 export default router;

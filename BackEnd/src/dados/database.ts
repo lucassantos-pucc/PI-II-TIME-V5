@@ -1,9 +1,11 @@
 /*
 Autores:
 
-    Feito por: Lucas de Oliveira Santos
-    RA: 26887166
+    Feito por: 
+        Lucas de Oliveira Santos - RA: 26887166
 
+    Modificado por:
+        Arthur Cardoso Martin - RA: 26006506
 */
 
 
@@ -53,6 +55,7 @@ async function testarConexao() {
 }
 
 async function ReiniciarBanco(){
+    // Função para deletar e recriar o banco e fazer os inserts iniciais
     try {
         let resposta = await conexao.query("Drop table if exists historico, comentario, demanda, usuario_projeto_participa, projeto, usuario;");
         console.log(resposta)
@@ -86,6 +89,7 @@ async function ReiniciarBanco(){
     }
 }
 
+// Variaveis para testar a conexão e reiniciar o banco de dados
 const TestarConexao = false;
 const Reiniciar = false;
 

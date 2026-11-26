@@ -1,11 +1,11 @@
 /*
 Autores: 
 
-    Feito por Arthur Cardoso Martin
-    RA: 26006506
+    Feito por:
+        Arthur Cardoso Martin - RA: 26006506
 
-    Modificado por: Lucas Studach Kaid Ludemann
-    RA: 26006454 
+    Modificado por: 
+        Lucas Studach Kaid Ludemann - RA: 26006454 
 
     */
 
@@ -13,12 +13,12 @@ import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeria
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 const Projeto = JSON.parse(localStorage.getItem("Projeto") || "null");
 
-
+// Verifica se o usuário logado é membro de equipe e separa o campo de id do usuário e do projeto
 const ehMembro = usuarioLogado?.papel === "Membro da equipe";
 const id_usuario = usuarioLogado ? usuarioLogado.id_usuario: null;
 const id_projeto = Projeto? Projeto:null;
 
-
+// Dicionarios com as transições de status permitidas para membros e não membros
 const TRANSICOES_MEMBRO = {
     "Aberta":       ["Em andamento"],
     "Em andamento": ["Em revisão"]
@@ -31,7 +31,8 @@ const TRANSICOES = {
     "Concluída":    [],                                    
     "Cancelada":    []
 };
-function StatusPermitidos(statusAtual) {
+
+function StatusPermitidos(statusAtual) { // pega o status atual e retorna os status permitidos para o usuário logado
     const tabela = ehMembro ? TRANSICOES_MEMBRO : TRANSICOES;
     return [statusAtual, ...(tabela[statusAtual] ?? [])];
 }
@@ -39,7 +40,7 @@ function StatusPermitidos(statusAtual) {
 function AplicarRegrasDeStatus(statusAtual) {
     const select = document.getElementById("status_id");
     const permitidos = StatusPermitidos(statusAtual);
-
+    // Desabilita as opções que não são permitidas
     for (const opcao of select.options) {
         opcao.disabled = !permitidos.includes(opcao.value);
     }
@@ -51,14 +52,15 @@ function AplicarRegrasDeStatus(statusAtual) {
     }
 }
 
-function TravarCamposParaMembro() {
+function TravarCamposParaMembro() { // Travar os campos de criação/editar para membros de equipe
     const campos = [titulo, prazo, responsavel, descricao,
                     document.getElementById("tipos_id"),
                     document.getElementById("prioridade_id")];
     for (const campo of campos) campo.disabled = true;
 }
 let statusOriginal = "";
-// O da direita são os campos na direita é o valor dele
+// Campos que podem ser alterados e que devem ser registrados no histórico
+// Esquerda é o campo e na direita é o valor
 const CAMPOS_HISTORICO = [
     ["titulo", "Título"],
     ["tipo", "Tipo"],
@@ -92,33 +94,33 @@ function ValorParaHistorico(chave, valor) {
     // arrumar o prazo 
     // do select vem yyyy/mm/dd e do localstorage vem como dd/mm/yyyy
     if (chave === "prazoFinalizacao" && /^\d{4}-\d{2}-\d{2}/.test(valor)) { //Usa regex para ver sé é uma data valida
-        const [a, m, d] = valor.slice(0, 10).split("-"); // pega o valor como um array e separa em y y y y - m m - d d e separa nas '-'
-        return `${d}/${m}/${a}`;
+        const [a, m, d] = valor.slice(0, 10).split("-"); // pega o valor e separa em y y y y - m m - d d e separa nas '-' nas variaveis
+        return `${d}/${m}/${a}`; // retorna formatado como dd/mm/yyyy
     }
-    return String(valor).trim(); // padronizar o valor
+    return String(valor).trim(); // caso nao seja nenhum dos casos acima, retorna o valor como string
 }
 
-function GerarDescricaoHistorico(antes, depois) {
+function GerarDescricaoHistorico(antes, depois) { // antes e depois são dicionarios com os valores antigos e novos da demanda, respectivamente.
     const mudancas = [];
 
-    for (const [chave, nome] of CAMPOS_HISTORICO) {
+    for (const [chave, nome] of CAMPOS_HISTORICO) { // para cada campo que pode ser alterado, pega o valor antes e depois da alteração e compara
         const valorAntes = ValorParaHistorico(chave, antes[chave]);
         const valorDepois = ValorParaHistorico(chave, depois[chave]);
 
-        // Nome do responsável: "Mariana" e "mariana" são o mesmo usuário
+        // Nome do responsável: "Mariana" e "mariana" são o mesmo usuário, usa operador ternario
         const igual = chave === "responsavel"
             ? valorAntes.toLowerCase() === valorDepois.toLowerCase()
             : valorAntes === valorDepois;
         if (igual) continue;
 
         if (chave === "descricao") {
-            mudancas.push("Descrição alterada"); // o texto pode ser longo, não vai inteiro
+            mudancas.push("Descrição alterada"); // o texto pode ser longo, entao no historico apenas registra que houve alteração
         } else {
             mudancas.push(`${nome} alterado de "${valorAntes}" para "${valorDepois}"`);
         }
     }
 
-    return mudancas.join("; ");
+    return mudancas.join("; "); // Converte a lista para uma string separada por ponto e virgula, para ser registrada no historico
 }
 const form = document.querySelector("form");
 
@@ -134,7 +136,9 @@ let prazoOriginal = "";
 //Criacao do dropdown
 await DropdownResponsavel(id_projeto);
 
-if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual") !== "{}") { // Pega os valores armazenados no localStorage e coloca nos inputs
+// Pega os valores armazenados no localStorage e coloca nos inputs
+// Apenas caso seja para editar a demanda, caso contrario os campos ficam em branco
+if (localStorage.getItem("DemandaAtual") && localStorage.getItem("DemandaAtual") !== "{}") { 
     const demandaAtual = JSON.parse(localStorage.getItem("DemandaAtual"));
     titulo.value = demandaAtual.titulo;
     prazo.value = demandaAtual.prazoFinalizacao
@@ -163,7 +167,7 @@ if (editar === 0 && ehMembro) {
 
 form.addEventListener("submit",async function (event) {
     event.preventDefault();
-
+    // verifica se o responsavel selecionado existe no projeto e salva o seu id e seu nome
     id_responsavel = responsavel.value !== "" ? Number(responsavel.value) : null;
     const nomeResp = responsavel.selectedOptions[0]?.textContent ?? "";
     for (const usuario of usuarios.usuarios){
@@ -229,14 +233,16 @@ form.addEventListener("submit",async function (event) {
         }
         
         else {        
-            const antiga = JSON.parse(localStorage.getItem("DemandaAtual") || "{}");
+            const antiga = JSON.parse(localStorage.getItem("DemandaAtual") || "{}"); // armazena a demanda original em uma variavel para comparar com a nova demanda e gerar o historico
+            // usa como novo valor o que foi digitado no form mais o nome do responsavel alem do id 
+            // nao armazena o nome do responsavel no banco, apenas o id, mas para gerar o historico precisa do nome
             const descricaoHistorico = GerarDescricaoHistorico(antiga, {
                 ...demanda,
                 responsavel: nomeResp
             });
-
+            // salva a demanda editada no banco de dados
             await EditarDemandasApi(id_demanda, demanda);
-
+            // registra o historico no banco caso haja alteração
             if (descricaoHistorico && usuarioLogado) {
                 try {
                     const historico ={
@@ -251,6 +257,8 @@ form.addEventListener("submit",async function (event) {
                 }
             }
 
+            // atualiza a demanda no localStorage e sessionStorage para que a página de demanda seja atualizada com os novos valores
+            //herda os valores antigos da demanda e atualiza com os novos valores, para que não perca nenhum valor que não foi alterado no form
             const json = JSON.stringify({
                 ...antiga,
                 ...demanda,

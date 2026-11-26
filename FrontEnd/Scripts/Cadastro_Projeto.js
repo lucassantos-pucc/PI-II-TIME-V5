@@ -1,4 +1,5 @@
 /*
+Arquivo nao utilizado, mas mantido para fins de referencia futura
 Autores: 
 
 */

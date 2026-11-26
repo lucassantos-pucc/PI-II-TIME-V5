@@ -1,8 +1,8 @@
 /*
 Autores:
 
-    Feito por: Lucas de Oliveira Santos
-    RA: 26887166
+    Feito por: 
+        Lucas de Oliveira Santos - RA: 26887166
 
 */
 import { Request, Response, Router } from "express";

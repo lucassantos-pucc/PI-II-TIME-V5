@@ -20,6 +20,7 @@ async function TratarRespostaApi(resposta) {
 
 export async function ListarDemandasApi(idProj, idUsu= "", tipo = "", prioridade = "", status = "", responsavel = "") {
     let Url = `${Url_Api}/demandas/?id_projeto=${idProj}`;
+    // Adiciona os parâmetros opcionais à URL, se fornecidos
     if (idUsu) {
         Url += `&id_usuario=${encodeURIComponent(idUsu)}`;
     }
@@ -214,11 +215,13 @@ export async function CadastrarComentario(id_demanda,comentario){
     return await TratarRespostaApi(resposta);
 }
 
-const cacheFeriados = {};
 
+// Api externa de feriados
+const cacheFeriados = {};
 export async function BuscarFeriadoNacional(dataISO) { // dataISO = "yyyy-mm-dd"
     const ano = dataISO.slice(0, 4);
 
+    // Tenta consultar a api e se falhar joga o erro de falha
     cacheFeriados[ano] ??= fetch(`https://brasilapi.com.br/api/feriados/v1/${ano}`)
         .then(r => {
             if (!r.ok) throw new Error("Falha ao consultar a API de feriados.");

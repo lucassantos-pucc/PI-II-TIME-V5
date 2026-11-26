@@ -47,6 +47,7 @@ function CreateUsuario(info) {
     document.querySelector(".usuarios-lista").appendChild(li);
 }
  
+// Carrega os usuários da API e cria os itens da lista
 const jsonusuarios = await ListarUsuariosApi();
  
 document.querySelector(".usuarios-lista").innerHTML = ""; // remove os itens de exemplo do HTML

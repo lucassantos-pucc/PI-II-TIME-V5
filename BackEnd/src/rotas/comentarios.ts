@@ -1,7 +1,7 @@
 /*
 Autores:
-    Feito por: Arthur Cardoso Martin
-    RA: 26006506
+    Feito por: 
+        Arthur Cardoso Martin - RA: 26006506
 */
 
 import {Router, Request, Response} from "express";

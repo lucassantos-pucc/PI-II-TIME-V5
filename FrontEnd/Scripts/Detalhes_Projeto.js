@@ -1,8 +1,9 @@
 /*
+Arquivo nao utilizado, mas mantido para fins de referencia futura
 Autores: 
     
-    Feito por: Vitor Kenzo Pina Takemasa
-    RA: 26007167
+    Feito por: 
+        Vitor Kenzo Pina Takemasa - RA: 26007167
 */
 
 

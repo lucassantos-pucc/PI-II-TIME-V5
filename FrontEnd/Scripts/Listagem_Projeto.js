@@ -1,8 +1,8 @@
 /*
 Autores: 
 
-    Feito por: Vitor Kenzo Pina Takemasa
-    RA: 26007167
+    Feito por: 
+        Vitor Kenzo Pina Takemasa - RA: 26007167
 
 */
 import { ListarProjetosApi, ListarUsuarioApi, ListarProjetosUsuarioApi } from "./Api.js";

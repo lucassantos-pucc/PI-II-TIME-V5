@@ -1,10 +1,10 @@
 /*
 Autores:
-    Feito por Lucas Studach Kaid Ludemann
-    RA: 26006454
+    Feito por:
+        Lucas Studach Kaid Ludemann - RA: 26006454
     
-    Modificado por: Arthur Cardoso Martin
-    RA: 26006506
+    Modificado por: 
+        Arthur Cardoso Martin - RA: 26006506
 */
 
 import express, {Router, Request, Response} from "express";
