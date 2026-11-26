@@ -4,6 +4,9 @@ Autores:
     Feito por: 
         Vitor Kenzo Pina Takemasa - RA: 26007167
 
+    Modificado por:
+        Arthur Cardoso Martin - RA: 26006506
+
 */
 
 import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi } from "./Api.js";

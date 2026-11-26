@@ -1,6 +1,10 @@
 /*
 Autores: 
-
+    feito por:
+        Vitor Kenzo Pina Takemasa - RA: 26007167
+    
+    modificado por:
+        Arthur Cardoso Martin - RA: 26006506
 */
 
 const Url_Api = "http://localhost:3000";
