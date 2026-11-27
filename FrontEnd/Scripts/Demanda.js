@@ -192,7 +192,6 @@ function Edit() {
 }
 
 function VoltarListagem(){
-    localStorage.setItem("DemandaAtual", "{}");
     open("Listagem_Demanda.html", "_self");
 }
 

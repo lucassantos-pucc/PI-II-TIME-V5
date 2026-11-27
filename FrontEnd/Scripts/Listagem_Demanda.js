@@ -10,8 +10,8 @@ Autores:
 */
 
 import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi } from "./Api.js";
-localStorage.setItem("DemandaAtual", JSON.stringify({}));
 sessionStorage.setItem("DemandaAtual", "");
+localStorage.setItem("DemandaAtual", "{}");
 
 function FormatarPrazo(valor) {
     if (!valor) return "";
