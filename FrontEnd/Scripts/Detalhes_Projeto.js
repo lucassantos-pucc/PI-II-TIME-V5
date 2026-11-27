@@ -43,9 +43,6 @@ function ShowDialog(projeto) {
 
 
     dialog.classList.remove("closing");
-    //PriorityColorDialog(dialogPriority.parentElement);
-    //localStorage.setItem("DemandaAtual", JSON.parse())
-    // !! Comentei por enquanto por conflitos com o popup,
     dialog.showModal();
 }
 
@@ -85,9 +82,4 @@ function StatusColorDialog(p) {
     } else if (prioridade.includes("cancelada")) {
         p.classList.add("status-cancelada");
     }
-}
-
-
-function Edit(demanda){
-
 }

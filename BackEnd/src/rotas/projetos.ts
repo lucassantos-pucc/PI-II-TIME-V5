@@ -1,12 +1,11 @@
 /*
 Autores:
-
     Feito por: 
         Lucas de Oliveira Santos - RA: 26887166
-
     Modificado por: 
         Arthur Cardoso Martin - RA: 26006506
-        Lucas Studach Kaid Ludemann - RA: 26006454 
+        Lucas Studach Kaid Ludemann - RA: 26006454
+        Vitor Kenzo Pina Takemasa - RA: 26007167
 */
 
 import { Request, Response, Router } from "express";

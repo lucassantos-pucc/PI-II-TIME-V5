@@ -52,4 +52,4 @@ async function DemandasMostrar(id) {
 }
 
 const projeto = localStorage.getItem("Projeto");
-if (document.title === "Dashboard_Demandas") { DemandasMostrar(projeto); } // !! TEMPORARIO, SERÁ ATRIBUIDO AOS DEVIDOS PROJETOS
+if (document.title === "Dashboard_Demandas") { DemandasMostrar(projeto); }
