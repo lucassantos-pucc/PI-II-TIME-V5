@@ -18,7 +18,6 @@ const menuAdm = [
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Dashboard de Demandas', href: 'Dashboard_Demanda.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
-    { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Usuários',              href: 'Listagem_Usuario.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
@@ -26,14 +25,12 @@ const menuAdm = [
 const menuMembro = [
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
-    { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
 
 const menuLider = [
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
-    { texto: 'Histórico',             href: 'historico.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];
 

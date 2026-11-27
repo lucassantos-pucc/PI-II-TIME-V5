@@ -18,7 +18,10 @@ async function CriarHistorico(info){
     strong.textContent = info.nome;
 
     span.appendChild(strong);
-    span.appendChild(document.createTextNode(" " + info.descricao));
+    for (const linha in info.descricao.split("; ")){
+        span.appendChild(document.createElement("br"))
+        span.appendChild(document.createTextNode(info.descricao.split("; ")[linha]));
+    }
 
     Historico_cr.appendChild(span);
 
@@ -48,7 +51,6 @@ async function MostrarHistorico(){
 
     try{
         const historicos = await CarregarHistoricoApi(demandaAtual.id_demanda);
-
         let tamanho = historicos.length;
         let historico = 0
         while(historico < tamanho){
