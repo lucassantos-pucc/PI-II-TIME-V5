@@ -5,6 +5,7 @@ Autores:
     
     modificado por:
         Arthur Cardoso Martin - RA: 26006506
+        Lucas Studach Kaid Ludemann - RA: 26006454
 */
 
 const Url_Api = "http://localhost:3000";

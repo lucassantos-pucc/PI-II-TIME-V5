@@ -44,8 +44,12 @@ router.get("/:id", async (req: Request, res: Response) => {
 
     //CONTADOR DO TOTAL DE DEMANDAS
     let total= 0;
+
+    //VARIAVEL PARA CALCULAR PRAZO
     let diasFinalizar: number;
     const diaAtual = new Date();
+
+    //MONTAGEM DAS INFORMAÇÕES DO DASHBOARD
     const [demandas] = await Conexao.query<DemandaRow[]>("SELECT * FROM demanda where demanda.id_projeto = ?", [id]);
     for (const demanda of demandas) {
         if (demanda.statusDemanda === "Aberta") {abertas++;}

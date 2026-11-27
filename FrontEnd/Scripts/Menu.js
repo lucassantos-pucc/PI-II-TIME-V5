@@ -4,7 +4,7 @@ Autores:
     Feito por:
         Kauã Gaiofato Santana Lima de Jesus - RA: 26000195
 
-    Editado por:
+    Modificado por:
         Lucas Studach Kaid Ludemann - RA: 26006454
         Vitor Kenzo Pina Takemasa - RA: 26007167
 */
