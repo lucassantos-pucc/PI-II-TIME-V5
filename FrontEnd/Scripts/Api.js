@@ -1,3 +1,8 @@
+/*
+    Feito por: Vitor Kenzo Pina Takemasa
+    RA: 26007167
+*/
+
 const Url_Api = "http://localhost:3000";
 
 async function TratarRespostaApi(resposta) {

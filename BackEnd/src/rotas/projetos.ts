@@ -4,7 +4,9 @@
     Modificado por: Arthur Cardoso Martin
     RA: 26006506
     Modificado por: Lucas Studach Kaid Ludemann
-    RA: 26006454 
+    RA: 26006454
+    Modificado por: Vitor Kenzo Pina Takemasa
+    RA: 26007167
 */
 
 //importando dados testes
