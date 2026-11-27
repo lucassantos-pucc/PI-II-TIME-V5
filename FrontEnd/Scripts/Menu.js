@@ -26,6 +26,7 @@ const menuAdm = [
 
 const menuMembro = [
     { texto: 'Listagem de Projetos',  href: 'Listagem_Projeto.html' },
+    { texto: 'Dashboard de Demandas', href: 'Dashboard_Demanda.html' },
     { texto: 'Listagem de Demandas',  href: 'Listagem_Demanda.html' },
     { texto: 'Sair',                  href: 'Login.html', btnsair: 'sair' }
 ];

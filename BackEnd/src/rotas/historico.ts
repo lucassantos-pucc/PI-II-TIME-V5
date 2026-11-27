@@ -19,7 +19,7 @@ const router = Router();
 
 router.get("/:id_demanda", async (req: Request, res: Response) => {
     let id = Number(req.params.id_demanda);
-    const [historicos] = await Conexao.query<HistoricoRow[]>("select historico.dataHora, historico.descricao, demanda.titulo, usuario.nome from historico, usuario, demanda where historico.id_autor = usuario.id_usuario and historico.id_demanda = demanda.id_demanda and historico.id_demanda = ? order by dataHora;", [id]);
+    const [historicos] = await Conexao.query<HistoricoRow[]>("select historico.dataHora, historico.descricao, demanda.titulo, usuario.nome from historico, usuario, demanda where historico.id_autor = usuario.id_usuario and historico.id_demanda = demanda.id_demanda and historico.id_demanda = ? order by dataHora desc;", [id]);
     return res.status(200).json(historicos);
 });
 
@@ -27,7 +27,7 @@ router.get("/:id_demanda", async (req: Request, res: Response) => {
 //pega todos os historicos
 
 router.get("/", async (req: Request, res: Response) => {
-    const [historicos] = await Conexao.query<HistoricoRow[]>("select historico.dataHora, historico.descricao, demanda.titulo, usuario.nome from historico, usuario, demanda;");
+    const [historicos] = await Conexao.query<HistoricoRow[]>("select * from historico ;");
     return res.status(200).json(historicos);
 });
 

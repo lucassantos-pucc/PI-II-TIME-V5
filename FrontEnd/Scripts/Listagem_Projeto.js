@@ -6,7 +6,7 @@ Autores:
 
 */
 import { ListarProjetosApi, ListarUsuarioApi, ListarProjetosUsuarioApi } from "./Api.js";
-
+localStorage.setItem("Projeto", "")
 async function CreateProjeto(info) {
     const lider = await ListarUsuarioApi(info.id_lider)
     const Proj_Cr = document.createElement('button'); // Projeto Criado

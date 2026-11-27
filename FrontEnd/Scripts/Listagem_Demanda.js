@@ -12,6 +12,7 @@ Autores:
 import { ListarDemandasApi, BuscarProjetoApi, ListarUsuarioApi } from "./Api.js";
 sessionStorage.setItem("DemandaAtual", "");
 localStorage.setItem("DemandaAtual", "{}");
+if (localStorage.getItem("Projeto") == "") {open("Listagem_Projeto.html", "_self");}
 
 function FormatarPrazo(valor) {
     if (!valor) return "";

@@ -103,7 +103,7 @@ function ShowDemanda() {
 
 
 // Cria um comentário na tela
-await async function CreateComentario(info) {
+async function CreateComentario(info) {
     const auto = await ListarUsuarioApi(info.id_autor); //autor
     const Com_Cr = document.createElement('li'); // Cria o html elemento do comentario e cria o seus campos
     Com_Cr.classList.add("dem-coment");
@@ -210,7 +210,8 @@ else {
 
     await CarregarComentarios();
     ShowComentarios();
-    document.getElementById("dem-autor").value = JSON.parse(localStorage.getItem("UsuarioLogado")).nome;
+    const nome = JSON.parse(localStorage.getItem("UsuarioLogado")).nome;
+    document.getElementById("dem-autor").value = nome[0].toUpperCase() + nome.substring(1).toLowerCase(); // Coloca o nome do usuário logado no campo de autor do comentário
     ValidarComentario();
 
     document.getElementById("dem-texto").addEventListener("input", ValidarComentario);

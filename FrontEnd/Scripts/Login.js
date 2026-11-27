@@ -91,7 +91,6 @@ form.addEventListener("submit", async function(event) {
     }
     let valido = false;
     for (const usuario of usuarios.usuarios){
-        console.log(usuario);
         if(usuario.email === login.email && usuario.senha === login.senha){
             valido = true;
             localStorage.setItem("UsuarioLogado", JSON.stringify(usuario));
@@ -101,6 +100,7 @@ form.addEventListener("submit", async function(event) {
     if(!valido){
         ErroValidation(campoEmail, erroEmail, "Usuário ou senha inválidos.");
         ErroValidation(campoSenha, erroSenha, "Usuário ou senha inválidos.");
+    }else{
+        open("Listagem_Projeto.html", "_self");
     }
-    open("Listagem_Projeto.html", "_self");
 });

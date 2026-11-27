@@ -75,11 +75,11 @@ async function ReiniciarBanco(){
         console.log(resposta)
         resposta = await conexao.query("insert into projeto (titulo, id_lider) values('Sistema de gerenciamento de tarefas', 2),('Sistema de controle financeiro',2),('Plataforma de estudos',3);");
         console.log(resposta)
-        resposta = await conexao.query("insert into usuario_projeto_participa(id_usuario, id_projeto) values(1, 1),(3, 1),(4, 2),(2, 2),(3, 3),(5, 3);");
+        resposta = await conexao.query("insert into usuario_projeto_participa(id_usuario, id_projeto) values(2, 1),(2, 2),(3, 3),(4, 1),(4, 2),(5, 2),(5, 3);");
         console.log(resposta)
-        resposta = await conexao.query("insert into demanda(descricao, titulo, tipo, prazoFinalizacao,statusDemanda, prioridade,  id_responsavel, id_projeto)values('Criar a tela de login do sistema', 'Tela de login','Tarefa', '2026-11-05','Em andamento', 'Alta', 1, 1),('Corrigir erros na validacao dos formularios', 'Validacao de formularios','Defeito', '2026-11-08','Aberta', 'Média', 2, 1),('Desenvolver a pagina inicial', 'Pagina inicial','Tarefa', '2026-11-10','Em revisão', 'Alta', 3, 1),('Adicionar relatorio mensal', 'Relatorio mensal','Melhoria', '2026-11-15','Aberta', 'Baixa', 4, 2),('Documentar as funcionalidades', 'Documentacao do sistema','Documentação', '2026-11-20','Em andamento', 'Média', 5, 3),('Documentar as funcionalidades do sistema', 'Documentacao','Documentação', '2026-12-20','Concluída', 'Média', NULL, 3);");
+        resposta = await conexao.query("insert into demanda(descricao, titulo, tipo, prazoFinalizacao,statusDemanda, prioridade,  id_responsavel, id_projeto)values('Criar a tela de login do sistema', 'Tela de login','Tarefa', '2027-11-05','Em andamento', 'Alta', 2, 1),('Corrigir erros na validacao dos formularios', 'Validacao de formularios','Defeito', '2027-11-08','Aberta', 'Média', 3, 2),('Desenvolver a pagina inicial', 'Pagina inicial','Tarefa', '2027-11-10','Em revisão', 'Alta', 4, 1),('Desenvolver a pagina de login', 'Pagina de login','Tarefa', '2027-11-30','Aberta', 'Crítica', 4, 2),('Adicionar relatorio mensal', 'Relatorio mensal','Melhoria', '2027-11-15','Aberta', 'Baixa', 5, 2),('Documentar as funcionalidades', 'Documentacao do sistema','Documentação', '2027-11-20','Em andamento', 'Média', 5, 3),('Documentar as Regras de negócio', 'Documentacao','Documentação', '2027-12-20','Concluída', 'Média', 5, 3);");
         console.log(resposta)
-        resposta = await conexao.query("insert into historico (descricao, id_autor, id_demanda) values('Demanda criada', 1, 1),('Demanda criada', 2, 2),('Status alterado para em revisao', 3, 3),('Demanda criada', 4, 4),('Demanda marcada como concluida', 5, 5),('Prioridade da demanda alterada', 1, 1);");
+        resposta = await conexao.query("insert into historico (descricao, id_autor, id_demanda) values('Demanda criada', 1, 1),('Demanda criada', 1, 2),('Demanda criada', 1, 3),('Demanda criada', 1, 4),('Demanda criada', 1, 5),('Demanda criada', 1, 6),('Demanda criada', 1, 7)    ;");
         console.log(resposta)
         resposta = await conexao.query("insert into comentario (conteudo, id_demanda, id_autor) values( 'Ja comecei a desenvolver a tela de login', 1, 1),('Encontrei um erro na validacao do formulario', 2, 3),('A pagina inicial esta quase pronta', 3, 2),('Vou iniciar o desenvolvimento do relatorio', 4, 4),('A documentacao foi finalizada', 5, 5),('Podemos revisar essa demanda juntos', 1, 2);");
         console.log(resposta)
@@ -91,7 +91,7 @@ async function ReiniciarBanco(){
 
 // Variaveis para testar a conexão e reiniciar o banco de dados
 const TestarConexao = false;
-const Reiniciar = false;
+const Reiniciar = true;
 
 if (TestarConexao) {
     testarConexao();

@@ -7,7 +7,7 @@ Autores:
 */
 
 import { DashboardDemandasApi, BuscarProjetoApi } from "./Api.js";
-
+if (localStorage.getItem("Projeto") == "") {open("Listagem_Projeto.html", "_self");}
 async function DemandasMostrar(id) {
     const info = await DashboardDemandasApi(id);
 

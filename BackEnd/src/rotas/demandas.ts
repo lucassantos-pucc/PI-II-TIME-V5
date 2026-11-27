@@ -13,6 +13,7 @@ import { Request, Response, Router } from "express";
 // Importa as interfaces utilizadas para tipar os dados retornados das consultas ao banco
 import {Demanda, DemandaRow, ProjetoRow, UsuarioRow, Tipo , Prioridade, Status} from "../dados/dados"; 
 import Conexao from "../dados/database";
+import type { ResultSetHeader } from "mysql2/promise";
 
 // Cria um Router para organizar as rotas
 const router = Router();
@@ -113,6 +114,7 @@ router.post("/", async (req:Request, res:Response)=>{
             mensagem: "titulo, tipo, prioridade, id_projeto e statusDemanda são obrigatorios"
         })
     }
+    const id_criador = req.body.id_criador || null;
 
     let statusFinal: Status;
     if(!["Defeito", "Tarefa", "Melhoria", "Documentação"].includes(tipo)) {
@@ -148,7 +150,7 @@ router.post("/", async (req:Request, res:Response)=>{
 
     //se tiver um prazo de finalização (em string) converte para Date
     if (prazoFinalizacao) {
-        prazo = new Date(prazoFinalizacao);
+        prazo = prazoFinalizacao;
     } 
     // se não tiver deixa null
     else {
@@ -168,9 +170,11 @@ router.post("/", async (req:Request, res:Response)=>{
         id_responsavel: responsavelFinal,
         descricao: descricao
     };
-    const resposta = await Conexao.query("INSERT INTO demanda (titulo, tipo, dataCriacao, prazoFinalizacao, statusDemanda, prioridade, dataAlteracao, descricao, id_responsavel, id_projeto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+    let [resposta] = await Conexao.query<ResultSetHeader>("INSERT INTO demanda (titulo, tipo, dataCriacao, prazoFinalizacao, statusDemanda, prioridade, dataAlteracao, descricao, id_responsavel, id_projeto) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
         [novaDemanda.titulo, novaDemanda.tipo, novaDemanda.dataCriacao, novaDemanda.prazoFinalizacao, novaDemanda.statusDemanda, novaDemanda.prioridade, novaDemanda.dataAlteracao, novaDemanda.descricao, novaDemanda.id_responsavel, novaDemanda.id_projeto]
     );
+    console.log("Resposta do banco de dados:", resposta.insertId);
+    [resposta] = await Conexao.query<ResultSetHeader>("insert into historico (descricao, id_autor, id_demanda) values('Demanda criada', ?, ?);", [id_criador, resposta.insertId]);
     console.log("Resposta do banco de dados:", resposta);
     //returna nova demanda
     return res.status(201).json(novaDemanda);
@@ -240,7 +244,7 @@ router.put("/:id", async (req: Request, res: Response) => {
     }
     if (prazoFinalizacao !== undefined) {
         let prazo: Date | null = null;
-        if (prazoFinalizacao) {prazo = new Date(prazoFinalizacao);}
+        if (prazoFinalizacao) {prazo = prazoFinalizacao;}
         campos.push("prazoFinalizacao = ?");
         valores.push(prazo);
     }

@@ -10,6 +10,7 @@ Autores:
     */
 
 import { CadastrarDemandasApi, ListarUsuariosApi, EditarDemandasApi, BuscarFeriadoNacional, RegistrarHistoricoApi, BuscarVinculadosProjeto } from "./Api.js";
+import { RegistrarHistorico } from "./Historico.js";
 const usuarioLogado = JSON.parse(localStorage.getItem("UsuarioLogado") || "null");
 const Projeto = JSON.parse(localStorage.getItem("Projeto") || "null");
 
@@ -61,21 +62,11 @@ function TravarCamposParaMembro() { // Travar os campos de criação/editar para
 let statusOriginal = "";
 // Campos que podem ser alterados e que devem ser registrados no histórico
 // Esquerda é o campo e na direita é o valor
-const CAMPOS_HISTORICO = [
-    ["titulo", "Título"],
-    ["tipo", "Tipo"],
-    ["prioridade", "Prioridade"],
-    ["statusDemanda", "Status"],
-    ["prazoFinalizacao", "Prazo"],
-    ["responsavel", "Responsável"],
-    ["descricao", "Descrição"],
-];
 
 // Um dropdown para escolher um responsavel da demanda dentre os usuários do projeto
 async function DropdownResponsavel(id_projeto)
 {
     const projeto = await BuscarVinculadosProjeto(id_usuario, id_projeto);
-    responsavel.innerHTML = "";
 
     projeto.forEach(item => {
         const escolha = document.createElement('option');
@@ -86,42 +77,6 @@ async function DropdownResponsavel(id_projeto)
     });
 }
 
-// Deixa o valor legível e no mesmo formato nos dois lados da comparação
-function ValorParaHistorico(chave, valor) {
-    if (valor === null || valor === undefined || String(valor).trim() === "") {
-        return "(vazio)"; // caso nao exista o valor
-    }
-    // arrumar o prazo 
-    // do select vem yyyy/mm/dd e do localstorage vem como dd/mm/yyyy
-    if (chave === "prazoFinalizacao" && /^\d{4}-\d{2}-\d{2}/.test(valor)) { //Usa regex para ver sé é uma data valida
-        const [a, m, d] = valor.slice(0, 10).split("-"); // pega o valor e separa em y y y y - m m - d d e separa nas '-' nas variaveis
-        return `${d}/${m}/${a}`; // retorna formatado como dd/mm/yyyy
-    }
-    return String(valor).trim(); // caso nao seja nenhum dos casos acima, retorna o valor como string
-}
-
-function GerarDescricaoHistorico(antes, depois) { // antes e depois são dicionarios com os valores antigos e novos da demanda, respectivamente.
-    const mudancas = [];
-
-    for (const [chave, nome] of CAMPOS_HISTORICO) { // para cada campo que pode ser alterado, pega o valor antes e depois da alteração e compara
-        const valorAntes = ValorParaHistorico(chave, antes[chave]);
-        const valorDepois = ValorParaHistorico(chave, depois[chave]);
-
-        // Nome do responsável: "Mariana" e "mariana" são o mesmo usuário, usa operador ternario
-        const igual = chave === "responsavel"
-            ? valorAntes.toLowerCase() === valorDepois.toLowerCase()
-            : valorAntes === valorDepois;
-        if (igual) continue;
-
-        if (chave === "descricao") {
-            mudancas.push("Descrição alterada"); // o texto pode ser longo, entao no historico apenas registra que houve alteração
-        } else {
-            mudancas.push(`${nome} alterado de "${valorAntes}" para "${valorDepois}"`);
-        }
-    }
-
-    return mudancas.join("; "); // Converte a lista para uma string separada por ponto e virgula, para ser registrada no historico
-}
 const form = document.querySelector("form");
 
 const titulo = document.getElementById("titulo_id");
@@ -169,7 +124,9 @@ form.addEventListener("submit",async function (event) {
     event.preventDefault();
     // verifica se o responsavel selecionado existe no projeto e salva o seu id e seu nome
     id_responsavel = responsavel.value !== "" ? Number(responsavel.value) : null;
-    const nomeResp = responsavel.selectedOptions[0]?.textContent ?? "";
+    const nomeResp = responsavel.value !== ""
+        ? responsavel.selectedOptions[0]?.textContent ?? ""
+        : "";
     for (const usuario of usuarios.usuarios){
         if (nomeResp.toLowerCase() === usuario.nome.toLowerCase()) {
             id_responsavel = usuario.id_usuario;
@@ -228,7 +185,7 @@ form.addEventListener("submit",async function (event) {
 
     try {
         if (editar === 0) {
-            console.log(await CadastrarDemandasApi(demanda));
+            console.log(await CadastrarDemandasApi({...demanda, id_criador: id_usuario}));
             open("Listagem_Demanda.html", "_self");
         }
         
@@ -236,29 +193,19 @@ form.addEventListener("submit",async function (event) {
             const antiga = JSON.parse(localStorage.getItem("DemandaAtual") || "{}"); // armazena a demanda original em uma variavel para comparar com a nova demanda e gerar o historico
             // usa como novo valor o que foi digitado no form mais o nome do responsavel alem do id 
             // nao armazena o nome do responsavel no banco, apenas o id, mas para gerar o historico precisa do nome
-            const descricaoHistorico = GerarDescricaoHistorico(antiga, {
-                ...demanda,
-                responsavel: nomeResp
-            });
-            // salva a demanda editada no banco de dados
-            await EditarDemandasApi(id_demanda, demanda);
-            // registra o historico no banco caso haja alteração
-            if (descricaoHistorico && usuarioLogado) {
-                try {
-                    const historico ={
-                        id_demanda: id_demanda,
-                        id_autor: usuarioLogado.id_usuario,
-                        descricao: descricaoHistorico
-                    }
-                    console.log(historico)
-                    await RegistrarHistoricoApi(historico);
-                } catch (e) {
-                    console.error("Falha ao registrar o histórico:", e);
+            console.log(await EditarDemandasApi(id_demanda, demanda));
+            await RegistrarHistorico(
+                {
+                    ...demanda,
+                    responsavel: nomeResp || "Nenhum"
+                },
+                {
+                    ...antiga,
+                    responsavel: antiga.responsavel || "Nenhum"
                 }
-            }
-
+            );
             // atualiza a demanda no localStorage e sessionStorage para que a página de demanda seja atualizada com os novos valores
-            //herda os valores antigos da demanda e atualiza com os novos valores, para que não perca nenhum valor que não foi alterado no form
+            //herda os valores antigos da demanda e atualiza com os novos valores, para que não perca nenhum valor que não foi alterado no form            
             const json = JSON.stringify({
                 ...antiga,
                 ...demanda,

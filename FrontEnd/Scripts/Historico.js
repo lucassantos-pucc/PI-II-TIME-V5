@@ -1,8 +1,10 @@
 /*
 Autores: 
 
-    Feito por: Lucas de Oliveira Santos
-    RA: 26887166
+    Feito por:
+        Lucas de Oliveira Santos - RA: 26887166
+    Modificado por:
+        Arthur Cardoso Martin - RA: 26006506
 
 */
 //CRIAR HISTORICO NO FRONT
@@ -38,8 +40,6 @@ async function CriarHistorico(info){
     
     Historico_cr.appendChild(data);
 
-    Historico_cr.appendChild(data);
-
     // Adicionar o histórico na lista do HTML
     document.querySelector("ul").appendChild(Historico_cr);
 }
@@ -68,57 +68,68 @@ async function MostrarHistorico(){
     }
 }
 
-export async function RegistrarHistorico(demandaAtual, demandaAntiga){
+// Deixa o valor legível e no mesmo formato nos dois lados da comparação
+function ValorParaHistorico(chave, valor) {
+    if (valor === null || valor === undefined || String(valor).trim() === "") {
+        return "(vazio)"; // caso nao exista o valor
+    }
+    // arrumar o prazo 
+    // do select vem yyyy/mm/dd e do localstorage vem como dd/mm/yyyy
+    if (chave === "prazoFinalizacao" && /^\d{4}-\d{2}-\d{2}/.test(valor)) { //Usa regex para ver sé é uma data valida
+        const [a, m, d] = valor.slice(0, 10).split("-"); // pega o valor e separa em y y y y - m m - d d e separa nas '-' nas variaveis
+        return `${d}/${m}/${a}`; // retorna formatado como dd/mm/yyyy
+    }
+    return String(valor).trim(); // caso nao seja nenhum dos casos acima, retorna o valor como string
+}
 
-    
+export async function RegistrarHistorico(demandaAtual, demandaAntiga) {
+    const CAMPOS_HISTORICO = [
+        ["titulo", "Título"],
+        ["tipo", "Tipo"],
+        ["prioridade", "Prioridade"],
+        ["statusDemanda", "Status"],
+        ["prazoFinalizacao", "Prazo"],
+        ["responsavel", "Responsável"],
+        ["descricao", "Descrição"],
+    ];
     const autor = JSON.parse(localStorage.getItem("UsuarioLogado")).id_usuario;
-    let descricao = "";
+    const mudancas = [];
 
+    for (const [chave, nome] of CAMPOS_HISTORICO) { // para cada campo que pode ser alterado, pega o valor antes e depois da alteração e compara
+        const valorAntes = ValorParaHistorico(chave, demandaAntiga[chave]);
+        const valorDepois = ValorParaHistorico(chave, demandaAtual[chave]);
+
+        // Nome do responsável: "Mariana" e "mariana" são o mesmo usuário, usa operador ternario
+        const igual = chave === "responsavel"
+            ? valorAntes.toLowerCase() === valorDepois.toLowerCase()
+            : valorAntes === valorDepois;
+        if (igual) continue;
+
+        if (chave === "descricao") {
+            mudancas.push("Descrição alterada"); // o texto pode ser longo, entao no historico apenas registra que houve alteração
+        } else {
+            mudancas.push(`${nome} alterado de "${valorAntes}" para "${valorDepois}"`);
+        }
+    }
+    const descricao = mudancas.join("; ");
     //verificar os campos que mudaram
     // Verificar se é uma demanda nova
-    if (demandaAntiga == null) {
-        descricao += "Demanda " + demandaAtual.titulo + " criada | ";
-    }
-
-    else {
-
-        if (demandaAntiga.titulo !== demandaAtual.titulo) {
-            descricao += "Título alterado de " + demandaAntiga.titulo + " para " + demandaAtual.titulo + " | ";
-        }
-
-        if (demandaAntiga.status !== demandaAtual.status) {
-            descricao += "Status alterado de " + demandaAntiga.status +
-                " para " + demandaAtual.status + " | ";
-        }
-
-        if (demandaAntiga.prazo !== demandaAtual.prazo) {
-            descricao += "Prazo alterado de " + demandaAntiga.prazo +
-                " para " + demandaAtual.prazo + " | ";
-        }
-
-        if (demandaAntiga.prioridade !== demandaAtual.prioridade) {
-            descricao += "Prioridade alterada | ";
-        }
-
-        if (demandaAntiga.responsavel !== demandaAtual.responsavel) {
-            descricao += "Responsável alterado | ";
-        }
-
-        if (demandaAntiga.descricao !== demandaAtual.descricao) {
-            descricao += "Descrição alterada | ";
-        }
-    }
-
     if (descricao === "") {
         console.log("Nenhuma alteração realizada.");
         return;
     }
-    const historico = {
-            descricao: descricao,
-            id_autor: autor,
+    try {
+        const historico ={
             id_demanda: demandaAtual.id_demanda,
-        };
-        console.log(await RegistrarHistoricoApi(historico));
+            id_autor: autor,
+            descricao: descricao
+        }
+        console.log(historico)
+        await RegistrarHistoricoApi(historico);
+    } catch (e) {
+        console.error("Falha ao registrar o histórico:", e);
+    }
 }
-
-MostrarHistorico();
+if (window.location.pathname.endsWith("/historico.html")) {
+    MostrarHistorico();
+}
